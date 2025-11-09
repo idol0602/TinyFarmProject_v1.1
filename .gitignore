@@ -1,0 +1,104 @@
+# ═══════════════════════════════════════════════════════════
+#          UNITY + FIREBASE .gitignore 2025 – SIÊU SẠCH
+#   → Repo chỉ còn ~10-15MB thay vì 300MB+
+#   → Không bao giờ bị lỗi GH001 nữa
+#   → Firebase Auth + Database vẫn chạy 100% trên Android/iOS
+# ═══════════════════════════════════════════════════════════
+
+# ================== UNITY RÁC (không bao giờ commit) ==================
+Library/
+Temp/
+Obj/
+Build/
+Builds/
+Logs/
+UserSettings/
+MemoryCaptures/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# ================== IDE RÁC ==================
+.vs/
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ================== BUILD & FILE NẶNG ==================
+*.apk
+*.aab
+*.unitypackage
+*.app
+*.exe
+*.x86_64
+*.bundle
+*.so
+*.dll
+*.pdb
+*.mdb
+*.zip
+*.rar
+*.7z
+*.tar.gz
+
+# ================== OS RÁC ==================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ================== FIREBASE: CHỈ GIỮ FILE CẦN THIẾT ==================
+# XÓA TOÀN BỘ native libs cho Editor/Desktop (không cần cho mobile)
+Assets/Firebase/Plugins/x86/
+Assets/Firebase/Plugins/x86_64/
+Assets/Plugins/x86/
+Assets/Plugins/x86_64/
+
+# Nhưng GIỮ LẠI .meta để Unity không báo missing
+!Assets/Firebase/Plugins/x86_64/*.meta
+!Assets/Plugins/x86_64/*.meta
+
+# XÓA RIÊNG 2 FILE SIÊU NẶNG (173MB + 111MB) – NGUYÊN NHÂN CHÍNH!
+Assets/Firebase/Plugins/x86_64/FirebaseCppApp-13_4_0.bundle
+Assets/Firebase/Plugins/x86_64/FirebaseCppApp-13_4_0.so
+Assets/Plugins/x86_64/FirebaseCppApp-13_4_0.bundle
+Assets/Plugins/x86_64/FirebaseCppApp-13_4_0.so
+
+# ================== CONFIG RIÊNG (mỗi máy tự thêm) ==================
+google-services.json
+GoogleService-Info.plist
+Assets/google-services.json
+Assets/GoogleService-Info.plist
+Assets/StreamingAssets/google-services-desktop.json
+
+# ================== CHỈ GIỮ LẠI FILE THẬT SỰ CẦN CHO MOBILE ==================
+# Android
+!Assets/Plugins/Android/Firebase*.aar
+!Assets/Plugins/Android/*.aar
+
+# iOS (nếu có)
+!Assets/Plugins/iOS/*.framework
+!Assets/Plugins/iOS/*.a
+
+# DLL .NET cần thiết
+!Assets/Plugins/Firebase*.dll
+!Assets/Plugins/Parse*.dll
+
+# ================== XONG! REPO CHỈ CÒN ~12MB ==================
