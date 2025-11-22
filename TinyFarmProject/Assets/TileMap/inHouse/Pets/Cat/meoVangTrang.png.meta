@@ -1,0 +1,1469 @@
+fileFormatVersion: 2
+guid: 4c468f7f3ab8e6742b261c577323fc20
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5037379870003045395
+    second: meoVangTrang_0
+  - first:
+      213: 1486537604226270331
+    second: meoVangTrang_1
+  - first:
+      213: 2207307781163376021
+    second: meoVangTrang_2
+  - first:
+      213: -5864821398034240656
+    second: meoVangTrang_3
+  - first:
+      213: 6936906900252285303
+    second: meoVangTrang_4
+  - first:
+      213: -1527700463961643147
+    second: meoVangTrang_5
+  - first:
+      213: 53220043569968574
+    second: meoVangTrang_6
+  - first:
+      213: 3134956962728616714
+    second: meoVangTrang_7
+  - first:
+      213: 3010541447834886294
+    second: meoVangTrang_8
+  - first:
+      213: 8144357632410840585
+    second: meoVangTrang_9
+  - first:
+      213: -8555775623813373366
+    second: meoVangTrang_10
+  - first:
+      213: 250695710122827692
+    second: meoVangTrang_11
+  - first:
+      213: 6012964124740494714
+    second: meoVangTrang_12
+  - first:
+      213: 6003481971084574797
+    second: meoVangTrang_13
+  - first:
+      213: 8615496550872363189
+    second: meoVangTrang_14
+  - first:
+      213: -279825328740778084
+    second: meoVangTrang_15
+  - first:
+      213: -3095803608657942254
+    second: meoVangTrang_16
+  - first:
+      213: 843822908262489009
+    second: meoVangTrang_17
+  - first:
+      213: 1402253068516671154
+    second: meoVangTrang_18
+  - first:
+      213: -9220359212344028065
+    second: meoVangTrang_19
+  - first:
+      213: 737654691905230549
+    second: meoVangTrang_20
+  - first:
+      213: 1747767656322376384
+    second: meoVangTrang_21
+  - first:
+      213: -3620468759144731324
+    second: meoVangTrang_22
+  - first:
+      213: 4148267262340882822
+    second: meoVangTrang_23
+  - first:
+      213: -2468793618200541217
+    second: meoVangTrang_24
+  - first:
+      213: -8320550028950296702
+    second: meoVangTrang_25
+  - first:
+      213: 8023561909564032666
+    second: meoVangTrang_26
+  - first:
+      213: -2843737765493147282
+    second: meoVangTrang_27
+  - first:
+      213: -3960991420136697
+    second: meoVangTrang_28
+  - first:
+      213: 5189523453442413829
+    second: meoVangTrang_29
+  - first:
+      213: -2150520877736416221
+    second: meoVangTrang_30
+  - first:
+      213: -1132271139609481745
+    second: meoVangTrang_31
+  - first:
+      213: 7370354106723849067
+    second: meoVangTrang_32
+  - first:
+      213: -1964848186437587161
+    second: meoVangTrang_33
+  - first:
+      213: 3248752586636273924
+    second: meoVangTrang_34
+  - first:
+      213: 2769656818407418978
+    second: meoVangTrang_35
+  - first:
+      213: -100914023949029767
+    second: meoVangTrang_36
+  - first:
+      213: -8220911278008873301
+    second: meoVangTrang_37
+  - first:
+      213: 1877525246837108371
+    second: meoVangTrang_38
+  - first:
+      213: 5207178956933086387
+    second: meoVangTrang_39
+  - first:
+      213: 682079666090267358
+    second: meoVangTrang_40
+  - first:
+      213: -7804844730053893345
+    second: meoVangTrang_41
+  - first:
+      213: -1675327521179455659
+    second: meoVangTrang_42
+  - first:
+      213: -2547904128437284255
+    second: meoVangTrang_43
+  - first:
+      213: -6134110493871139662
+    second: meoVangTrang_44
+  - first:
+      213: 3995782541290489352
+    second: meoVangTrang_45
+  - first:
+      213: 1840506850466903052
+    second: meoVangTrang_46
+  - first:
+      213: -8347460706765740852
+    second: meoVangTrang_47
+  - first:
+      213: 60254504444166271
+    second: meoVangTrang_48
+  - first:
+      213: -3583389870505678068
+    second: meoVangTrang_49
+  - first:
+      213: 6105018233126765675
+    second: meoVangTrang_50
+  - first:
+      213: -437264169339157944
+    second: meoVangTrang_51
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 8
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: meoVangTrang_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 386
+        width: 18
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: debd3c982b1a71ab0800000000000000
+      internalID: -5037379870003045395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_1
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 386
+        width: 19
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b74ca25331e31a410800000000000000
+      internalID: 1486537604226270331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_2
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 386
+        width: 18
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59dd23e6bbee1ae10800000000000000
+      internalID: 2207307781163376021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_3
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 386
+        width: 17
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07b2f0bf208fb9ea0800000000000000
+      internalID: -5864821398034240656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_4
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 354
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7795e7d8218d44060800000000000000
+      internalID: 6936906900252285303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_5
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 354
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 577ed5aa5848ccae0800000000000000
+      internalID: -1527700463961643147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_6
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 354
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb53beff8531db000800000000000000
+      internalID: 53220043569968574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_7
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 354
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a03a3957fba918b20800000000000000
+      internalID: 3134956962728616714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_8
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 322
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 690e9cb0f7797c920800000000000000
+      internalID: 3010541447834886294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_9
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 322
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90ee693bd12960170800000000000000
+      internalID: 8144357632410840585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_10
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 322
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4268ac8667c34980800000000000000
+      internalID: -8555775623813373366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_11
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 322
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cafd59c8b66aa7300800000000000000
+      internalID: 250695710122827692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_12
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 290
+        width: 18
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a75235e6307527350800000000000000
+      internalID: 6012964124740494714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_13
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 290
+        width: 17
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4045fd7b07a05350800000000000000
+      internalID: 6003481971084574797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_14
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 290
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b0b9565774609770800000000000000
+      internalID: 8615496550872363189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_15
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 290
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9fbf39985cdd1cf0800000000000000
+      internalID: -279825328740778084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_16
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 258
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 219229b250f7905d0800000000000000
+      internalID: -3095803608657942254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_17
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 258
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bb925cd67cd5bb00800000000000000
+      internalID: 843822908262489009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_18
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 258
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2be33228cbdc57310800000000000000
+      internalID: 1402253068516671154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_19
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 258
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f54dbbed524ba0080800000000000000
+      internalID: -9220359212344028065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_20
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 226
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d659e5b80dac3a00800000000000000
+      internalID: 737654691905230549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_21
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 226
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c223016c61514810800000000000000
+      internalID: 1747767656322376384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_22
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 226
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44d67ca78d281cdc0800000000000000
+      internalID: -3620468759144731324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_23
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 226
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 681e53db81b919930800000000000000
+      internalID: 4148267262340882822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_24
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 194
+        width: 18
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd7c763d8451dbdd0800000000000000
+      internalID: -2468793618200541217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_25
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 194
+        width: 18
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2872d8435d7778c80800000000000000
+      internalID: -8320550028950296702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_26
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 198
+        width: 19
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a964beccb0b695f60800000000000000
+      internalID: 8023561909564032666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_27
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 195
+        width: 18
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e69fa6da1930988d0800000000000000
+      internalID: -2843737765493147282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_28
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 162
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 703c171df7de1fff0800000000000000
+      internalID: -3960991420136697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_29
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 162
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5055efbe514e40840800000000000000
+      internalID: 5189523453442413829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_30
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 165
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32ca578d7a0d722e0800000000000000
+      internalID: -2150520877736416221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_31
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 164
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fed6626c56d5940f0800000000000000
+      internalID: -1132271139609481745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_32
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 130
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b63dd10a202c84660800000000000000
+      internalID: 7370354106723849067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_33
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 130
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72f21d11cf47bb4e0800000000000000
+      internalID: -1964848186437587161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_34
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 134
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4092691d343e51d20800000000000000
+      internalID: 3248752586636273924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_35
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 132
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26ca9eab33ccf6620800000000000000
+      internalID: 2769656818407418978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_36
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 96
+        width: 16
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97ea9a9da3b799ef0800000000000000
+      internalID: -100914023949029767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_37
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 96
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bae4748bfb479ed80800000000000000
+      internalID: -8220911278008873301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_38
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 96
+        width: 16
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39ead82b34f4e0a10800000000000000
+      internalID: 1877525246837108371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_39
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 96
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bcb2e92cad934840800000000000000
+      internalID: 5207178956933086387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_40
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 66
+        width: 18
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed2d3dda7db377900800000000000000
+      internalID: 682079666090267358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_41
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 66
+        width: 19
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f13ee02e11f9fa390800000000000000
+      internalID: -7804844730053893345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_42
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 66
+        width: 20
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55fa9a9ee7a00c8e0800000000000000
+      internalID: -1675327521179455659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_43
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 66
+        width: 20
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1629ebec1b604acd0800000000000000
+      internalID: -2547904128437284255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_44
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 34
+        width: 19
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b490d771034fdaa0800000000000000
+      internalID: -6134110493871139662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_45
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 34
+        width: 20
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 806c35dfc0fd37730800000000000000
+      internalID: 3995782541290489352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_46
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 34
+        width: 20
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c04b0c4aa3bca8910800000000000000
+      internalID: 1840506850466903052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_47
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 34
+        width: 20
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc462b4c6bcd72c80800000000000000
+      internalID: -8347460706765740852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_48
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 0
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f70038d072116d000800000000000000
+      internalID: 60254504444166271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_49
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 0
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0ba6ccf5ed354ec0800000000000000
+      internalID: -3583389870505678068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_50
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 0
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b64cdccbcb169b450800000000000000
+      internalID: 6105018233126765675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meoVangTrang_51
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 0
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84288810e868ee9f0800000000000000
+      internalID: -437264169339157944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      meoVangTrang_0: -5037379870003045395
+      meoVangTrang_1: 1486537604226270331
+      meoVangTrang_10: -8555775623813373366
+      meoVangTrang_11: 250695710122827692
+      meoVangTrang_12: 6012964124740494714
+      meoVangTrang_13: 6003481971084574797
+      meoVangTrang_14: 8615496550872363189
+      meoVangTrang_15: -279825328740778084
+      meoVangTrang_16: -3095803608657942254
+      meoVangTrang_17: 843822908262489009
+      meoVangTrang_18: 1402253068516671154
+      meoVangTrang_19: -9220359212344028065
+      meoVangTrang_2: 2207307781163376021
+      meoVangTrang_20: 737654691905230549
+      meoVangTrang_21: 1747767656322376384
+      meoVangTrang_22: -3620468759144731324
+      meoVangTrang_23: 4148267262340882822
+      meoVangTrang_24: -2468793618200541217
+      meoVangTrang_25: -8320550028950296702
+      meoVangTrang_26: 8023561909564032666
+      meoVangTrang_27: -2843737765493147282
+      meoVangTrang_28: -3960991420136697
+      meoVangTrang_29: 5189523453442413829
+      meoVangTrang_3: -5864821398034240656
+      meoVangTrang_30: -2150520877736416221
+      meoVangTrang_31: -1132271139609481745
+      meoVangTrang_32: 7370354106723849067
+      meoVangTrang_33: -1964848186437587161
+      meoVangTrang_34: 3248752586636273924
+      meoVangTrang_35: 2769656818407418978
+      meoVangTrang_36: -100914023949029767
+      meoVangTrang_37: -8220911278008873301
+      meoVangTrang_38: 1877525246837108371
+      meoVangTrang_39: 5207178956933086387
+      meoVangTrang_4: 6936906900252285303
+      meoVangTrang_40: 682079666090267358
+      meoVangTrang_41: -7804844730053893345
+      meoVangTrang_42: -1675327521179455659
+      meoVangTrang_43: -2547904128437284255
+      meoVangTrang_44: -6134110493871139662
+      meoVangTrang_45: 3995782541290489352
+      meoVangTrang_46: 1840506850466903052
+      meoVangTrang_47: -8347460706765740852
+      meoVangTrang_48: 60254504444166271
+      meoVangTrang_49: -3583389870505678068
+      meoVangTrang_5: -1527700463961643147
+      meoVangTrang_50: 6105018233126765675
+      meoVangTrang_51: -437264169339157944
+      meoVangTrang_6: 53220043569968574
+      meoVangTrang_7: 3134956962728616714
+      meoVangTrang_8: 3010541447834886294
+      meoVangTrang_9: 8144357632410840585
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
