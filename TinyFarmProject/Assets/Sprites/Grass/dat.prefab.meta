@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:TinyFarmProject/Assets/Sprites/Grass/dat.prefab.meta
 guid: 723e5894eaaf962498cb3380cf10f7e4
+========
+guid: 899fbf605ff85cf479522f5efb33619f
+>>>>>>>> restore-my-work:TinyFarmProject/Assets/Prefab/1_119.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 
