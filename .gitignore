@@ -71,6 +71,8 @@ Assets/Firebase/Plugins/x86/
 Assets/Firebase/Plugins/x86_64/
 Assets/Plugins/x86/
 Assets/Plugins/x86_64/
+Assets/Plugins/iOS/
+Assets/Plugins/tvOS/
 
 # Nhưng GIỮ LẠI .meta để Unity không báo missing
 !Assets/Firebase/Plugins/x86_64/*.meta
