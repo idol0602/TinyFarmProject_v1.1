@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class moving : MonoBehaviour
 {
     private Rigidbody2D rb;
-    public float speed = 5f;
+    public float speed = 20f;
     private Vector2 movement;
 
     // LastMoveDirection phải là public để PlayerHandler đọc được

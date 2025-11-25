@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "308302170860",
+    "firebase_url": "https://tinyfarmgameproject-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "tinyfarmgameproject",
+    "storage_bucket": "tinyfarmgameproject.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:308302170860:android:22f2faced6b5885c57b3c9",
+        "android_client_info": {
+          "package_name": "com.tinyFarm.game2d"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCo1zJ2cLIXkk6DAUo-uUVoGIKLRtgjJU8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
