@@ -1,0 +1,2717 @@
+fileFormatVersion: 2
+guid: c5f7fbd88d59dc04b9e61f480af8220b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6466417568459596771
+    second: Summer Crops 1_0
+  - first:
+      213: 1578109374192750608
+    second: Summer Crops 1_1
+  - first:
+      213: -5704572553637564642
+    second: Summer Crops 1_2
+  - first:
+      213: -357410816393183491
+    second: Summer Crops 1_3
+  - first:
+      213: -5036616226295595889
+    second: Summer Crops 1_4
+  - first:
+      213: -782886814194528820
+    second: Summer Crops 1_5
+  - first:
+      213: 6189265983671350716
+    second: Summer Crops 1_6
+  - first:
+      213: -8552464497881304869
+    second: Summer Crops 1_7
+  - first:
+      213: -2357385852272661548
+    second: Summer Crops 1_8
+  - first:
+      213: 3041194482167124328
+    second: Summer Crops 1_9
+  - first:
+      213: 748337454682450663
+    second: Summer Crops 1_10
+  - first:
+      213: -980486401692948805
+    second: Summer Crops 1_11
+  - first:
+      213: 553637897105633209
+    second: Summer Crops 1_12
+  - first:
+      213: 1790385998485886251
+    second: Summer Crops 1_13
+  - first:
+      213: -3096172969052706322
+    second: Summer Crops 1_14
+  - first:
+      213: 8849513896435821892
+    second: Summer Crops 1_15
+  - first:
+      213: 1216946202832452327
+    second: Summer Crops 1_16
+  - first:
+      213: 7751414486397849976
+    second: Summer Crops 1_17
+  - first:
+      213: 365804210160272642
+    second: Summer Crops 1_18
+  - first:
+      213: -9143115653683159267
+    second: Summer Crops 1_19
+  - first:
+      213: 3450048733135214768
+    second: Summer Crops 1_20
+  - first:
+      213: -773411307158348635
+    second: Summer Crops 1_21
+  - first:
+      213: 3497268293556361172
+    second: Summer Crops 1_22
+  - first:
+      213: 7071570758034639195
+    second: Summer Crops 1_23
+  - first:
+      213: 7526848065870599846
+    second: Summer Crops 1_24
+  - first:
+      213: -4374275534614849819
+    second: Summer Crops 1_25
+  - first:
+      213: -2914639920959524509
+    second: Summer Crops 1_26
+  - first:
+      213: -858595266141632062
+    second: Summer Crops 1_27
+  - first:
+      213: -937324068882685091
+    second: Summer Crops 1_28
+  - first:
+      213: 8946949840770040186
+    second: Summer Crops 1_29
+  - first:
+      213: -3154304052132850097
+    second: Summer Crops 1_30
+  - first:
+      213: 4934311878728842303
+    second: Summer Crops 1_31
+  - first:
+      213: 776631175764542935
+    second: Summer Crops 1_32
+  - first:
+      213: 6473467395622859298
+    second: Summer Crops 1_33
+  - first:
+      213: 8295936967703265151
+    second: Summer Crops 1_34
+  - first:
+      213: 3354491309324310130
+    second: Summer Crops 1_35
+  - first:
+      213: -4235748086267263857
+    second: Summer Crops 1_36
+  - first:
+      213: -1127314413952766692
+    second: Summer Crops 1_37
+  - first:
+      213: 8765619684568704885
+    second: Summer Crops 1_38
+  - first:
+      213: 6686852460982984889
+    second: Summer Crops 1_39
+  - first:
+      213: -5025210536908122941
+    second: Summer Crops 1_40
+  - first:
+      213: 5801805636770863202
+    second: Summer Crops 1_41
+  - first:
+      213: 6033980865000746960
+    second: Summer Crops 1_42
+  - first:
+      213: -3372373348500920079
+    second: Summer Crops 1_43
+  - first:
+      213: -2677562328089774840
+    second: Summer Crops 1_44
+  - first:
+      213: -2733534503151407015
+    second: Summer Crops 1_45
+  - first:
+      213: 3751268359682970185
+    second: Summer Crops 1_46
+  - first:
+      213: 3246828033532854043
+    second: Summer Crops 1_47
+  - first:
+      213: -2693741757646703139
+    second: Summer Crops 1_48
+  - first:
+      213: -4568560560134526845
+    second: Summer Crops 1_49
+  - first:
+      213: -5680936932557564068
+    second: Summer Crops 1_50
+  - first:
+      213: 8987079344408071874
+    second: Summer Crops 1_51
+  - first:
+      213: -3212320368363741368
+    second: Summer Crops 1_52
+  - first:
+      213: -2934857183311500659
+    second: Summer Crops 1_53
+  - first:
+      213: -690753537796337283
+    second: Summer Crops 1_54
+  - first:
+      213: -1822911289067003755
+    second: Summer Crops 1_55
+  - first:
+      213: -8870705459240435006
+    second: Summer Crops 1_56
+  - first:
+      213: 6023824398289260276
+    second: Summer Crops 1_57
+  - first:
+      213: 8410702767147394606
+    second: Summer Crops 1_58
+  - first:
+      213: 6694529992590963676
+    second: Summer Crops 1_59
+  - first:
+      213: 1004154927160923687
+    second: Summer Crops 1_60
+  - first:
+      213: -8699648437584063386
+    second: Summer Crops 1_61
+  - first:
+      213: -8412874389968540970
+    second: Summer Crops 1_62
+  - first:
+      213: -5023363478667916982
+    second: Summer Crops 1_63
+  - first:
+      213: -2311628358873875172
+    second: Summer Crops 1_64
+  - first:
+      213: 8703376264010035053
+    second: Summer Crops 1_65
+  - first:
+      213: -3916208221060044036
+    second: Summer Crops 1_66
+  - first:
+      213: 5135420448180003380
+    second: Summer Crops 1_67
+  - first:
+      213: 9088508125894154022
+    second: Summer Crops 1_68
+  - first:
+      213: 3336303937686759398
+    second: Summer Crops 1_69
+  - first:
+      213: 1762241961161950123
+    second: Summer Crops 1_70
+  - first:
+      213: 2057242599096891150
+    second: Summer Crops 1_71
+  - first:
+      213: 3492681693059832563
+    second: Summer Crops 1_72
+  - first:
+      213: -2882567589827779918
+    second: Summer Crops 1_73
+  - first:
+      213: 4927636195189560271
+    second: Summer Crops 1_74
+  - first:
+      213: -4088530523901875688
+    second: Summer Crops 1_75
+  - first:
+      213: -1316333587855587203
+    second: Summer Crops 1_76
+  - first:
+      213: 7093845566429237164
+    second: Summer Crops 1_77
+  - first:
+      213: -7010806375366896982
+    second: Summer Crops 1_78
+  - first:
+      213: -4288941863945727688
+    second: Summer Crops 1_79
+  - first:
+      213: -8369766172942730296
+    second: Summer Crops 1_80
+  - first:
+      213: 114642535590302262
+    second: Summer Crops 1_81
+  - first:
+      213: -6052254784896800730
+    second: Summer Crops 1_82
+  - first:
+      213: -7855141843866521109
+    second: Summer Crops 1_83
+  - first:
+      213: -1377424683939690685
+    second: Summer Crops 1_84
+  - first:
+      213: -5053276334886036648
+    second: Summer Crops 1_85
+  - first:
+      213: -1578491354963894163
+    second: Summer Crops 1_86
+  - first:
+      213: 6393676987952805325
+    second: Summer Crops 1_87
+  - first:
+      213: 75755931279664137
+    second: Summer Crops 1_88
+  - first:
+      213: -7057579169817522531
+    second: Summer Crops 1_89
+  - first:
+      213: -7795849477420507206
+    second: Summer Crops 1_90
+  - first:
+      213: 1756635449272197815
+    second: Summer Crops 1_91
+  - first:
+      213: 3133434844151652028
+    second: Summer Crops 1_92
+  - first:
+      213: -2065269906705621204
+    second: Summer Crops 1_93
+  - first:
+      213: -5697049858849515744
+    second: Summer Crops 1_94
+  - first:
+      213: 3219083936485862616
+    second: Summer Crops 1_95
+  - first:
+      213: 5789395610485832598
+    second: Summer Crops 1_96
+  - first:
+      213: -5859181184626076542
+    second: Summer Crops 1_97
+  - first:
+      213: -2068970986201057256
+    second: Summer Crops 1_98
+  - first:
+      213: -1485590458962086075
+    second: Summer Crops 1_99
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Summer Crops 1_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 384
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1cde966b7ba246a0800000000000000
+      internalID: -6466417568459596771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_1
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 383
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01019795d1296e510800000000000000
+      internalID: 1578109374192750608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_2
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 383
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1f6df09c7945d0b0800000000000000
+      internalID: -5704572553637564642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_3
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 383
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfe700291c83a0bf0800000000000000
+      internalID: -357410816393183491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_4
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 383
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8cbea13a385a1ab0800000000000000
+      internalID: -5036616226295595889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_5
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 383
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ccd09942790a225f0800000000000000
+      internalID: -782886814194528820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_6
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 383
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb5b329be90b4e550800000000000000
+      internalID: 6189265983671350716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_7
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 384
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd035a12ada8f4980800000000000000
+      internalID: -8552464497881304869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_8
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 351
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4dba1ccae02e84fd0800000000000000
+      internalID: -2357385852272661548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_9
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 351
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8611372c44e743a20800000000000000
+      internalID: 3041194482167124328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_10
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 351
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7eaa77e33f0a26a00800000000000000
+      internalID: 748337454682450663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_11
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 351
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb6adffffcc9462f0800000000000000
+      internalID: -980486401692948805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_12
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 351
+        width: 17
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bfec2febbaeea700800000000000000
+      internalID: 553637897105633209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_13
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 351
+        width: 17
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b25959a649ab8d810800000000000000
+      internalID: 1790385998485886251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_14
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 352
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee96270c61f2805d0800000000000000
+      internalID: -3096172969052706322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_15
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 320
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44da0f7800acfca70800000000000000
+      internalID: 8849513896435821892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_16
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 320
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7eab692bf1673e010800000000000000
+      internalID: 1216946202832452327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_17
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 319
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8719f88186e829b60800000000000000
+      internalID: 7751414486397849976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_18
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 319
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20502f3bdf8931500800000000000000
+      internalID: 365804210160272642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_19
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 319
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1fd6e951c02d1180800000000000000
+      internalID: -9143115653683159267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_20
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 319
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b89f4c2b0901ef20800000000000000
+      internalID: 3450048733135214768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_21
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 319
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ac5e8b838a4445f0800000000000000
+      internalID: -773411307158348635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_22
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 321
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d7d9a1dbfac88030800000000000000
+      internalID: 3497268293556361172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_23
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 289
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b59c1bc3324432260800000000000000
+      internalID: 7071570758034639195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_24
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 288
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a69d8cdf6cb47860800000000000000
+      internalID: 7526848065870599846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_25
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 287
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e69991c3937b43c0800000000000000
+      internalID: -4374275534614849819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_26
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 287
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 361f80f2f6e1d87d0800000000000000
+      internalID: -2914639920959524509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_27
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 287
+        width: 11
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c9cbcb8728a514f0800000000000000
+      internalID: -858595266141632062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_28
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 287
+        width: 11
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d53e2dab9b4fdf2f0800000000000000
+      internalID: -937324068882685091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_29
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 287
+        width: 14
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a71065a2a73f92c70800000000000000
+      internalID: 8946949840770040186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_30
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 287
+        width: 16
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f46db034d29a934d0800000000000000
+      internalID: -3154304052132850097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_31
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 289
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3c7f96b2823a7440800000000000000
+      internalID: 4934311878728842303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_32
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 257
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d580f880f527ca00800000000000000
+      internalID: 776631175764542935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_33
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 257
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2227c256c4066d950800000000000000
+      internalID: 6473467395622859298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_34
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 257
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7ffbf6e7b6112370800000000000000
+      internalID: 8295936967703265151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_35
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 257
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 276196ea21c8d8e20800000000000000
+      internalID: 3354491309324310130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_36
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 257
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f84cff7be899735c0800000000000000
+      internalID: -4235748086267263857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_37
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 256
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1dea266389fa50f0800000000000000
+      internalID: -1127314413952766692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_38
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 256
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 577a3ee29acb5a970800000000000000
+      internalID: 8765619684568704885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_39
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 256
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b0665282e87ccc50800000000000000
+      internalID: 6686852460982984889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_40
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 256
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c49a0234add24ab0800000000000000
+      internalID: -5025210536908122941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_41
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 256
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2681693cc77248050800000000000000
+      internalID: 5801805636770863202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_42
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 256
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0dfafd790a10db350800000000000000
+      internalID: 6033980865000746960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_43
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 225
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f8ab90ae4ce231d0800000000000000
+      internalID: -3372373348500920079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_44
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 223
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 805bd3abf3367dad0800000000000000
+      internalID: -2677562328089774840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_45
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 223
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 950f26e2ad8801ad0800000000000000
+      internalID: -2733534503151407015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_46
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 223
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 942d014b2be2f0430800000000000000
+      internalID: 3751268359682970185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_47
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 223
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1f7181e4ec0f0d20800000000000000
+      internalID: 3246828033532854043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_48
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 223
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd5f4dab428ed9ad0800000000000000
+      internalID: -2693741757646703139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_49
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 225
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 388625630663990c0800000000000000
+      internalID: -4568560560134526845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_50
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 192
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c57528f65f14921b0800000000000000
+      internalID: -5680936932557564068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_51
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 192
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ce81b35c0588bc70800000000000000
+      internalID: 8987079344408071874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_52
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 191
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84f5de205ab8b63d0800000000000000
+      internalID: -3212320368363741368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_53
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 191
+        width: 16
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8ae63af0fa4547d0800000000000000
+      internalID: -2934857183311500659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_54
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 191
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d711e403153f966f0800000000000000
+      internalID: -690753537796337283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_55
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 191
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 590ac1e37d7b3b6e0800000000000000
+      internalID: -1822911289067003755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_56
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 191
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c20bd2426ce4e480800000000000000
+      internalID: -8870705459240435006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_57
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 191
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fecc59ef5ce89350800000000000000
+      internalID: 6023824398289260276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_58
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 192
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e26273bda91d8b470800000000000000
+      internalID: 8410702767147394606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_59
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 159
+        width: 10
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd335922f8fb7ec50800000000000000
+      internalID: 6694529992590963676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_60
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 159
+        width: 11
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72692e406997fed00800000000000000
+      internalID: 1004154927160923687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_61
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 159
+        width: 14
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6641507b6d3a44780800000000000000
+      internalID: -8699648437584063386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_62
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 159
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6daa1fdc0577f3b80800000000000000
+      internalID: -8412874389968540970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_63
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 159
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a490454f78d694ab0800000000000000
+      internalID: -5023363478667916982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_64
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 159
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1d7a9051427befd0800000000000000
+      internalID: -2311628358873875172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_65
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 161
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6f62e2899a98c870800000000000000
+      internalID: 8703376264010035053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_66
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 128
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfa60453f55d6a9c0800000000000000
+      internalID: -3916208221060044036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_67
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 127
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 432eb0260bda44740800000000000000
+      internalID: 5135420448180003380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_68
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 127
+        width: 15
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6271c2eccfdd02e70800000000000000
+      internalID: 9088508125894154022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_69
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 127
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e76e8c31ceec4e20800000000000000
+      internalID: 3336303937686759398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_70
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 127
+        width: 15
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba388571abdb47810800000000000000
+      internalID: 1762241961161950123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_71
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 127
+        width: 15
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e07b8ff7e3bcc8c10800000000000000
+      internalID: 2057242599096891150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_72
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 129
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fa575cae7f787030800000000000000
+      internalID: 3492681693059832563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_73
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 96
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b2e24fac001ff7d0800000000000000
+      internalID: -2882567589827779918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_74
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 95
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc391a4030b726440800000000000000
+      internalID: 4927636195189560271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_75
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 95
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81aac75862f9247c0800000000000000
+      internalID: -4088530523901875688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_76
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 95
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d78c3f973917bbde0800000000000000
+      internalID: -1316333587855587203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_77
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 95
+        width: 16
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: caf8e7635f6627260800000000000000
+      internalID: 7093845566429237164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_78
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 95
+        width: 16
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa256371fbc94be90800000000000000
+      internalID: -7010806375366896982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_79
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 96
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8319639391e9a74c0800000000000000
+      internalID: -4288941863945727688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_80
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 63
+        width: 12
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cbfaa8b20e98db80800000000000000
+      internalID: -8369766172942730296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_81
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 63
+        width: 12
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 632920a57ca479100800000000000000
+      internalID: 114642535590302262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_82
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 63
+        width: 17
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6286110e652120ca0800000000000000
+      internalID: -6052254784896800730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_83
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 63
+        width: 66
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be177008c1eecf290800000000000000
+      internalID: -7855141843866521109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_84
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 65
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3478be04c8762ece0800000000000000
+      internalID: -1377424683939690685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_85
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 32
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85bda3362f72fd9b0800000000000000
+      internalID: -5053276334886036648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_86
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 32
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d602a52d972181ae0800000000000000
+      internalID: -1578491354963894163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_87
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 32
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc5348b6857eab850800000000000000
+      internalID: 6393676987952805325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_88
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 31
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 904ad8d3e932d0100800000000000000
+      internalID: 75755931279664137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_89
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 31
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9e84d043217e0e90800000000000000
+      internalID: -7057579169817522531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_90
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 31
+        width: 14
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abf9fe754349fc390800000000000000
+      internalID: -7795849477420507206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_91
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 31
+        width: 14
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b26ab152a2d06810800000000000000
+      internalID: 1756635449272197815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_92
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 32
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbe9d7c93623c7b20800000000000000
+      internalID: 3133434844151652028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_93
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 1
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2fd18d46ffa653e0800000000000000
+      internalID: -2065269906705621204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_94
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 0
+        width: 14
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 027d59f665300f0b0800000000000000
+      internalID: -5697049858849515744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_95
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 15
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8dce768e8cb7cac20800000000000000
+      internalID: 3219083936485862616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_96
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 15
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69bb63b52a0185050800000000000000
+      internalID: 5789395610485832598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_97
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 284d5bf71c100bea0800000000000000
+      internalID: -5859181184626076542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_98
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81875e499d98943e0800000000000000
+      internalID: -2068970986201057256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summer Crops 1_99
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 547fadb395f126be0800000000000000
+      internalID: -1485590458962086075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Summer Crops 1_0: -6466417568459596771
+      Summer Crops 1_1: 1578109374192750608
+      Summer Crops 1_10: 748337454682450663
+      Summer Crops 1_11: -980486401692948805
+      Summer Crops 1_12: 553637897105633209
+      Summer Crops 1_13: 1790385998485886251
+      Summer Crops 1_14: -3096172969052706322
+      Summer Crops 1_15: 8849513896435821892
+      Summer Crops 1_16: 1216946202832452327
+      Summer Crops 1_17: 7751414486397849976
+      Summer Crops 1_18: 365804210160272642
+      Summer Crops 1_19: -9143115653683159267
+      Summer Crops 1_2: -5704572553637564642
+      Summer Crops 1_20: 3450048733135214768
+      Summer Crops 1_21: -773411307158348635
+      Summer Crops 1_22: 3497268293556361172
+      Summer Crops 1_23: 7071570758034639195
+      Summer Crops 1_24: 7526848065870599846
+      Summer Crops 1_25: -4374275534614849819
+      Summer Crops 1_26: -2914639920959524509
+      Summer Crops 1_27: -858595266141632062
+      Summer Crops 1_28: -937324068882685091
+      Summer Crops 1_29: 8946949840770040186
+      Summer Crops 1_3: -357410816393183491
+      Summer Crops 1_30: -3154304052132850097
+      Summer Crops 1_31: 4934311878728842303
+      Summer Crops 1_32: 776631175764542935
+      Summer Crops 1_33: 6473467395622859298
+      Summer Crops 1_34: 8295936967703265151
+      Summer Crops 1_35: 3354491309324310130
+      Summer Crops 1_36: -4235748086267263857
+      Summer Crops 1_37: -1127314413952766692
+      Summer Crops 1_38: 8765619684568704885
+      Summer Crops 1_39: 6686852460982984889
+      Summer Crops 1_4: -5036616226295595889
+      Summer Crops 1_40: -5025210536908122941
+      Summer Crops 1_41: 5801805636770863202
+      Summer Crops 1_42: 6033980865000746960
+      Summer Crops 1_43: -3372373348500920079
+      Summer Crops 1_44: -2677562328089774840
+      Summer Crops 1_45: -2733534503151407015
+      Summer Crops 1_46: 3751268359682970185
+      Summer Crops 1_47: 3246828033532854043
+      Summer Crops 1_48: -2693741757646703139
+      Summer Crops 1_49: -4568560560134526845
+      Summer Crops 1_5: -782886814194528820
+      Summer Crops 1_50: -5680936932557564068
+      Summer Crops 1_51: 8987079344408071874
+      Summer Crops 1_52: -3212320368363741368
+      Summer Crops 1_53: -2934857183311500659
+      Summer Crops 1_54: -690753537796337283
+      Summer Crops 1_55: -1822911289067003755
+      Summer Crops 1_56: -8870705459240435006
+      Summer Crops 1_57: 6023824398289260276
+      Summer Crops 1_58: 8410702767147394606
+      Summer Crops 1_59: 6694529992590963676
+      Summer Crops 1_6: 6189265983671350716
+      Summer Crops 1_60: 1004154927160923687
+      Summer Crops 1_61: -8699648437584063386
+      Summer Crops 1_62: -8412874389968540970
+      Summer Crops 1_63: -5023363478667916982
+      Summer Crops 1_64: -2311628358873875172
+      Summer Crops 1_65: 8703376264010035053
+      Summer Crops 1_66: -3916208221060044036
+      Summer Crops 1_67: 5135420448180003380
+      Summer Crops 1_68: 9088508125894154022
+      Summer Crops 1_69: 3336303937686759398
+      Summer Crops 1_7: -8552464497881304869
+      Summer Crops 1_70: 1762241961161950123
+      Summer Crops 1_71: 2057242599096891150
+      Summer Crops 1_72: 3492681693059832563
+      Summer Crops 1_73: -2882567589827779918
+      Summer Crops 1_74: 4927636195189560271
+      Summer Crops 1_75: -4088530523901875688
+      Summer Crops 1_76: -1316333587855587203
+      Summer Crops 1_77: 7093845566429237164
+      Summer Crops 1_78: -7010806375366896982
+      Summer Crops 1_79: -4288941863945727688
+      Summer Crops 1_8: -2357385852272661548
+      Summer Crops 1_80: -8369766172942730296
+      Summer Crops 1_81: 114642535590302262
+      Summer Crops 1_82: -6052254784896800730
+      Summer Crops 1_83: -7855141843866521109
+      Summer Crops 1_84: -1377424683939690685
+      Summer Crops 1_85: -5053276334886036648
+      Summer Crops 1_86: -1578491354963894163
+      Summer Crops 1_87: 6393676987952805325
+      Summer Crops 1_88: 75755931279664137
+      Summer Crops 1_89: -7057579169817522531
+      Summer Crops 1_9: 3041194482167124328
+      Summer Crops 1_90: -7795849477420507206
+      Summer Crops 1_91: 1756635449272197815
+      Summer Crops 1_92: 3133434844151652028
+      Summer Crops 1_93: -2065269906705621204
+      Summer Crops 1_94: -5697049858849515744
+      Summer Crops 1_95: 3219083936485862616
+      Summer Crops 1_96: 5789395610485832598
+      Summer Crops 1_97: -5859181184626076542
+      Summer Crops 1_98: -2068970986201057256
+      Summer Crops 1_99: -1485590458962086075
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
