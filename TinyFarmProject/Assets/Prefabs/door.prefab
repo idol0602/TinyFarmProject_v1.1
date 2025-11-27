@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5029734198374262229}
   - component: {fileID: 1879275480799312977}
   - component: {fileID: 6944947187990080703}
-  - component: {fileID: 6155614648704997984}
   - component: {fileID: 6165314860407578089}
+  - component: {fileID: 1266438471529697680}
   m_Layer: 0
   m_Name: door
   m_TagString: Untagged
@@ -115,23 +115,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6155614648704997984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3787489114099699354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ad2aa359caeccb4f94a11a129e5becb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::OpenDoor
-  doorAnimator: {fileID: 6944947187990080703}
-  outdoorSceneName: mapSummer
-  indoorSceneName: InHouseSence
-  loadDelay: 0.5
-  autoCloseTime: 3
 --- !u!61 &6165314860407578089
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -178,3 +161,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2, y: 2.875}
   m_EdgeRadius: 0
+--- !u!114 &1266438471529697680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3787489114099699354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ad2aa359caeccb4f94a11a129e5becb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::openDoor
+  doorAnimator: {fileID: 6944947187990080703}
+  outdoorSceneName: mapSummer
+  indoorSceneName: InHouseSence
+  loadDelay: 0.5
+  autoCloseTime: 0
