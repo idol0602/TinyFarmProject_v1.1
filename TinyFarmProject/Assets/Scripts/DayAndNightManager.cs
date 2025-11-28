@@ -93,4 +93,9 @@ public class DayAndNightManager : MonoBehaviour
 
         Debug.Log("😴 Ngủ dậy sang ngày mới: " + currentDay);
     }
+    public float GetCurrentGameSeconds()
+    {
+        return currentGameSeconds;
+    }
+
 }

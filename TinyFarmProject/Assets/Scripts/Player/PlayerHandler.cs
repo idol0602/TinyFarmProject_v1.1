@@ -74,7 +74,11 @@ public class PlayerHandler : MonoBehaviour
         if (!isSleeping)
         {
             if (Keyboard.current.hKey.wasPressedThisFrame) { CheckTileInFront(); TriggerHoeAction(); }
-            if (Keyboard.current.gKey.wasPressedThisFrame) TriggerWateringAction();
+            if (Keyboard.current.gKey.wasPressedThisFrame){
+                TriggerWateringAction();
+                TryWaterCrop();   // 👈 thêm dòng này
+
+            }
             if (Keyboard.current.fKey.wasPressedThisFrame) TryPlantCrop();
         }
 
@@ -342,4 +346,29 @@ public class PlayerHandler : MonoBehaviour
         // ☀️ Sáng 2s
         yield return StartCoroutine(FadeLight(0f, originalLightIntensity, fadeDuration));
     }
+    private void TryWaterCrop()
+    {
+        Vector2 dir = moveScript.lastMoveDirection.normalized;
+        if (dir == Vector2.zero) dir = Vector2.down;
+
+        Vector2 pos = (Vector2)transform.position + dir * interactDistance;
+        Vector2 center = new Vector2(Mathf.Round(pos.x), Mathf.Round(pos.y));
+
+        Collider2D hit = Physics2D.OverlapBox(center, new Vector2(0.4f, 0.4f), 0f, cropLayer);
+
+        if (hit != null)
+        {
+            Crop crop = hit.GetComponent<Crop>();
+            if (crop != null)
+            {
+                crop.Water();
+                Debug.Log("💧 Đã tưới nước cây!");
+            }
+        }
+    }
+
+
+
+
+
 }
