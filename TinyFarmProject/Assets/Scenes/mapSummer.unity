@@ -44435,9 +44435,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 372234297}
     - target: {fileID: 1086360113661944099, guid: 87843692a94bb92419f5618cf30b5a8b, type: 3}
+      propertyPath: globalLight
+      value: 
+      objectReference: {fileID: 372234297}
+    - target: {fileID: 1086360113661944099, guid: 87843692a94bb92419f5618cf30b5a8b, type: 3}
       propertyPath: textTimeInGame
       value: 
       objectReference: {fileID: 1205384678}
+    - target: {fileID: 1086360113661944099, guid: 87843692a94bb92419f5618cf30b5a8b, type: 3}
+      propertyPath: realMinutesPerGameDay
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2746568631520064454, guid: 87843692a94bb92419f5618cf30b5a8b, type: 3}
       propertyPath: m_Name
       value: DayAndNightManager
