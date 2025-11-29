@@ -1,30 +1,36 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+#if UNITY_EDITOR
+using UnityEditor; // để chọn SceneAsset
+#endif
+
 [RequireComponent(typeof(Collider2D))]
 public class OpenDoor : MonoBehaviour
 {
     public enum DoorType
     {
-        MainDoor,   // ➜ Chuyển scene
-        NormalDoor  // ➜ chỉ mở cửa, không load map
+        MainDoor,
+        NormalDoor
     }
 
-    [Header("=== Main Settings ===")]
+    [Header("=== Door Mode ===")]
     public DoorType doorType = DoorType.MainDoor;
 
     [Header("=== Animator ===")]
     public Animator doorAnimator;
 
     [Header("=== Scene Switching (Only for MainDoor) ===")]
-    public string outdoorSceneName = "mapSummer";
-    public string indoorSceneName = "InHouseSence";
+#if UNITY_EDITOR
+    public SceneAsset outdoorScene;
+    public SceneAsset indoorScene;
+#endif
+
+    [HideInInspector] public string outdoorSceneName;
+    [HideInInspector] public string indoorSceneName;
 
     [Header("=== Timing ===")]
-    [Tooltip("Thời gian delay trước khi đổi scene (animation)")]
     public float loadDelay = 0.5f;
-
-    [Tooltip("Thời gian tự động đóng cửa nếu KHÔNG đổi scene (nếu = 0 thì bỏ qua)")]
     public float autoCloseTime = 0f;
 
     // Internal states
@@ -45,30 +51,27 @@ public class OpenDoor : MonoBehaviour
             doorAnimator = GetComponent<Animator>();
 
         GetComponent<Collider2D>().isTrigger = true;
-    }
 
+        // đảm bảo sceneName cập nhật khi play
+#if UNITY_EDITOR
+        SyncSceneNames();
+#endif
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (sceneLoading) return;
-        if (!other.CompareTag("Player")) return;
+        if (!other.CompareTag("Player") || sceneLoading) return;
 
         playerInside = true;
         playerCollider = other;
 
-        // 👇 mở cửa
         doorAnimator?.SetBool("isOpen", true);
 
-        // Hủy lệnh đóng nếu có
         CancelInvoke(nameof(CloseDoor));
 
-        // Nếu là cửa chính → chuẩn bị load scene
         if (doorType == DoorType.MainDoor)
-        {
             Invoke(nameof(LoadCorrectScene), loadDelay);
-        }
     }
-
 
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -77,23 +80,15 @@ public class OpenDoor : MonoBehaviour
         playerInside = false;
         playerCollider = null;
 
-        // 🚪 Nếu là cửa thường → đóng NGAY
         if (doorType == DoorType.NormalDoor && !sceneLoading)
         {
             CloseDoor();
             return;
         }
 
-        // ⏳ Nếu có autoCloseTime và không load scene → delay đóng
         if (autoCloseTime > 0f && !sceneLoading)
-        {
             Invoke(nameof(CloseDoor), autoCloseTime);
-        }
     }
-
-
-
-
 
     private void LoadCorrectScene()
     {
@@ -108,7 +103,7 @@ public class OpenDoor : MonoBehaviour
             target = outdoorSceneName;
         else
         {
-            Debug.LogError($"❌ Scene '{current}' không nằm trong cấu hình cửa!");
+            Debug.LogError($"❌ Scene '{current}' không khớp với cấu hình cửa!");
             return;
         }
 
@@ -116,11 +111,23 @@ public class OpenDoor : MonoBehaviour
         SceneManager.LoadScene(target);
     }
 
-
     private void CloseDoor()
     {
         if (playerInside || sceneLoading) return;
-
         doorAnimator?.SetBool("isOpen", false);
     }
+
+#if UNITY_EDITOR
+    // Tự động convert SceneAsset → tên scene runtime
+    private void OnValidate()
+    {
+        SyncSceneNames();
+    }
+
+    private void SyncSceneNames()
+    {
+        outdoorSceneName = outdoorScene != null ? outdoorScene.name : "";
+        indoorSceneName = indoorScene != null ? indoorScene.name : "";
+    }
+#endif
 }
