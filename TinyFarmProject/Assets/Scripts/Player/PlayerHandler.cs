@@ -80,7 +80,11 @@ public class PlayerHandler : MonoBehaviour
 
             }
             if (Keyboard.current.fKey.wasPressedThisFrame) TryPlantCrop();
+            if (Keyboard.current.eKey.wasPressedThisFrame)
+                TryHarvest();
+
         }
+
 
         // Tỉnh dậy khi nhấn phím di chuyển
         if (isSleeping && HasAnyMovementInput())
@@ -250,10 +254,16 @@ public class PlayerHandler : MonoBehaviour
         if (dir == Vector2.zero) dir = Vector2.down;
 
         StopMovementAndFaceDirection(dir);
+
         float absX = Mathf.Abs(dir.x);
         float absY = Mathf.Abs(dir.y);
-        animator.SetTrigger(absY >= absX ? (dir.y > 0 ? "WateringUp" : "WateringDown") : "WateringRight");
+
+        if (absY >= absX)
+            animator.SetTrigger(dir.y > 0 ? "WateringUp" : "WateringDown");
+        else
+            animator.SetTrigger("WateringRight");
     }
+
 
     private void TryPlantCrop()
     {
@@ -265,16 +275,31 @@ public class PlayerHandler : MonoBehaviour
         Vector2 pos = (Vector2)transform.position + dir * interactDistance;
         Vector2 center = new Vector2(Mathf.Round(pos.x), Mathf.Round(pos.y));
 
+        // 1. CHECK ĐẤT TRỒNG
         Collider2D soil = Physics2D.OverlapBox(center, new Vector2(0.4f, 0.4f), 0f);
         if (soil == null || !soil.CompareTag(plantableTag)) return;
 
-        if (Physics2D.OverlapBoxAll(center, new Vector2(0.9f, 0.9f), 0f, cropLayer).Length > 0) return;
-        if (!IsSurroundingCellsEmpty(center)) return;
+        // 2. CHECK Ô ĐÃ CÓ CÂY CHƯA → DÙNG COLLIDER LỚN (LAYER Crop)
+        Collider2D existCrop = Physics2D.OverlapBox(
+            center,
+            new Vector2(0.8f, 0.8f),
+            0f,
+            cropLayer   // LAYER CỦA COLLIDERWATERCHECK
+        );
 
+        if (existCrop != null)
+        {
+            Debug.Log("❌ Ô này đã có cây → không thể trồng tiếp");
+            return;
+        }
+
+        // 3. TRỒNG CÂY
         Instantiate(cropPrefab, new Vector3(center.x, center.y, 0f), Quaternion.identity);
         TriggerPlantAction(dir);
-    }
 
+        Debug.Log("🌱 Trồng cây thành công!");
+    }
+    
     private void TriggerPlantAction(Vector2 dir)
     {
         if (isSleeping || animator == null) return;
@@ -348,26 +373,61 @@ public class PlayerHandler : MonoBehaviour
     }
     private void TryWaterCrop()
     {
+        // Lấy hướng
+        Vector2 dir = moveScript.lastMoveDirection.normalized;
+        if (dir == Vector2.zero) dir = Vector2.down;
+
+        // Vị trí cần kiểm tra (không Round)
+        Vector2 checkPos = (Vector2)transform.position + dir * interactDistance;
+
+        // Overlap rộng hơn để không miss
+        Vector2 boxSize = new Vector2(0.9f, 0.9f);
+
+        Collider2D hit = Physics2D.OverlapBox(
+            checkPos,
+            boxSize,
+            0f,
+            cropLayer   // Layer của ColliderWaterCheck
+        );
+
+        if (hit != null)
+        {
+            Crop crop = hit.GetComponentInParent<Crop>();
+            if (crop != null)
+            {
+                crop.Water();
+                Debug.Log("💧 Tưới thành công!");
+                return;
+            }
+
+            Debug.Log("❌ hit được collider nhưng KHÔNG có Crop.cs");
+        }
+        else
+        {
+            Debug.Log("❌ Không tìm thấy Crop để tưới.");
+        }
+    }
+    private void TryHarvest()
+    {
         Vector2 dir = moveScript.lastMoveDirection.normalized;
         if (dir == Vector2.zero) dir = Vector2.down;
 
         Vector2 pos = (Vector2)transform.position + dir * interactDistance;
-        Vector2 center = new Vector2(Mathf.Round(pos.x), Mathf.Round(pos.y));
 
-        Collider2D hit = Physics2D.OverlapBox(center, new Vector2(0.4f, 0.4f), 0f, cropLayer);
+        Collider2D hit = Physics2D.OverlapBox(
+            pos,
+            new Vector2(1f, 1f),
+            0f,
+            cropLayer
+        );
 
         if (hit != null)
         {
-            Crop crop = hit.GetComponent<Crop>();
+            Crop crop = hit.GetComponentInParent<Crop>();
             if (crop != null)
-            {
-                crop.Water();
-                Debug.Log("💧 Đã tưới nước cây!");
-            }
+                crop.Harvest();
         }
     }
-
-
 
 
 
