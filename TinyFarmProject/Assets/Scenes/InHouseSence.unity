@@ -3881,7 +3881,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -15042,6 +15042,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1266438471529697680, guid: aaa2000acb75af644b2f926e30735da5, type: 3}
+      propertyPath: indoorScene
+      value: 
+      objectReference: {fileID: 102900000, guid: c98276df33301f04286dffc8604d094b, type: 3}
+    - target: {fileID: 1266438471529697680, guid: aaa2000acb75af644b2f926e30735da5, type: 3}
+      propertyPath: outdoorScene
+      value: 
+      objectReference: {fileID: 102900000, guid: 64e6976d40901884ba4c6266d778cdc0, type: 3}
+    - target: {fileID: 1266438471529697680, guid: aaa2000acb75af644b2f926e30735da5, type: 3}
+      propertyPath: indoorSceneName
+      value: InHouseSence
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266438471529697680, guid: aaa2000acb75af644b2f926e30735da5, type: 3}
+      propertyPath: outdoorSceneName
+      value: mapSummer
+      objectReference: {fileID: 0}
     - target: {fileID: 1879275480799312977, guid: aaa2000acb75af644b2f926e30735da5, type: 3}
       propertyPath: m_SortingLayer
       value: 9
@@ -15751,7 +15767,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 60
-    OrthographicSize: 7
+    OrthographicSize: 10
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
