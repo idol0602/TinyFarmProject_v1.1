@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4861d3c28f818944f929f6dfcee0daef, type: 3}
+  m_Name: SeedDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::SeedDatabase
+  seeds:
+  - seedName: corn_seed
+    plantName: corn
+    price: 20
+    growTime: 5
+    seedIcon: {fileID: 2264594466298315286, guid: cf9e2d10f85348446b6c16a88889b744, type: 3}
+  - seedName: carrot_seed
+    plantName: carrot
+    price: 10
+    growTime: 3
+    seedIcon: {fileID: 3614151479051087722, guid: cf9e2d10f85348446b6c16a88889b744, type: 3}
