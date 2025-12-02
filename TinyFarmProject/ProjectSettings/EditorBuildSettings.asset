@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/mapSummer.unity
     guid: 64e6976d40901884ba4c6266d778cdc0
   - enabled: 1
+    path: Assets/Scenes/mapSeedStore.unity
+    guid: 8660cf85a6a23f5469e047fad9c55df7
+  - enabled: 1
     path: Assets/Scenes/InHouseSence.unity
     guid: c98276df33301f04286dffc8604d094b
   - enabled: 1

@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 
 #if UNITY_EDITOR
-using UnityEditor; // để chọn SceneAsset
+using UnityEditor;
 #endif
 
 [RequireComponent(typeof(Collider2D))]
@@ -17,11 +17,17 @@ public class OpenDoor : MonoBehaviour
     [Header("=== Door Mode ===")]
     public DoorType doorType = DoorType.MainDoor;
 
+    [Header("=== Unique Door ID (Must match in both scenes) ===")]
+    public string doorID;
+
     [Header("=== Animator ===")]
     public Animator doorAnimator;
 
-    [Header("=== Scene Switching (Only for MainDoor) ===")]
+    [Header("=== Player Spawn Position ===")]
+    public Transform spawnPoint; // vị trí player sẽ xuất hiện khi vào scene này qua cửa này
+
 #if UNITY_EDITOR
+    [Header("=== Scene Switching (Only for MainDoor) ===")]
     public SceneAsset outdoorScene;
     public SceneAsset indoorScene;
 #endif
@@ -33,11 +39,12 @@ public class OpenDoor : MonoBehaviour
     public float loadDelay = 0.5f;
     public float autoCloseTime = 0f;
 
-    // Internal states
     private bool playerInside = false;
     private bool sceneLoading = false;
-    private Collider2D playerCollider = null;
+    private Collider2D playerCollider;
 
+    // ⭐ Biến static dùng chung cho tất cả scene
+    public static string lastDoorID = "";
 
     private void Reset()
     {
@@ -52,7 +59,6 @@ public class OpenDoor : MonoBehaviour
 
         GetComponent<Collider2D>().isTrigger = true;
 
-        // đảm bảo sceneName cập nhật khi play
 #if UNITY_EDITOR
         SyncSceneNames();
 #endif
@@ -66,7 +72,6 @@ public class OpenDoor : MonoBehaviour
         playerCollider = other;
 
         doorAnimator?.SetBool("isOpen", true);
-
         CancelInvoke(nameof(CloseDoor));
 
         if (doorType == DoorType.MainDoor)
@@ -94,6 +99,9 @@ public class OpenDoor : MonoBehaviour
     {
         if (sceneLoading || doorType != DoorType.MainDoor) return;
 
+        // 🔥 LƯU LẠI CỬA VỪA ĐI QUA
+        lastDoorID = doorID;
+
         string current = SceneManager.GetActiveScene().name;
         string target = "";
 
@@ -118,7 +126,6 @@ public class OpenDoor : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-    // Tự động convert SceneAsset → tên scene runtime
     private void OnValidate()
     {
         SyncSceneNames();

@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 2097619337241407536}
   - component: {fileID: 463161254378139713}
   - component: {fileID: 8509952585834796858}
+  - component: {fileID: 90785794233134286}
+  - component: {fileID: 105290919253681664}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -178,6 +180,13 @@ MonoBehaviour:
     m_Bits: 0
   interactDistance: 1
   checkDiagonals: 0
+  sleepDialog: {fileID: 0}
+  yesButton: {fileID: 0}
+  noButton: {fileID: 0}
+  sleepPosition: {x: -23.99, y: 0.4}
+  wakeupPosition: {x: -26.6759, y: -3.24255}
+  globalLight: {fileID: 0}
+  fadeDuration: 2
 --- !u!61 &463161254378139713
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -238,3 +247,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSorting
   spriteRenderer: {fileID: 0}
   offset: 0
+--- !u!114 &90785794233134286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7496122895074522226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e741851cba3ad425c91ecf922cc6b379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.VisualScripting.Core::Unity.VisualScripting.Variables
+  _data:
+    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
+    _objectReferences: []
+--- !u!114 &105290919253681664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7496122895074522226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fef94e111a0c2e449e032cc000955ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DoorSpawnOnStart
