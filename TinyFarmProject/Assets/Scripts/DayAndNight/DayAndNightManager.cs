@@ -157,6 +157,8 @@ public class DayAndNightManager : MonoBehaviour
 
     private void OnNewDay()
     {
+        DayAndNightEvents.InvokeNewDay(currentDay);
+
         Debug.Log($"[Sun] BẮT ĐẦU NGÀY MỚI: Ngày {currentDay}");
         // Có thể gọi event: crop grow, shop reset, v.v.
     }

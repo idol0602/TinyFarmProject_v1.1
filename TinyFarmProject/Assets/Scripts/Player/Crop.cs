@@ -2,11 +2,8 @@
 
 public class Crop : MonoBehaviour
 {
-    [Header("Stages (0 → cuối)")]
+    [Header("Stages cây (0 → cuối)")]
     public Sprite[] stages;
-
-    [Header("Thời gian (GIỜ GAME) mỗi stage")]
-    public float hoursPerStage = 3f;
 
     [Header("Icon nước")]
     public GameObject waterIconPrefab;
@@ -18,155 +15,178 @@ public class Crop : MonoBehaviour
 
     [Header("Cây chết")]
     public Sprite deadSprite;
-    public float maxNoWaterHours = 5f;
 
     private SpriteRenderer sr;
     private DayAndNightManager clock;
 
+    // ======= Trạng thái tăng trưởng =======
     private int currentStage = 0;
-    private float lastHourCheck = 0f;
-    private bool isWatered = false;
-
-    private float lastWaterHour = 0f;
     private bool isDead = false;
 
-    void Start()
+    // ======= Logic tưới theo NGÀY =======
+    private int lastWaterDay = 0;
+    private bool isWateredToday = false;
+    private int plantedDay = 0;
+
+    // ======= Giới hạn tưới trong ngày =======
+    public int morningHour = 6;
+    public int eveningHour = 18;
+
+    private void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-        clock = FindFirstObjectByType<DayAndNightManager>();
+        clock = DayAndNightManager.Instance;
+
         sr.sprite = stages[0];
 
-        lastHourCheck = GetHour();
-        lastWaterHour = GetHour();
+        // Ngày trồng → xem như đã tưới để không chết ngay lập tức
+        plantedDay = clock.GetCurrentDay();
+        lastWaterDay = plantedDay;
 
-        // Xóa icon cũ
-        foreach (Transform child in transform)
-        {
-            string n = child.name.ToLower();
-            if (n.Contains("watericon") || n.Contains("harvesticon"))
-                Destroy(child.gameObject);
-        }
+        SpawnIcons();
 
+        // Đăng ký sự kiện ngày mới
+        DayAndNightEvents.OnNewDay += HandleNewDay;
+    }
+
+    private void OnDestroy()
+    {
+        DayAndNightEvents.OnNewDay -= HandleNewDay;
+    }
+
+    private void SpawnIcons()
+    {
         // Icon nước
         if (waterIconPrefab != null)
         {
             waterIcon = Instantiate(waterIconPrefab, transform);
             waterIcon.transform.localPosition = new Vector3(0f, 0.8f, 0f);
+            waterIcon.name = "WaterIcon";
             waterIcon.SetActive(true);
         }
 
-        // Icon thu hoạch / dọn
+        // Icon thu hoạch
         if (harvestIconPrefab != null)
         {
             harvestIcon = Instantiate(harvestIconPrefab, transform);
             harvestIcon.transform.localPosition = new Vector3(0f, 1f, 0f);
+            harvestIcon.name = "HarvestIcon";
             harvestIcon.SetActive(false);
         }
     }
 
-    void Update()
-    {
-        float hour = GetHour();
+    // ========================================================
+    // ===============   NGÀY MỚI   ===========================
+    // ========================================================
 
-        // ====== 1. CHẾT CÂY ======
-        if (!isDead && hour - lastWaterHour >= maxNoWaterHours)
+    private void HandleNewDay(int newDay)
+    {
+        if (isDead) return;
+
+        int yesterday = newDay - 1;
+
+        // ❌ Nếu hôm qua không tưới → cây chết
+        if (lastWaterDay < yesterday)
         {
             Die();
             return;
         }
 
-        // Nếu cây CHẾT → hiện icon gặt để dọn
-        if (isDead)
+        // ✔ Nếu hôm qua có tưới → cây lớn lên 1 stage
+        if (isWateredToday)
         {
-            if (harvestIcon != null) harvestIcon.SetActive(true);
-            return;
+            Grow();
         }
 
-        // ====== 2. Stage cuối → hiện icon thu hoạch ======
-        if (currentStage == stages.Length - 1)
-        {
-            if (harvestIcon != null) harvestIcon.SetActive(true);
-            if (waterIcon != null) waterIcon.SetActive(false);
-            return;
-        }
+        // Reset trạng thái tưới cho NGÀY HÔM NAY
+        isWateredToday = false;
 
-        // ====== 3. Lớn lên theo giờ ======
-        if (hour - lastHourCheck >= hoursPerStage)
+        // Nếu chưa trưởng thành → icon nước bật lại
+        if (!isDead && currentStage < stages.Length - 1)
         {
-            ProcessStage();
-            lastHourCheck = hour;
+            waterIcon.SetActive(true);
         }
     }
 
-    float GetHour()
+    // ========================================================
+    // =====================  TƯỚI NƯỚC  =======================
+    // ========================================================
+
+    public void Water()
     {
-        return clock.GetCurrentGameSeconds() / 3600f;
-    }
+        if (isDead) return;
 
-    void ProcessStage()
-    {
-        if (!isWatered)
+        int hour = clock.GetCurrentHour();
+
+        // Ban đêm không được tưới
+        if (hour < morningHour || hour > eveningHour)
         {
-            if (waterIcon != null) waterIcon.SetActive(true);
+            Debug.Log("🌙 Ban đêm không được tưới!");
             return;
         }
 
-        Grow();
-        isWatered = false;
+        int today = clock.GetCurrentDay();
 
-        if (currentStage < stages.Length - 1)
-        {
-            if (waterIcon != null) waterIcon.SetActive(true);
-        }
-        else
-        {
-            // Stage cuối → icon thu hoạch
-            if (harvestIcon != null) harvestIcon.SetActive(true);
-        }
+        lastWaterDay = today;
+        isWateredToday = true;
+
+        if (waterIcon != null)
+            waterIcon.SetActive(false);
+
+        Debug.Log($"💧 Tưới cây thành công (Ngày {today})");
     }
 
-    void Grow()
+    // ========================================================
+    // =====================  LỚN LÊN  =========================
+    // ========================================================
+
+    private void Grow()
     {
         if (currentStage < stages.Length - 1)
         {
             currentStage++;
             sr.sprite = stages[currentStage];
+
+            Debug.Log($"🌱 Cây lớn lên stage {currentStage}");
+        }
+
+        // Stage cuối → icon thu hoạch bật
+        if (currentStage == stages.Length - 1)
+        {
+            harvestIcon.SetActive(true);
+            waterIcon.SetActive(false);
+        }
+        else
+        {
+            // Stage mới → cần tưới tiếp
+            waterIcon.SetActive(true);
         }
     }
 
-    public void Water()
-    {
-        isWatered = true;
-        lastWaterHour = GetHour(); // reset giờ tưới
+    // ========================================================
+    // =====================  CHẾT  ============================
+    // ========================================================
 
-        if (waterIcon != null) waterIcon.SetActive(false);
-
-        Debug.Log("💧 Đã tưới");
-    }
-
-    // 🌾 Thu hoạch hoặc dọn cây chết
-    public void Harvest()
-    {
-        Debug.Log("🌾 Thu hoạch / Dọn cây!");
-
-        Destroy(gameObject); // xóa cây
-    }
-
-    // 💀 Cây chết
-    void Die()
+    private void Die()
     {
         isDead = true;
 
-        Debug.Log("💀 Cây đã chết!");
-
-        // đổi sprite chết
         if (deadSprite != null)
             sr.sprite = deadSprite;
 
-        // tắt icon nước
-        if (waterIcon != null) waterIcon.SetActive(false);
+        waterIcon.SetActive(false);
+        harvestIcon.SetActive(true);
 
-        // bật icon gặt để dọn
-        if (harvestIcon != null) harvestIcon.SetActive(true);
+        Debug.Log("💀 Cây chết vì hôm qua không tưới!");
+    }
+
+    // ========================================================
+    // =====================  THU HOẠCH  =======================
+    // ========================================================
+
+    public void Harvest()
+    {
+        Debug.Log("🌾 Thu hoạch / Dọn cây!");
+        Destroy(gameObject);
     }
 }
