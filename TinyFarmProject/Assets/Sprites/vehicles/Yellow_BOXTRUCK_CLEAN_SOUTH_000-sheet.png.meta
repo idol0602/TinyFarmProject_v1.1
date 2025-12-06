@@ -1,0 +1,429 @@
+fileFormatVersion: 2
+guid: 47c4792fd9b695040855525edcd184b3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2419190955304548983
+    second: Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_0
+  - first:
+      213: -1090465635920415896
+    second: Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_1
+  - first:
+      213: -1269777182578468082
+    second: Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_2
+  - first:
+      213: -2552405299241341091
+    second: Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_3
+  - first:
+      213: -2468215592369086908
+    second: Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_4
+  - first:
+      213: 2177963805663086542
+    second: Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_5
+  - first:
+      213: 5109025593903732065
+    second: Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_6
+  - first:
+      213: -7672182800242279076
+    second: Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_7
+  - first:
+      213: 8650054103164590165
+    second: Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_8
+  - first:
+      213: -1280868996286221794
+    second: Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_9
+  - first:
+      213: 1009538334973622726
+    second: Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_10
+  - first:
+      213: 1903160182546216054
+    second: Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 8
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_0
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 305
+        width: 40
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77af3ce3b51b29120800000000000000
+      internalID: 2419190955304548983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_1
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 304
+        width: 40
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 863713b1843edd0f0800000000000000
+      internalID: -1090465635920415896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_2
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 304
+        width: 40
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0b93884168d06ee0800000000000000
+      internalID: -1269777182578468082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_3
+      rect:
+        serializedVersion: 2
+        x: 470
+        y: 304
+        width: 40
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5f25ef47e8049cd0800000000000000
+      internalID: -2552405299241341091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_4
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 164
+        width: 40
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44e92c3fef22fbdd0800000000000000
+      internalID: -2468215592369086908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_5
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 163
+        width: 40
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec7c43aba8ea93e10800000000000000
+      internalID: 2177963805663086542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_6
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 163
+        width: 40
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 165d20975b7e6e640800000000000000
+      internalID: 5109025593903732065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_7
+      rect:
+        serializedVersion: 2
+        x: 470
+        y: 164
+        width: 40
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5d72b3646ee68590800000000000000
+      internalID: -7672182800242279076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_8
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 24
+        width: 40
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 558190b706a2b0870800000000000000
+      internalID: 8650054103164590165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_9
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 24
+        width: 40
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e127c882f60793ee0800000000000000
+      internalID: -1280868996286221794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_10
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 24
+        width: 40
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c9fd3354c9920e00800000000000000
+      internalID: 1009538334973622726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_11
+      rect:
+        serializedVersion: 2
+        x: 470
+        y: 24
+        width: 40
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 674b5574a12696a10800000000000000
+      internalID: 1903160182546216054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_0: 2419190955304548983
+      Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_1: -1090465635920415896
+      Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_10: 1009538334973622726
+      Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_11: 1903160182546216054
+      Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_2: -1269777182578468082
+      Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_3: -2552405299241341091
+      Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_4: -2468215592369086908
+      Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_5: 2177963805663086542
+      Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_6: 5109025593903732065
+      Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_7: -7672182800242279076
+      Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_8: 8650054103164590165
+      Yellow_BOXTRUCK_CLEAN_SOUTH_000-sheet_9: -1280868996286221794
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
