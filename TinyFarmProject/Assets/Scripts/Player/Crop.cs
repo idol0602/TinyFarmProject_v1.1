@@ -40,25 +40,32 @@ public class Crop : MonoBehaviour
     public bool IsDead => isDead;
     public int LastWaterDay => lastWaterDay;
     public bool IsWateredToday => isWateredToday;
+    private bool isLoadedFromSave = false;
 
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
         clock = DayAndNightManager.Instance;
 
-        // tạo ID duy nhất
-        CropID = System.Guid.NewGuid().ToString();
+        // 🔥 Nếu cây này được Load từ Save → KHÔNG reset dữ liệu!
+        if (isLoadedFromSave)
+        {
+            // Không tạo ID mới, không reset ngày tưới, không reset stage
+            DayAndNightEvents.OnNewDay += HandleNewDay;
+            return;
+        }
 
+        // === CÂY MỚI TRỒNG ===
+        CropID = System.Guid.NewGuid().ToString();
         sr.sprite = stages[0];
 
         plantedDay = clock.GetCurrentDay();
-        lastWaterDay = plantedDay;  // ngày trồng xem như đã tưới
+        lastWaterDay = plantedDay;
+        isWateredToday = false;
 
         SpawnIcons();
 
         DayAndNightEvents.OnNewDay += HandleNewDay;
-
-        // lưu vào danh sách cây
         CropSaveSystem.AddCrop(this);
     }
 
@@ -80,7 +87,7 @@ public class Crop : MonoBehaviour
         if (harvestIconPrefab != null)
         {
             harvestIcon = Instantiate(harvestIconPrefab, transform);
-            harvestIcon.transform.localPosition = new Vector3(0f, 1f, 0f);
+            harvestIcon.transform.localPosition = new Vector3(0f, 1.25f, 0f);
             harvestIcon.SetActive(false);
         }
     }
@@ -176,7 +183,9 @@ public class Crop : MonoBehaviour
 
     // ========================== LOAD LẠI ==========================
     public void LoadFromData(CropData d)
+
     {
+        isLoadedFromSave = true;
         // ====== GÁN LẠI DỮ LIỆU ======
         this.CropID = d.cropID;
         this.currentStage = d.stage;

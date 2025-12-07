@@ -1,47 +1,49 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
-public class CropSaveSystem : MonoBehaviour
+public static class CropSaveSystem
 {
-    public static List<CropData> allCrops = new List<CropData>();
+    private static List<Crop> crops = new List<Crop>();
 
-    [Header("Prefab cây để spawn lại")]
-    public GameObject cropPrefab;
-
-    // Khi scene FARM load → spawn lại toàn bộ cây
-    private void Start()
+    public static void AddCrop(Crop c)
     {
-        LoadAllCrops();
+        if (!crops.Contains(c))
+            crops.Add(c);
     }
 
-    public void LoadAllCrops()
+    public static void RemoveCrop(Crop c)
     {
-        foreach (var d in allCrops)
+        crops.Remove(c);
+    }
+
+    public static void ClearAll()
+    {
+        crops.Clear();   // ⭐ Quan trọng
+    }
+
+    public static List<CropData> GetAllCropData()
+    {
+        List<CropData> list = new List<CropData>();
+
+        foreach (var c in crops)
         {
-            GameObject obj = Instantiate(cropPrefab, d.position, Quaternion.identity);
-            Crop c = obj.GetComponent<Crop>();
-            c.LoadFromData(d);
+            if (c == null) continue;  // ⭐ Chống lỗi MissingReference
+
+            CropData d = new CropData();
+            d.cropID = c.CropID;
+            d.stage = c.CurrentStage;
+            d.isDead = c.IsDead;
+            d.lastWaterDay = c.LastWaterDay;
+            d.isWateredToday = c.IsWateredToday;
+            d.position = c.transform.position;
+
+            list.Add(d);
         }
-    }
 
-    // ====================== ADD CROP =======================
-    public static void AddCrop(Crop crop)
+        return list;
+    }
+    public static List<Crop> GetRuntimeCrops()
     {
-        CropData d = new CropData();
-
-        d.cropID = crop.CropID;
-        d.position = crop.transform.position;
-        d.stage = crop.CurrentStage;
-        d.isDead = crop.IsDead;
-        d.lastWaterDay = crop.LastWaterDay;
-        d.isWateredToday = crop.IsWateredToday;
-
-        allCrops.Add(d);
+        return new List<Crop>(crops);
     }
 
-    // ====================== REMOVE CROP =====================
-    public static void RemoveCrop(Crop crop)
-    {
-        allCrops.RemoveAll(x => x.cropID == crop.CropID);
-    }
 }

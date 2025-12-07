@@ -106,9 +106,17 @@ public class OpenDoor : MonoBehaviour
         string target = "";
 
         if (current == outdoorSceneName)
+        {
+            FarmSaveSystem.SaveFarm();   // ⭐⭐⭐ CỰC KỲ QUAN TRỌNG ⭐⭐⭐
+
             target = indoorSceneName;
+        }
+
         else if (current == indoorSceneName)
+        {
+            // 👉 TỪ NHÀ RA FARM: KHÔNG SAVE (vì trong nhà không có cây)
             target = outdoorSceneName;
+        }
         else
         {
             Debug.LogError($"❌ Scene '{current}' không khớp với cấu hình cửa!");

@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 5333057237835130866}
   - component: {fileID: 3430765190741030517}
   m_Layer: 9
-  m_Name: CornPrefab
+  m_Name: CropPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
