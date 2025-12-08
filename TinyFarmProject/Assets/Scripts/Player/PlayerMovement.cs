@@ -33,30 +33,35 @@ public class moving : MonoBehaviour
         var keyboard = Keyboard.current;
         Vector2 inputMovement = Vector2.zero;
 
-        // 1. Lấy Input Di chuyển (Bàn phím)
+        // 1. Input bàn phím
         if (keyboard.wKey.isPressed) inputMovement.y += 1;
         if (keyboard.sKey.isPressed) inputMovement.y -= 1;
         if (keyboard.aKey.isPressed) inputMovement.x -= 1;
         if (keyboard.dKey.isPressed) inputMovement.x += 1;
 
-        // 2. Xử lý Di chuyển (Bàn phím hoặc Click)
+        // 2. Ưu tiên bàn phím
         if (inputMovement != Vector2.zero)
         {
             isMovingToClick = false;
             movement = inputMovement.normalized;
         }
+        // 3. Click chuột để di chuyển → CHỈ KHI KHÔNG BẤM VÀO UI
         else if (Mouse.current.leftButton.wasPressedThisFrame)
         {
+            // SIÊU DÒNG FIX: Nếu con trỏ đang nằm trên UI → bỏ qua hoàn toàn
+            if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+                return; // Không làm gì cả → player không chạy lung tung
+
             Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             mouseWorld.z = 0;
             targetPosition = mouseWorld;
             isMovingToClick = true;
         }
 
+        // 4. Di chuyển đến điểm click
         if (isMovingToClick)
         {
             Vector3 dir = (targetPosition - transform.position);
-
             if (dir.magnitude < 0.1f)
             {
                 isMovingToClick = false;
@@ -72,7 +77,7 @@ public class moving : MonoBehaviour
             movement = Vector2.zero;
         }
 
-        // 3. Cập nhật Hướng Cuối cùng (Chỉ khi đang di chuyển)
+        // Cập nhật hướng cuối
         if (movement.magnitude > 0.01f)
         {
             lastMoveDirection = movement.normalized;
