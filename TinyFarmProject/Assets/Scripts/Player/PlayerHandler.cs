@@ -169,7 +169,7 @@ public class PlayerHandler : MonoBehaviour
     }
 
     // =================== NGẮT HOÀN TOÀN HÀNH ĐỘNG ===================
-    private void ForceStopAllActions()
+    public void ForceStopAllActions()
     {
         if (rb != null) rb.linearVelocity = Vector2.zero;
         if (moveScript != null) moveScript.enabled = false;
@@ -188,7 +188,7 @@ public class PlayerHandler : MonoBehaviour
         animator.SetFloat("speed", 0f);
     }
 
-    private void LockPlayerMovement(bool lockIt)
+    public void LockPlayerMovement(bool lockIt)
     {
         if (moveScript != null)
             moveScript.enabled = !lockIt && !isSleeping;

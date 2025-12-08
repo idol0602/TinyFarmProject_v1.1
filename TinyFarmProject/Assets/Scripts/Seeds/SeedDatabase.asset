@@ -23,3 +23,8 @@ MonoBehaviour:
     price: 10
     growTime: 3
     seedIcon: {fileID: 3614151479051087722, guid: cf9e2d10f85348446b6c16a88889b744, type: 3}
+  - seedName: carrot_seed
+    plantName: carrot
+    price: 10
+    growTime: 3
+    seedIcon: {fileID: 3614151479051087722, guid: cf9e2d10f85348446b6c16a88889b744, type: 3}
