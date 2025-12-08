@@ -3,88 +3,127 @@ using Firebase;
 using Firebase.Database;
 using Firebase.Extensions;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using MapSummer;
 
 public class FirebaseDatabaseManager : MonoBehaviour
 {
+    public static FirebaseDatabaseManager Instance;
+    public static bool FirebaseReady = false;
+
     private DatabaseReference reference;
 
-    private async void Awake()
+    private void Awake()
+    {
+        // Singleton
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        InitFirebase();
+    }
+
+    private async void InitFirebase()
     {
         var status = await FirebaseApp.CheckAndFixDependenciesAsync();
         if (status == DependencyStatus.Available)
         {
             reference = FirebaseDatabase.DefaultInstance.RootReference;
-            Debug.Log("Firebase Ready!");
+            FirebaseReady = true;
+            Debug.Log("🔥 Firebase Ready");
         }
         else
         {
-            Debug.LogError("Firebase lỗi: " + status);
+            Debug.LogError("❌ Firebase lỗi: " + status);
         }
     }
 
-    // GHI: CHỈ LÀ 1 DÒNG – LƯU CHUỖI JSON ĐẸP
-    public void WriteAsJsonString(string id, TilemapDetail data)
+    // ============================================================
+    // SAVE FARM
+    // ============================================================
+    public void SaveFarmToFirebase(string userId)
     {
-        if (reference == null) return;
-
-        string json = JsonConvert.SerializeObject(data);
-        // → json = {"x":1,"y":1,"tilemapState":0}
-
-        reference.Child("Users").Child(id).SetValueAsync(json).ContinueWithOnMainThread(task =>
+        if (!FirebaseReady || reference == null)
         {
-            if (task.IsCompletedSuccessfully)
-                Debug.Log("ĐÃ GHI CHUỖI JSON ĐẸP LÊN FIREBASE!");
-            else
-                Debug.LogError("Lỗi: " + task.Exception);
-        });
+            Debug.LogError("❌ Firebase chưa sẵn sàng → KHÔNG SAVE");
+            return;
+        }
+
+        List<CropData> crops = new List<CropData>();
+
+        foreach (var crop in GameObject.FindObjectsOfType<Crop>())
+            crops.Add(new CropData(crop));
+
+        string json = JsonConvert.SerializeObject(crops);
+
+        reference.Child("Farms").Child(userId)
+            .SetValueAsync(json)
+            .ContinueWithOnMainThread(task =>
+            {
+                Debug.Log($"📤 Farm Saved ({crops.Count} cây)");
+            });
     }
 
-    // ĐỌC: In ra chuỗi JSON + deserialize nếu cần
-    public void ReadJsonString(string id)
+    // ============================================================
+    // LOAD FARM
+    // ============================================================
+    public void LoadFarmFromFirebase(string userId)
     {
-        if (reference == null) return;
-
-        reference.Child("Users").Child(id).GetValueAsync().ContinueWithOnMainThread(task =>
+        if (!FirebaseReady || reference == null)
         {
-            if (task.IsFaulted || task.IsCanceled)
+            Debug.LogError("❌ Firebase chưa sẵn sàng → KHÔNG LOAD");
+            return;
+        }
+
+        reference.Child("Farms").Child(userId).GetValueAsync()
+            .ContinueWithOnMainThread(task =>
             {
-                Debug.LogError("Đọc lỗi: " + task.Exception);
-                return;
-            }
+                if (!task.IsCompletedSuccessfully)
+                {
+                    Debug.LogError("❌ Load lỗi → " + task.Exception);
+                    return;
+                }
 
-            DataSnapshot snapshot = task.Result;
-            if (!snapshot.Exists)
-            {
-                Debug.Log("Không có dữ liệu tại: " + id);
-                return;
-            }
+                DataSnapshot snap = task.Result;
 
-            // CHÍNH LÀ CHUỖI JSON ĐẸP BẠN MUỐN!
-            string json = snapshot.Value.ToString();
-            Debug.Log("<color=yellow>Chuỗi JSON từ Firebase:</color> " + json);
+                if (snap.Value == null)
+                {
+                    Debug.Log("⚠ Firebase không có farm");
+                    return;
+                }
 
-            // Nếu cần dùng lại object:
-            TilemapDetail tile = JsonConvert.DeserializeObject<TilemapDetail>(json);
-            Debug.Log($"<color=lime>Object:</color> ({tile.x}, {tile.y}) - {tile.tilemapState}");
-        });
+                string json = snap.Value.ToString();
+                List<CropData> crops = JsonConvert.DeserializeObject<List<CropData>>(json);
+
+                // Xóa cây hiện tại
+                foreach (var old in GameObject.FindObjectsOfType<Crop>())
+                    Destroy(old.gameObject);
+
+                GameObject prefab = Resources.Load<GameObject>("CropPrefab");
+
+                foreach (var d in crops)
+                {
+                    GameObject obj = Instantiate(prefab, new Vector3(d.posX, d.posY, 0), Quaternion.identity);
+                    obj.GetComponent<Crop>().LoadFromData(d);
+                }
+
+                Debug.Log("🌱 Farm Loaded");
+            });
     }
 
-    // TEST TỰ ĐỘNG
-    void Start()
+    private void OnApplicationQuit()
     {
-        Invoke(nameof(Test), 2f);
-    }
-
-    void Test()
-    {
-        var tile = new TilemapDetail(1, 1, TilemapState.Ground);
-        WriteAsJsonString("123", tile);
-
-        Invoke(nameof(ReadBack), 2f);
-    }
-
-    void ReadBack()
-    {
-        ReadJsonString("123");
+        if (FirebaseReady)
+        {
+            Debug.Log("💾 Auto SAVE khi thoát game");
+            SaveFarmToFirebase("Player1");
+        }
     }
 }

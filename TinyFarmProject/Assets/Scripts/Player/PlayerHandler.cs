@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
 using System.Collections;
+using MapSummer;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
@@ -425,10 +426,19 @@ public class PlayerHandler : MonoBehaviour
         {
             Crop crop = hit.GetComponentInParent<Crop>();
             if (crop != null)
-                crop.Harvest();
+            {
+                crop.Harvest();   // ⭐ BẬT LẠI DÒNG NÀY
+                Debug.Log("🌾 Thu hoạch thành công!");
+            }
+        }
+
+        // ⭐ Tự động SAVE sau khi thu hoạch
+        if (FirebaseDatabaseManager.Instance != null && FirebaseDatabaseManager.FirebaseReady)
+        {
+            FirebaseDatabaseManager.Instance.SaveFarmToFirebase("Player1");
+            Debug.Log("💾 Save Farm sau khi thu hoạch");
         }
     }
-
 
 
 }

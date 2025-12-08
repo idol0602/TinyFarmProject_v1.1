@@ -17,17 +17,17 @@ public class OpenDoor : MonoBehaviour
     [Header("=== Door Mode ===")]
     public DoorType doorType = DoorType.MainDoor;
 
-    [Header("=== Unique Door ID (Must match in both scenes) ===")]
+    [Header("=== Door Unique ID ===")]
     public string doorID;
 
     [Header("=== Animator ===")]
     public Animator doorAnimator;
 
     [Header("=== Player Spawn Position ===")]
-    public Transform spawnPoint; // vị trí player sẽ xuất hiện khi vào scene này qua cửa này
+    public Transform spawnPoint;
 
 #if UNITY_EDITOR
-    [Header("=== Scene Switching (Only for MainDoor) ===")]
+    [Header("=== Scene Switching ===")]
     public SceneAsset outdoorScene;
     public SceneAsset indoorScene;
 #endif
@@ -43,7 +43,6 @@ public class OpenDoor : MonoBehaviour
     private bool sceneLoading = false;
     private Collider2D playerCollider;
 
-    // ⭐ Biến static dùng chung cho tất cả scene
     public static string lastDoorID = "";
 
     private void Reset()
@@ -97,24 +96,36 @@ public class OpenDoor : MonoBehaviour
 
     private void LoadCorrectScene()
     {
-        if (sceneLoading || doorType != DoorType.MainDoor) return;
+        if (sceneLoading || doorType != DoorType.MainDoor)
+            return;
 
-        // 🔥 LƯU LẠI CỬA VỪA ĐI QUA
         lastDoorID = doorID;
 
         string current = SceneManager.GetActiveScene().name;
         string target = "";
 
+        // ========================= FROM FARM → HOUSE =========================
         if (current == outdoorSceneName)
         {
-            FarmSaveSystem.SaveFarm();   // ⭐⭐⭐ CỰC KỲ QUAN TRỌNG ⭐⭐⭐
+            Debug.Log("🚪 Rời FARM → SAVE FARM TRƯỚC KHI VÀO NHÀ");
+
+            // 👉 Không dùng Instance nữa, chỉ Find cho chắc
+            var firebase = Object.FindObjectOfType<FirebaseDatabaseManager>();
+            if (firebase != null)
+            {
+                firebase.SaveFarmToFirebase("Player1");
+            }
+            else
+            {
+                Debug.LogWarning("⚠ Không tìm thấy FirebaseDatabaseManager trong scene, bỏ qua SAVE farm.");
+            }
 
             target = indoorSceneName;
         }
-
+        // ========================= FROM HOUSE → FARM =========================
         else if (current == indoorSceneName)
         {
-            // 👉 TỪ NHÀ RA FARM: KHÔNG SAVE (vì trong nhà không có cây)
+            Debug.Log("🏡 Rời HOUSE → Không cần save farm");
             target = outdoorSceneName;
         }
         else
