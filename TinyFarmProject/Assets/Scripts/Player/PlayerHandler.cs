@@ -15,7 +15,13 @@ public class PlayerHandler : MonoBehaviour
     private Rigidbody2D rb;
     private moving moveScript;
     [Header("=== TRỒNG CÂY ===")]
-    public GameObject cropPrefab;
+    public GameObject cornPrefab;
+    public GameObject chiliPrefab;
+    public GameObject tomatoPrefab;
+    public GameObject eggplantPrefab;
+    public GameObject watermelonPrefab;
+
+
     public string plantableTag = "dattrongcay";
     public LayerMask cropLayer;
     public float interactDistance = 1f;
@@ -32,6 +38,8 @@ public class PlayerHandler : MonoBehaviour
     private float originalLightIntensity;
     private bool isNearBed = false;
     private bool isSleeping = false;
+public string currentCropType = "Chili"; 
+
     void Awake()
     {
         if (globalLight != null)
@@ -213,31 +221,55 @@ public class PlayerHandler : MonoBehaviour
     }
     private void TryPlantCrop()
     {
-        if (isSleeping || cropPrefab == null || moveScript == null) return;
+        if (isSleeping || moveScript == null) return;
+
         Vector2 dir = moveScript.lastMoveDirection.normalized;
         if (dir == Vector2.zero) dir = Vector2.down;
+
         Vector2 pos = (Vector2)transform.position + dir * interactDistance;
         Vector2 center = new Vector2(Mathf.Round(pos.x), Mathf.Round(pos.y));
-        // 1. CHECK ĐẤT TRỒNG
+
+        // 1. CHECK đất trồng
         Collider2D soil = Physics2D.OverlapBox(center, new Vector2(0.4f, 0.4f), 0f);
-        if (soil == null || !soil.CompareTag(plantableTag)) return;
-        // 2. CHECK Ô ĐÃ CÓ CÂY CHƯA → DÙNG COLLIDER LỚN (LAYER Crop)
+        if (soil == null || !soil.CompareTag(plantableTag))
+        {
+            return;
+        }
+
+        // 2. CHECK đã có cây chưa
         Collider2D existCrop = Physics2D.OverlapBox(
             center,
             new Vector2(0.8f, 0.8f),
             0f,
-            cropLayer // LAYER CỦA COLLIDERWATERCHECK
+            cropLayer
         );
+
         if (existCrop != null)
         {
-            Debug.Log("❌ Ô này đã có cây → không thể trồng tiếp");
+            Debug.Log("❌ Ô này đã có cây, không thể trồng");
             return;
         }
-        // 3. TRỒNG CÂY
-        Instantiate(cropPrefab, new Vector3(center.x, center.y, 0f), Quaternion.identity);
+
+        // 3. LẤY PREFAB THEO LOẠI CÂY
+        GameObject prefab = GetCropPrefab(currentCropType);
+        if (prefab == null)
+        {
+            Debug.LogError("❌ Không load được prefab loại cây: " + currentCropType);
+            return;
+        }
+
+        // 4. TRỒNG CÂY
+        GameObject newCrop = Instantiate(prefab, new Vector3(center.x, center.y, 0f), Quaternion.identity);
+
+        // ⭐ GÁN LOẠI CÂY
+        newCrop.GetComponent<Crop>().cropType = currentCropType;
+
+        // Animation
         TriggerPlantAction(dir);
-        Debug.Log("🌱 Trồng cây thành công!");
+
+        Debug.Log("🌱 Trồng thành công loại: " + currentCropType);
     }
+
 
     private void TriggerPlantAction(Vector2 dir)
     {
@@ -427,6 +459,21 @@ public class PlayerHandler : MonoBehaviour
             return false;
 
         return true;
+    }
+    private GameObject GetCropPrefab(string cropType)
+    {
+        switch (cropType)
+        {
+            case "Corn": return cornPrefab;
+            case "Chili": return chiliPrefab;
+            case "Tomato": return tomatoPrefab;
+            case "Eggplant": return eggplantPrefab;
+            case "Watermelon": return watermelonPrefab;
+
+        }
+
+        Debug.LogError("❌ Không có prefab cho loại cây: " + cropType);
+        return null;
     }
 
 }

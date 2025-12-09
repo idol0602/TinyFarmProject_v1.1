@@ -15,7 +15,6 @@ public class FirebaseDatabaseManager : MonoBehaviour
 
     private void Awake()
     {
-        // Singleton
         if (Instance == null)
         {
             Instance = this;
@@ -61,7 +60,7 @@ public class FirebaseDatabaseManager : MonoBehaviour
         foreach (var crop in GameObject.FindObjectsOfType<Crop>())
             crops.Add(new CropData(crop));
 
-        string json = JsonConvert.SerializeObject(crops);
+        string json = JsonConvert.SerializeObject(crops, Formatting.Indented);
 
         reference.Child("Farms").Child(userId)
             .SetValueAsync(json)
@@ -72,7 +71,7 @@ public class FirebaseDatabaseManager : MonoBehaviour
     }
 
     // ============================================================
-    // LOAD FARM
+    // LOAD FARM — VERSION HỖ TRỢ NHIỀU LOẠI CÂY
     // ============================================================
     public void LoadFarmFromFirebase(string userId)
     {
@@ -95,7 +94,7 @@ public class FirebaseDatabaseManager : MonoBehaviour
 
                 if (snap.Value == null)
                 {
-                    Debug.Log("⚠ Firebase không có farm");
+                    Debug.Log("⚠ Firebase không có dữ liệu farm");
                     return;
                 }
 
@@ -106,15 +105,25 @@ public class FirebaseDatabaseManager : MonoBehaviour
                 foreach (var old in GameObject.FindObjectsOfType<Crop>())
                     Destroy(old.gameObject);
 
-                GameObject prefab = Resources.Load<GameObject>("CropPrefab");
-
+                // Load từng cây theo đúng loại
                 foreach (var d in crops)
                 {
-                    GameObject obj = Instantiate(prefab, new Vector3(d.posX, d.posY, 0), Quaternion.identity);
+                    string path = "Crops/" + d.cropType;
+                    GameObject prefab = Resources.Load<GameObject>(path);
+
+                    if (prefab == null)
+                    {
+                        Debug.LogError("❌ Không tìm thấy prefab cho loại cây: " + d.cropType);
+                        continue;
+                    }
+
+                    Vector3 pos = new Vector3(d.posX, d.posY, 0);
+                    GameObject obj = Instantiate(prefab, pos, Quaternion.identity);
+
                     obj.GetComponent<Crop>().LoadFromData(d);
                 }
 
-                Debug.Log("🌱 Farm Loaded");
+                Debug.Log("🌱 Farm Loaded xong!");
             });
     }
 
