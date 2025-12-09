@@ -6,6 +6,7 @@ TagManager:
   tags:
   - dattrongcay
   - Bed
+  - GlobalLight
   layers:
   - Default
   - TransparentFX
