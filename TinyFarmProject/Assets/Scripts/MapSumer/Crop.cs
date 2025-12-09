@@ -42,10 +42,13 @@ namespace MapSummer
 
                 lastWaterDay = clock.GetCurrentDay();
                 isWateredToday = false;
+
+                // CHỈ CÂY MỚI SPAWN ICON Ở ĐÂY
+                SpawnIcons();
+                UpdateIcons();
             }
 
-            SpawnIcons();
-            UpdateIcons();
+            // Cây load từ save KHÔNG chạy SpawnIcons ở đây nữa
 
             DayAndNightEvents.OnNewDay += HandleNewDay;
         }
@@ -137,22 +140,33 @@ namespace MapSummer
         {
             isLoadedFromSave = true;
 
-            CropID = d.cropID;
             currentStage = d.stage;
             isDead = d.isDead;
             lastWaterDay = d.lastWaterDay;
             isWateredToday = d.isWateredToday;
 
             sr = GetComponent<SpriteRenderer>();
-            clock = DayAndNightManager.Instance;
-
             sr.sprite = isDead ? deadSprite : stages[currentStage];
 
+            // ❗ XÓA ICON CŨ CHỈ NẾU TAG = "Icon"
             foreach (Transform t in transform)
-                Destroy(t.gameObject);
+            {
+                if (t.CompareTag("Icon"))
+                    Destroy(t.gameObject);
+            }
 
+            // Spawn icon mới
             SpawnIcons();
             UpdateIcons();
+
+            // RESET COLLIDER
+            Collider2D col = GetComponentInChildren<Collider2D>();
+            if (col != null)
+            {
+                col.enabled = false;
+                col.enabled = true;
+            }
         }
     }
 }
+

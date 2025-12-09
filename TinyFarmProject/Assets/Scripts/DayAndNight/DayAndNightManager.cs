@@ -4,10 +4,9 @@ using TMPro;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
-[DefaultExecutionOrder(-100)] // Chạy trước mọi script khác
+[DefaultExecutionOrder(-100)]
 public class DayAndNightManager : MonoBehaviour
 {
-    // ==================== SINGLETON - KHÔNG BAO GIỜ BỊ HỦY KHI CHUYỂN SCENE ====================
     public static DayAndNightManager Instance { get; private set; }
 
     [Header("=== HIỂN THỊ ===")]
@@ -15,30 +14,26 @@ public class DayAndNightManager : MonoBehaviour
     public TMP_Text textDayInGame;
 
     [Header("=== TỐC ĐỘ THỜI GIAN ===")]
-    [Tooltip("1 ngày trong game bằng bao nhiêu phút thực tế")]
     public float realMinutesPerGameDay = 5f;
 
     [Header("=== ÁNH SÁNG ===")]
     public Light2D globalLight;
     public Gradient gradient;
 
-    // ================================= PRIVATE =================================
     private const float SECONDS_PER_DAY = 86400f;
     private float timeScale;
 
-    // LƯU TRỮ THỜI GIAN TOÀN CỤC - KHÔNG BAO GIỜ RESET
-    private static float savedTotalGameSeconds = -1f;  // -1 = chưa có save
+    private static float savedTotalGameSeconds = -1f;
     private float totalGameSeconds = 0f;
 
     private int currentDay = 1;
 
-    // ========================================================================
     private void Awake()
     {
-        // === SINGLETON PATTERN + DON'T DESTROY ON LOAD ===
+
+        // === SINGLETON ===
         if (Instance != null && Instance != this)
         {
-            // Nếu đã có 1 thằng khác rồi → destroy thằng mới (khi load scene lại)
             Destroy(gameObject);
             return;
         }
@@ -46,20 +41,19 @@ public class DayAndNightManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        // Khôi phục thời gian từ lần chơi trước (nếu có)
+        // === KHÔI PHỤC GAME TIME ===
         if (savedTotalGameSeconds >= 0f)
         {
             totalGameSeconds = savedTotalGameSeconds;
             currentDay = Mathf.FloorToInt(totalGameSeconds / SECONDS_PER_DAY) + 1;
+
         }
         else
         {
-            // Lần đầu chơi → bắt đầu 7:00 sáng ngày 1
             totalGameSeconds = 7f * 3600f;
             currentDay = 1;
         }
 
-        // Tính tốc độ thời gian
         timeScale = SECONDS_PER_DAY / (realMinutesPerGameDay * 60f);
     }
 
@@ -73,31 +67,47 @@ public class DayAndNightManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    // Khi vào scene mới → tìm lại UI (vì UI ở mỗi scene khác nhau)
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+
+        StartCoroutine(DelayedUpdateLight());
+    }
+
+    private System.Collections.IEnumerator DelayedUpdateLight()
+    {
+        yield return null;
+
         FindUIReferences();
+
         UpdateUIAndLight();
     }
 
-    // Tự động tìm lại Text và Light nếu bị mất khi chuyển scene
     private void FindUIReferences()
     {
+        // tìm UI
         if (textTimeInGame == null)
             textTimeInGame = GameObject.Find("TimeText")?.GetComponent<TMP_Text>();
 
         if (textDayInGame == null)
             textDayInGame = GameObject.Find("DayText")?.GetComponent<TMP_Text>();
 
-        if (globalLight == null)
+        // LUÔN tìm lại Global Light
+        GameObject lightObj = GameObject.Find("Global Light 2D")
+                           ?? GameObject.FindWithTag("GlobalLight");
+
+        if (lightObj != null)
         {
-            var lightObj = GameObject.Find("Global Light 2D") ?? GameObject.FindWithTag("GlobalLight");
-            globalLight = lightObj?.GetComponent<Light2D>();
+            globalLight = lightObj.GetComponent<Light2D>();
+        }
+        else
+        {
+            Debug.LogWarning("[Light] ⚠ KHÔNG tìm thấy Global Light 2D trong scene mới!");
         }
     }
 
     void Start()
     {
+
         FindUIReferences();
         UpdateUIAndLight();
     }
@@ -105,13 +115,14 @@ public class DayAndNightManager : MonoBehaviour
     void Update()
     {
         totalGameSeconds += Time.deltaTime * timeScale;
-        savedTotalGameSeconds = totalGameSeconds; // Luôn cập nhật static để giữ khi reload
+        savedTotalGameSeconds = totalGameSeconds;
 
-        // Tự động sang ngày mới khi qua 00:00
         int newDay = Mathf.FloorToInt(totalGameSeconds / SECONDS_PER_DAY) + 1;
+
         if (newDay > currentDay)
         {
             currentDay = newDay;
+            Debug.Log($"[DayNight] Sang ngày mới: Ngày {currentDay}");
             OnNewDay();
         }
 
@@ -121,6 +132,7 @@ public class DayAndNightManager : MonoBehaviour
     void UpdateUIAndLight()
     {
         float secondsToday = totalGameSeconds % SECONDS_PER_DAY;
+
         int hours = Mathf.FloorToInt(secondsToday / 3600f);
         int minutes = Mathf.FloorToInt((secondsToday % 3600f) / 60f);
 
@@ -132,12 +144,17 @@ public class DayAndNightManager : MonoBehaviour
 
         if (globalLight != null && gradient != null)
         {
-            float t = secondsToday / SECONDS_PER_DAY;
-            globalLight.color = gradient.Evaluate(t);
+            float t = (totalGameSeconds % SECONDS_PER_DAY) / SECONDS_PER_DAY;
+            Color c = gradient.Evaluate(t);
+            globalLight.color = c;
+
+        }
+        else
+        {
+            Debug.LogWarning("[Light] ⚠ Không có Global Light hoặc Gradient để cập nhật!");
         }
     }
 
-    // ==================== NGỦ → NHẢY TỚI 7:00 SÁNG HÔM SAU ====================
     public void SleepToNextDay()
     {
         float secondsToday = totalGameSeconds % SECONDS_PER_DAY;
@@ -149,21 +166,20 @@ public class DayAndNightManager : MonoBehaviour
             totalGameSeconds += (target - secondsToday);
 
         currentDay = Mathf.FloorToInt(totalGameSeconds / SECONDS_PER_DAY) + 1;
+
+        Debug.Log($"[Sleep] Ngủ → Dậy lúc 7:00, Ngày {currentDay}");
+
         savedTotalGameSeconds = totalGameSeconds;
 
-        Debug.Log($"[Sleep] Tỉnh dậy lúc 7:00 sáng - Ngày {currentDay}");
         UpdateUIAndLight();
     }
 
     private void OnNewDay()
     {
         DayAndNightEvents.InvokeNewDay(currentDay);
-
-        Debug.Log($"[Sun] BẮT ĐẦU NGÀY MỚI: Ngày {currentDay}");
-        // Có thể gọi event: crop grow, shop reset, v.v.
+        Debug.Log($"[Sun] BẮT ĐẦU NGÀY MỚI → Day {currentDay}");
     }
 
-    // ==================== CÁC HÀM PUBLIC CHO SCRIPT KHÁC DÙNG ====================
     public float GetCurrentGameSeconds() => totalGameSeconds % SECONDS_PER_DAY;
     public int GetCurrentHour() => Mathf.FloorToInt((totalGameSeconds % SECONDS_PER_DAY) / 3600f);
     public int GetCurrentDay() => currentDay;

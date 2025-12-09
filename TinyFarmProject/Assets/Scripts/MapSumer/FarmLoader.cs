@@ -12,10 +12,21 @@ public class FarmLoader : MonoBehaviour
 
     IEnumerator LoadFarmRoutine()
     {
-        while (!FirebaseDatabaseManager.FirebaseReady)
+        // ⭐ B1: CHỜ FirebaseDatabaseManager được tạo (Awake đã chạy)
+        while (FirebaseDatabaseManager.Instance == null)
+        {
             yield return null;
+        }
 
-        FindObjectOfType<FirebaseDatabaseManager>()
-            .LoadFarmFromFirebase(userId);
+        // ⭐ B2: CHỜ Firebase thực sự sẵn sàng (async init)
+        while (!FirebaseDatabaseManager.FirebaseReady)
+        {
+            yield return null;
+        }
+
+        // ⭐ B3: GỌI LOAD
+        FirebaseDatabaseManager.Instance.LoadFarmFromFirebase(userId);
+
+        Debug.Log("🌱 FarmLoader → LoadFarmFromFirebase DONE!");
     }
 }
