@@ -94,6 +94,7 @@ public class OpenDoor : MonoBehaviour
             Invoke(nameof(CloseDoor), autoCloseTime);
     }
 
+    [System.Obsolete]
     private void LoadCorrectScene()
     {
         if (sceneLoading || doorType != DoorType.MainDoor)
