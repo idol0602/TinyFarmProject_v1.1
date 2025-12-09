@@ -332,16 +332,23 @@ public class PlayerHandler : MonoBehaviour
 
     private void TryWaterCrop()
     {
+        // ❌ Không cho tưới nếu giờ trong game là 19h–5h
+        if (!CanWaterNow())
+        {
+            Debug.Log($"⛔ Không thể tưới nước từ 19h đến 5h sáng! (Giờ hiện tại: {DayAndNightManager.Instance.GetCurrentHour()}:00)");
+            return;
+        }
+
         if (moveScript == null) return;
 
         Vector2 dir = moveScript.lastMoveDirection.normalized;
         if (dir == Vector2.zero) dir = Vector2.down;
 
-        // Tâm khu vực tưới: ô phía trước player (cách 1 ô)
+        // Tâm khu vực tưới phía trước người chơi
         Vector2 centerPos = (Vector2)transform.position + dir * interactDistance;
         Vector2 center = new Vector2(Mathf.Round(centerPos.x), Mathf.Round(centerPos.y));
 
-        // Tưới 9 ô xung quanh (3x3) kể cả chéo
+        // 3x3 khu vực xung quanh
         Vector2[] directions = new Vector2[]
         {
         new Vector2(-1, -1), new Vector2(-1, 0), new Vector2(-1, 1),
@@ -355,7 +362,6 @@ public class PlayerHandler : MonoBehaviour
         {
             Vector2 checkPos = center + offset;
 
-            // Dùng OverlapBox để tìm Crop trong từng ô
             Collider2D hit = Physics2D.OverlapBox(
                 checkPos,
                 new Vector2(0.9f, 0.9f),
@@ -376,13 +382,14 @@ public class PlayerHandler : MonoBehaviour
 
         if (wateredCount > 0)
         {
-            Debug.Log($"Tưới thành công {wateredCount} cây trong khu vực 3x3!");
+            Debug.Log($"💧 Tưới thành công {wateredCount} cây trong khu vực 3x3!");
         }
         else
         {
-            Debug.Log("Không có cây nào để tưới trong khu vực.");
+            Debug.Log("⚠ Không có cây nào để tưới trong khu vực.");
         }
     }
+
     private void TryHarvest()
     {
         Vector2 dir = moveScript.lastMoveDirection.normalized;
@@ -410,4 +417,16 @@ public class PlayerHandler : MonoBehaviour
             Debug.Log("💾 Save Farm sau khi thu hoạch");
         }
     }
+    // =================== KIỂM TRA GIỜ TRONG GAME ===================
+    private bool CanWaterNow()
+    {
+        int hour = DayAndNightManager.Instance.GetCurrentHour();
+
+        // ⛔ CẤM TƯỚI từ 19h → 23h59 và 0h → 4h59
+        if (hour >= 19 || hour < 5)
+            return false;
+
+        return true;
+    }
+
 }
