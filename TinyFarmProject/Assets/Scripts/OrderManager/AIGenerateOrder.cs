@@ -6,19 +6,26 @@ using UnityEngine.Networking;
 
 public class AIGenerateOrder : MonoBehaviour
 {
-    [Header("Danh sách sản phẩm có thể xuất hiện")]
-    public List<Product> availableProducts = new List<Product>();
+    [Header("Gán Product Database ở đây")]
+    [SerializeField] private ProductDatabase productDatabase;
 
-    [Header("API Settings (để trống nếu chỉ test offline)")]
-    public string apiKey = "";
-    public string apiUrl = "https://api.x.ai/v1/chat/completions";
+    [Header("Gemini API Key")]
+    [SerializeField] private string geminiApiKey = "AIzaSyARs632T5drQ7upT3Km6qlqywKIfMuMTg8";
 
-    // HÀM PUBLIC CHÍNH – GỌI TỪ BÊN NGOÀI ĐỂ TẠO ĐƠN
+    private const string apiUrl =
+        "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent";
+
+    private void OnValidate()
+    {
+        if (productDatabase == null)
+            Debug.LogWarning("[AIGenerateOrder] Chưa gán ProductDatabase!");
+    }
+
     public Order GenerateNewOrder()
     {
-        if (availableProducts.Count == 0)
+        if (productDatabase == null || productDatabase.products.Count == 0)
         {
-            Debug.LogError("Chưa gán sản phẩm nào trong AIGenerateOrder!");
+            Debug.LogError("[AIGenerateOrder] ProductDatabase trống!");
             return null;
         }
 
@@ -28,116 +35,150 @@ public class AIGenerateOrder : MonoBehaviour
             deadlineDays = Random.Range(1, 4)
         };
 
-        // Random số loại hàng: 1 đến 4
-        int itemCount = Random.Range(1, Mathf.Min(5, availableProducts.Count + 1));
-        int totalSeedCost = 0;
+        int itemCount = Random.Range(1, Mathf.Min(5, productDatabase.products.Count + 1));
+        var selectedProducts = productDatabase.GetRandomProducts(itemCount, false);
 
-        for (int i = 0; i < itemCount; i++)
+        int totalSeedCost = 0;
+        foreach (var p in selectedProducts)
         {
-            Product p = availableProducts[Random.Range(0, availableProducts.Count)];
             int qty = Random.Range(10, 41);
             order.items.Add(new OrderItem(p, qty));
-            totalSeedCost += p.seedPrice * qty;
+            totalSeedCost += p.seedCost * qty;
         }
 
-        // Đảm bảo lợi nhuận: reward từ 2.3x đến 4x chi phí hạt giống
-        order.totalReward = Mathf.RoundToInt(totalSeedCost * Random.Range(2.3f, 4f));
+        order.totalReward = Mathf.RoundToInt(totalSeedCost * Random.Range(2.7f, 4.3f));
 
-        // Nếu có API key → gọi AI thật, không thì dùng fallback
-        if (!string.IsNullOrEmpty(apiKey))
-            StartCoroutine(CallAIForContent(order));
+        // ✅ IN CHI TIẾT ĐƠN HÀNG (CHƯA CÓ LỜI NPC)
+        PrintFullOrderDetails(order, totalSeedCost);
+
+        if (!string.IsNullOrEmpty(geminiApiKey))
+            StartCoroutine(CallGeminiAI(order, totalSeedCost));
         else
-            order.content = order.GenerateFallbackContent() + " (có thể thay bằng AI sau)";
+            order.content = order.GenerateFallbackContent();
 
         return order;
     }
 
-    private IEnumerator CallAIForContent(Order order)
+    // ✅ HÀM IN ĐẦY ĐỦ CHI TIẾT ĐƠN HÀNG
+    private void PrintFullOrderDetails(Order order, int seedCost)
     {
-        string productList = "";
-        for (int i = 0; i < order.items.Count; i++)
+        StringBuilder sb = new StringBuilder();
+
+        sb.AppendLine("════════════════════════════════════");
+        sb.AppendLine("🧾 CHI TIẾT ĐƠN HÀNG");
+        sb.AppendLine("════════════════════════════════════");
+
+        sb.AppendLine($"📌 Mã đơn hàng : #{order.id}");
+        sb.AppendLine($"⏳ Thời hạn    : {order.deadlineDays} ngày");
+        sb.AppendLine($"🌱 Chi phí hạt : {seedCost} vàng");
+        sb.AppendLine($"💰 Thưởng      : {order.totalReward} vàng");
+
+        sb.AppendLine("------------------------------------");
+        sb.AppendLine("📦 DANH SÁCH SẢN PHẨM:");
+
+        int index = 1;
+        foreach (var item in order.items)
         {
-            productList += order.items[i].ToString();
-            if (i < order.items.Count - 2) productList += ", ";
-            else if (i == order.items.Count - 2) productList += " và ";
+            int itemCost = item.product.seedCost * item.quantity;
+
+            sb.AppendLine(
+                $"{index}. {item.product.plant_name} | SL: {item.quantity} | Giá hạt: {item.product.seedCost} | Tổng: {itemCost}"
+            );
+            index++;
         }
 
-        string prompt = $@"
-Bạn là NPC vui tính trong game nông trại 2D. Viết 1 câu ngắn (dưới 90 ký tự), ấm áp, hài hước, tự nhiên về đơn hàng sau.
-CHỈ TRẢ VỀ ĐÚNG 1 CÂU, không thêm dấu ngoặc, không giải thích.
+        sb.AppendLine("------------------------------------");
 
-Sản phẩm: {productList}
-Thời hạn: {order.deadlineDays} ngày
-Phần thưởng: {order.totalReward} vàng
+        if (!string.IsNullOrEmpty(order.content))
+            sb.AppendLine($"🗣 Lời NPC: \"{order.content}\"");
+        else
+            sb.AppendLine("🗣 Lời NPC: (chưa có)");
 
-Ví dụ:
-- 'Chị bán hoa đang khóc huhu vì thiếu {productList} làm bó cưới đó!'
-- 'Ông chủ tiệm bánh gầm lên: “{productList} đâu hết rồi hả trời!”'
-- 'Thương nhân cười toe: “Cho tôi {productList} đi, trả hậu đây!”'";
+        sb.AppendLine($"🕒 Thời gian tạo: {System.DateTime.Now:dd/MM/yyyy HH:mm:ss}");
+        sb.AppendLine("════════════════════════════════════");
 
-        string json = $"{{\"model\":\"grok-beta\",\"messages\":[{{\"role\":\"user\",\"content\":\"{prompt}\"}}],\"temperature\":0.95,\"max_tokens\":100}}";
+        Debug.Log(sb.ToString());
+    }
 
-        using (UnityWebRequest www = new UnityWebRequest(apiUrl, "POST"))
+    private IEnumerator CallGeminiAI(Order order, int seedCost)
+    {
+        string itemList = order.GetItemListString();
+
+        string prompt = $@"Bạn là NPC siêu lầy lội và dễ thương trong game nông trại 2D.
+Viết đúng 1 câu ngắn (dưới 80 ký tự), hài hước + ấm áp về đơn hàng này.
+CHỈ TRẢ VỀ ĐÚNG 1 CÂU DUY NHẤT!
+
+Đơn hàng: {itemList}
+Giao trong {order.deadlineDays} ngày
+Thưởng {order.totalReward} vàng";
+
+        string jsonBody =
+            $"{{\"contents\":[{{\"role\":\"user\",\"parts\":[{{\"text\":\"{EscapeJson(prompt)}\"}}]}}],\"generationConfig\":{{\"temperature\":0.9,\"maxOutputTokens\":100}}}}";
+
+        using (UnityWebRequest www = new UnityWebRequest(apiUrl + "?key=" + geminiApiKey, "POST"))
         {
-            byte[] body = Encoding.UTF8.GetBytes(json);
-            www.uploadHandler = new UploadHandlerRaw(body);
+            byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonBody);
+            www.uploadHandler = new UploadHandlerRaw(bodyRaw);
             www.downloadHandler = new DownloadHandlerBuffer();
             www.SetRequestHeader("Content-Type", "application/json");
-            www.SetRequestHeader("Authorization", "Bearer " + apiKey);
+
+            Debug.Log("<color=orange>Gửi Gemini...</color>");
 
             yield return www.SendWebRequest();
 
             if (www.result == UnityWebRequest.Result.Success)
             {
-                string text = ExtractContentFromResponse(www.downloadHandler.text);
-                order.content = string.IsNullOrEmpty(text) ? order.GenerateFallbackContent() : text;
+                string aiText = ExtractGeminiText(www.downloadHandler.text);
+                order.content = string.IsNullOrWhiteSpace(aiText)
+                    ? order.GenerateFallbackContent()
+                    : aiText.Trim();
+
+                Debug.Log($"<color=lime>Gemini nói: {order.content}</color>");
+
+                // ✅ IN LẠI CHI TIẾT SAU KHI CÓ LỜI NPC
+                PrintFullOrderDetails(order, seedCost);
             }
             else
             {
-                Debug.LogWarning("AI lỗi: " + www.error);
+                Debug.LogError("Gemini lỗi: " + www.responseCode);
+                Debug.LogError("Response: " + www.downloadHandler.text);
                 order.content = order.GenerateFallbackContent();
             }
-
-            // Thông báo UI cập nhật lại nội dung
-            Debug.Log(order);
         }
     }
 
-    private string ExtractContentFromResponse(string jsonResponse)
+    private string EscapeJson(string s)
+    {
+        return s.Replace("\\", "\\\\")
+                .Replace("\"", "\\\"")
+                .Replace("\n", "\\n")
+                .Replace("\r", "\\r");
+    }
+
+    private string ExtractGeminiText(string jsonResponse)
     {
         try
         {
-            int start = jsonResponse.IndexOf("\"content\":\"") + 11;
+            int start = jsonResponse.IndexOf("\"text\":\"") + 8;
+            if (start == 7) return "";
             int end = jsonResponse.IndexOf("\"", start);
-            string raw = jsonResponse.Substring(start, end - start);
-            return raw.Replace("\\n", "").Replace("\\\"", "\"").Trim();
+            return jsonResponse.Substring(start, end - start)
+                              .Replace("\\n", " ")
+                              .Replace("\\\"", "\"")
+                              .Trim();
         }
         catch
         {
-            return "";
+            return "NPC đang ngủ gật...";
         }
     }
 
-    // Tự động tạo demo products nếu chưa có
-    private void Awake()
+#if UNITY_EDITOR
+    [ContextMenu("TEST IN ĐƠN HÀNG NGAY")]
+    private void TestGenerateOrder()
     {
-        if (availableProducts.Count == 0)
-        {
-            Debug.Log("[AIGenerateOrder] Tạo sản phẩm demo...");
-            availableProducts.Add(CreateProduct("Cà rốt", 10));
-            availableProducts.Add(CreateProduct("Táo", 15));
-            availableProducts.Add(CreateProduct("Trứng gà", 5));
-            availableProducts.Add(CreateProduct("Bí đỏ", 20));
-            availableProducts.Add(CreateProduct("Cà chua", 12));
-        }
+        GenerateNewOrder();
+        Debug.Log("<color=orange>ĐÃ TẠO 1 ĐƠN HÀNG MỚI ĐỂ TEST!</color>");
     }
-
-    private Product CreateProduct(string name, int seedPrice)
-    {
-        Product p = ScriptableObject.CreateInstance<Product>();
-        p.productName = name;
-        p.seedPrice = seedPrice;
-        p.baseSellPrice = seedPrice * 3;
-        return p;
-    }
+#endif
 }

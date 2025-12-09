@@ -1,41 +1,47 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
 public class Order
 {
     public int id;
+    public int deadlineDays;
+    public int totalReward;
+    public string content = "";
     public List<OrderItem> items = new List<OrderItem>();
 
-    public int totalReward;      // Tiền thưởng khi hoàn thành
-    public int deadlineDays;     // Số ngày còn lại
-    public string content = "";  // Nội dung do AI tạo: "Ông chủ quán rượu cần 20 táo và 15 trứng gà để làm bánh!"
+    // THÊM 4 DÒNG NÀY LÀ HẾT LỖI NGAY
+    public bool isAccepted = false;   // đã nhận đơn chưa
+    public bool isCompleted = false;  // đã giao xong chưa
+    public float remainingTime;       // thời gian còn lại (nếu bạn có hệ thống đếm ngược)
 
-    public bool isAccepted = false;
-    public bool isCompleted = false;
+    // Hàm tiện ích (tùy chọn)
+    public void Accept() => isAccepted = true;
+    public void Complete() => isCompleted = true;
 
-    // Tính tổng chi phí hạt giống toàn bộ đơn hàng
-    public int TotalSeedCost()
+    public string GetItemListString()
     {
-        int total = 0;
+        // ... code cũ của bạn giữ nguyên
+        if (items.Count == 0) return "";
+        List<string> list = new List<string>();
         foreach (var item in items)
-            total += item.GetSeedCost();
-        return total;
+            list.Add($"{item.quantity} {item.product.plant_name}");
+
+        if (list.Count == 1) return list[0];
+        if (list.Count == 2) return $"{list[0]} và {list[1]}";
+
+        string result = string.Join(", ", list.Take(list.Count - 1));
+        return result + " và " + list[^1];
     }
 
-    // Tạo nội dung dự phòng nếu AI lỗi hoặc chưa trả về
     public string GenerateFallbackContent()
     {
-        if (items.Count == 0) return "Đơn hàng trống";
-
-        string result = items[0].ToString();
-        for (int i = 1; i < items.Count; i++)
-        {
-            if (i == items.Count - 1)
-                result += " và " + items[i].ToString();
-            else
-                result += ", " + items[i].ToString();
-        }
-        return result;
+        string[] texts = {
+            "Khách đang sốt ruột chờ đơn hàng đây!",
+            "Giao nhanh kẻo họ giận đó nha!",
+            "Đơn VIP nè, làm tốt có thưởng thêm!"
+        };
+        return texts[Random.Range(0, texts.Length)];
     }
 }
