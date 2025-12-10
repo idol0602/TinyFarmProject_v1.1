@@ -52,9 +52,14 @@ public class AIGenerateOrder : MonoBehaviour
         PrintFullOrderDetails(order, totalSeedCost);
 
         if (!string.IsNullOrEmpty(geminiApiKey))
+        {
             StartCoroutine(CallGeminiAI(order, totalSeedCost));
+        }
         else
+        {
             order.content = order.GenerateFallbackContent();
+            OrderManager.Instance.OnOrderContentReady(order); // ✅ THÊM DÒNG NÀY
+        }
 
         return order;
     }
@@ -122,10 +127,9 @@ Thưởng {order.totalReward} vàng";
             www.downloadHandler = new DownloadHandlerBuffer();
             www.SetRequestHeader("Content-Type", "application/json");
 
-            Debug.Log("<color=orange>Gửi Gemini...</color>");
-
             yield return www.SendWebRequest();
 
+            // ✅ THÀNH CÔNG
             if (www.result == UnityWebRequest.Result.Success)
             {
                 string aiText = ExtractGeminiText(www.downloadHandler.text);
@@ -133,19 +137,26 @@ Thưởng {order.totalReward} vàng";
                     ? order.GenerateFallbackContent()
                     : aiText.Trim();
 
-                Debug.Log($"<color=lime>Gemini nói: {order.content}</color>");
-
-                // ✅ IN LẠI CHI TIẾT SAU KHI CÓ LỜI NPC
                 PrintFullOrderDetails(order, seedCost);
             }
-            else
+            // ✅ HẾT QUOTA → FALLBACK → KHÔNG CHO LÀ LỖI
+            else if (www.responseCode == 429)
             {
-                Debug.LogError("Gemini lỗi: " + www.responseCode);
-                Debug.LogError("Response: " + www.downloadHandler.text);
+                Debug.LogWarning("<color=yellow>Gemini hết quota → dùng nội dung mặc định</color>");
                 order.content = order.GenerateFallbackContent();
             }
+            // ✅ LỖI KHÁC
+            else
+            {
+                Debug.LogWarning("Gemini lỗi: " + www.responseCode);
+                order.content = order.GenerateFallbackContent();
+            }
+
+            // ✅ BẮT BUỘC GỌI ĐỂ UI CẬP NHẬT
+            OrderManager.Instance.OnOrderContentReady(order);
         }
     }
+
 
     private string EscapeJson(string s)
     {
