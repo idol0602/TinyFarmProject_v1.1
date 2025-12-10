@@ -1292,6 +1292,8 @@ MonoBehaviour:
   nameText: {fileID: 5454090795377456207}
   priceText: {fileID: 6155231644913516034}
   growTimeText: {fileID: 2423468119249991625}
+  sellPrice: {fileID: 367296755894132450}
+  numsSeed: {fileID: 9191285671323579870}
   buyButton: {fileID: 1361726681686245591}
 --- !u!1 &2330651881149934471
 GameObject:
@@ -4031,7 +4033,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00024414062, y: -26.161987}
+  m_AnchoredPosition: {x: -0.00024414062, y: -26.161957}
   m_SizeDelta: {x: -137.58, y: -311.447}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &608056439690479419
@@ -5305,7 +5307,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4908740463568782841}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7755330880144447570}
+        m_TargetAssemblyTypeName: ShopTrigger, Assembly-CSharp
+        m_MethodName: OnMouseDown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7755330880144447570
 MonoBehaviour:
   m_ObjectHideFlags: 0

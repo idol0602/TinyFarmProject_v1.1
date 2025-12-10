@@ -9,6 +9,8 @@ public class ShopDetailPanel : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI priceText;
     public TextMeshProUGUI growTimeText;
+    public TextMeshProUGUI sellPrice;
+    public TextMeshProUGUI numsSeed;
     public Button buyButton;
 
     private SeedData currentSeed;
@@ -19,13 +21,16 @@ public class ShopDetailPanel : MonoBehaviour
 
         icon.sprite = seed.seedIcon;
         nameText.text = seed.plantName;
-        priceText.text = seed.price.ToString("N0") + "đ";
+        priceText.text = $"Price: {seed.price:N0}d";
+        sellPrice.text = $"Sell price: {seed.priceToSell:N0}d";
+        numsSeed.text = $"Quantity: {seed.numsSeed:N0}";
+
 
         // Hiển thị số ngày phát triển (làm tròn lên)
         int days = Mathf.CeilToInt(seed.growTime);
         growTimeText.text = days <= 0
-            ? "Thời gian phát triển: Ngay lập tức"
-            : $"Thời gian phát triển: {days} ngày";
+            ? "Days: right now"
+            : $"Days: {days} day";
 
         buyButton.gameObject.SetActive(true);
     }
