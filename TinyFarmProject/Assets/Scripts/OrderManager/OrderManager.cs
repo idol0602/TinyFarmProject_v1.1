@@ -154,10 +154,23 @@ public class OrderManager : MonoBehaviour
     }
 
     // Xóa hết đơn hàng (dùng khi test hoặc đổi ngày mới)
-    public void ClearAllOrders()
+    public void ClearAllOrdersFull()
     {
+        List<Order> allOrders = new List<Order>();
+        allOrders.AddRange(pendingOrders);
+        allOrders.AddRange(acceptedOrders);
+
+        foreach (var order in allOrders)
+        {
+            onOrderRemoved?.Invoke(order);
+        }
+
         pendingOrders.Clear();
         acceptedOrders.Clear();
+
         onOrdersListChanged?.Invoke();
+
+        Debug.Log("[OrderManager] ĐÃ CLEAR TOÀN BỘ ĐƠN HÀNG!");
     }
+
 }

@@ -15,7 +15,9 @@ public class OrderDetailUI : MonoBehaviour
     public Button btnAccept;
     public Button btnReject;
     public Button btnDeliver;
+    public Button btnClearAll;
 
+    public Move truckMove;
     private Order currentOrder;
 
     private void Start()
@@ -58,7 +60,15 @@ public class OrderDetailUI : MonoBehaviour
         btnDeliver.onClick.AddListener(() =>
         {
             OrderManager.Instance.DeliverOrder(order);
+            if (truckMove != null && truckMove.CanRun())
+            {
+                truckMove.Run();
+            }
             Clear();
+        });
+        btnClearAll.onClick.AddListener(() =>
+        {
+            OrderManager.Instance.ClearAllOrdersFull();
         });
     }
 
