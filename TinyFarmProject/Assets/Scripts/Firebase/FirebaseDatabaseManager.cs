@@ -125,9 +125,21 @@ public class FirebaseDatabaseManager : MonoBehaviour
                 }
 
                 // ⭐ FIX QUAN TRỌNG: BẮN LẠI EVENT SAU KHI LOAD FARM
+                // ⭐ CHỈ GỌI OnNewDay NẾU VỪA NGỦ DẬY
                 int day = DayAndNightManager.Instance.GetCurrentDay();
-                Debug.Log("🔄 Re-trigger OnNewDay for loaded crops | Day = " + day);
-                DayAndNightEvents.InvokeNewDay(day);
+
+                if (FarmState.IsSleepTransition)
+                {
+                    Debug.Log("😴 LoadFarm → SleepTransition TRUE → OnNewDay()");
+                    FarmState.IsSleepTransition = false;
+
+                    DayAndNightEvents.InvokeNewDay(day);
+                }
+                else
+                {
+                    Debug.Log("🌱 LoadFarm → Bình thường → không OnNewDay()");
+                }
+
 
                 Debug.Log("🌱 Farm Loaded xong!");
 

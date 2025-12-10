@@ -7,4 +7,5 @@ public static class FarmState
 
     // Đánh dấu cần SAVE sau khi quay lại MapSummer
     public static bool NeedSaveAfterReturn = false;
+    // ⭐ ĐÁNH DẤU KHI ĐỔI SCENE (RA/VÀO NHÀ)
 }

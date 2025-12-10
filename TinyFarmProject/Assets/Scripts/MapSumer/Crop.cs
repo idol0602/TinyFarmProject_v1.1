@@ -2,7 +2,7 @@
 
 namespace MapSummer
 {
-    [DefaultExecutionOrder(10)]
+    [DefaultExecutionOrder(50)]
     public class Crop : MonoBehaviour
     {
         public string cropType;
