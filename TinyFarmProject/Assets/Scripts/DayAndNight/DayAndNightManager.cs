@@ -9,8 +9,6 @@ public class DayAndNightManager : MonoBehaviour
 {
     public static DayAndNightManager Instance { get; private set; }
 
-    public static int LastNewDayEvent = -1;  // ⭐ CHO CROP BIẾT NGÀY MỚI
-
     [Header("=== HIỂN THỊ ===")]
     public TMP_Text textTimeInGame;
     public TMP_Text textDayInGame;
@@ -37,6 +35,7 @@ public class DayAndNightManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
@@ -47,71 +46,139 @@ public class DayAndNightManager : MonoBehaviour
         }
         else
         {
-            totalGameSeconds = 7f * 3600f;
+            totalGameSeconds = 7 * 3600f; // 7:00 sáng
             currentDay = 1;
         }
 
         timeScale = SECONDS_PER_DAY / (realMinutesPerGameDay * 60f);
     }
 
-    void Update()
+    private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
+    private void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        StartCoroutine(DelayedUpdate());
+    }
+
+    private System.Collections.IEnumerator DelayedUpdate()
+    {
+        yield return null;
+        FindUIReferences();
+        UpdateUIAndLight();
+    }
+
+    // ================= UI FINDER =====================
+
+    private void FindUIReferences()
+    {
+        if (textTimeInGame == null)
+            textTimeInGame = GameObject.Find("TimeText")?.GetComponent<TMP_Text>();
+
+        if (textDayInGame == null)
+            textDayInGame = GameObject.Find("DayText")?.GetComponent<TMP_Text>();
+
+        GameObject lightObj = GameObject.Find("Global Light 2D") ?? GameObject.FindWithTag("GlobalLight");
+        if (lightObj != null)
+            globalLight = lightObj.GetComponent<Light2D>();
+    }
+
+    private void Start()
+    {
+        FindUIReferences();
+        UpdateUIAndLight();
+    }
+
+    // ================= GAME LOOP =====================
+
+    private void Update()
     {
         totalGameSeconds += Time.deltaTime * timeScale;
         savedTotalGameSeconds = totalGameSeconds;
 
-        int newDay = Mathf.FloorToInt(totalGameSeconds / SECONDS_PER_DAY) + 1;
+        int calcDay = Mathf.FloorToInt(totalGameSeconds / SECONDS_PER_DAY) + 1;
 
-        if (newDay > currentDay)
+        // ⭐⭐ FIX LỖI QUAN TRỌNG ⭐⭐
+        if (calcDay != currentDay)
         {
-            currentDay = newDay;
-
-            Debug.Log($"[UPDATE NEW DAY] Ngày mới = {currentDay}");
-
-            LastNewDayEvent = currentDay;           // ⭐ LƯU NGÀY MỚI
-            DayAndNightEvents.InvokeNewDay(currentDay); // ⭐ BẮN SỰ KIỆN
-
-            Debug.Log($"[SUN] BẮT ĐẦU NGÀY MỚI → Day {currentDay}");
+            currentDay = calcDay;
+            Debug.Log("🌞 New day detected via Update()");
+            OnNewDay();
         }
 
         UpdateUIAndLight();
     }
 
-    void UpdateUIAndLight()
+    // ================= EVENT CALLER =====================
+
+    private void OnNewDay()
+    {
+        Debug.Log($"🔥 [DayAndNightManager] Trigger New Day {currentDay}");
+        DayAndNightEvents.InvokeNewDay(currentDay);
+    }
+
+    // ================= UI / LIGHT =====================
+
+    private void UpdateUIAndLight()
     {
         float secondsToday = totalGameSeconds % SECONDS_PER_DAY;
 
         int hours = Mathf.FloorToInt(secondsToday / 3600f);
         int minutes = Mathf.FloorToInt((secondsToday % 3600f) / 60f);
 
-        if (textTimeInGame != null) textTimeInGame.text = $"{hours:00}:{minutes:00}";
-        if (textDayInGame != null) textDayInGame.text = $"Ngày {currentDay}";
+        if (textTimeInGame != null)
+            textTimeInGame.text = $"{hours:00}:{minutes:00}";
+
+        if (textDayInGame != null)
+            textDayInGame.text = $"Ngày {currentDay}";
 
         if (globalLight != null)
         {
-            float t = (totalGameSeconds % SECONDS_PER_DAY) / SECONDS_PER_DAY;
+            float t = secondsToday / SECONDS_PER_DAY;
             globalLight.color = gradient.Evaluate(t);
         }
     }
 
+    // ================= SLEEP SYSTEM =====================
+
     public void SleepToNextDay()
     {
-        float secondsToday = totalGameSeconds % SECONDS_PER_DAY;
-        float target = 7f * 3600f;
+        int hour = GetCurrentHour();
 
-        if (secondsToday >= target)
-            totalGameSeconds += (SECONDS_PER_DAY - secondsToday) + target;
+        // ⭐ Chỉ được ngủ từ 18:00 trở lên
+        if (hour < 20)
+        {
+            Debug.Log("🌙 Không thể ngủ lúc này! Còn quá sớm (phải sau 18:00).");
+            // Nếu muốn hiện UI thông báo:
+            // UIManager.ShowMessage("Còn quá sớm để ngủ!");
+            return;
+        }
+
+        Debug.Log("😴 [Sleep] Gọi SleepToNextDay()");
+
+        float secondsToday = totalGameSeconds % SECONDS_PER_DAY;
+        float morning = 7 * 3600f;
+
+        if (secondsToday >= morning)
+            totalGameSeconds += (SECONDS_PER_DAY - secondsToday) + morning;
         else
-            totalGameSeconds += (target - secondsToday);
+            totalGameSeconds += (morning - secondsToday);
 
         savedTotalGameSeconds = totalGameSeconds;
 
-        Debug.Log($"[Sleep] After Sleep: totalGameSeconds={totalGameSeconds}");
+        int newDay = Mathf.FloorToInt(totalGameSeconds / SECONDS_PER_DAY) + 1;
 
-        // ❌ Không cập nhật currentDay ở đây
-        // ❌ Không bắn event ở đây
+        currentDay = newDay;
+
+        Debug.Log($"🌅 [Sleep] Sang ngày mới = {currentDay}");
+
+        OnNewDay();  // Bắn event tăng trưởng cây
 
         UpdateUIAndLight();
     }
+
+
+    // ================= GETTERS =====================
 
     public int GetCurrentDay() => currentDay;
     public int GetCurrentHour() => Mathf.FloorToInt((totalGameSeconds % SECONDS_PER_DAY) / 3600f);

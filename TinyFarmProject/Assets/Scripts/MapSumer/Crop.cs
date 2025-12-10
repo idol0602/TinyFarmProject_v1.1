@@ -1,13 +1,10 @@
 ﻿using UnityEngine;
 
 namespace MapSummer
-
 {
     [DefaultExecutionOrder(10)]
-
     public class Crop : MonoBehaviour
     {
-        // ⭐ LOẠI CÂY (Corn, Chili, Tomato...)
         public string cropType;
 
         [Header("Sprites theo từng Stage")]
@@ -24,7 +21,6 @@ namespace MapSummer
         private SpriteRenderer sr;
         private DayAndNightManager clock;
 
-        // Stage / Life
         private int currentStage = 0;
         private bool isDead = false;
         private int lastWaterDay = 0;
@@ -37,36 +33,24 @@ namespace MapSummer
         public bool IsWateredToday => isWateredToday;
 
         private bool isLoadedFromSave = false;
-        public static int LastNewDayEvent = -1;
 
-
-        private void OnEnable()
+        // ============================================================
+        //  ĐĂNG KÝ EVENT — chỉ chạy 1 lần / crop
+        // ============================================================
+        private void Awake()
         {
-            Debug.Log($"[CROP ENABLE] {cropType} ENABLE");
-
+            DayAndNightEvents.OnNewDay -= HandleNewDay;
             DayAndNightEvents.OnNewDay += HandleNewDay;
-
-            // ⭐ Nếu cây spawn sau khi DayManager bắn event → tự xử lý
-            int today = DayAndNightManager.LastNewDayEvent;
-            if (today != -1 && clock != null)
-            {
-                if (today == clock.GetCurrentDay())
-                {
-                    Debug.Log($"[CROP] {cropType} missed event → replay OnNewDay({today})");
-                    HandleNewDay(today);
-                }
-            }
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             DayAndNightEvents.OnNewDay -= HandleNewDay;
         }
 
-
-
-       
-
+        // ============================================================
+        //  KHỞI TẠO CÂY
+        // ============================================================
         private void Start()
         {
             sr = GetComponent<SpriteRenderer>();
@@ -87,18 +71,11 @@ namespace MapSummer
             }
         }
 
-
-        private void OnDestroy()
-        {
-            DayAndNightEvents.OnNewDay -= HandleNewDay;
-        }
-
-        // ============================================
-        // ICON
-        // ============================================
+        // ============================================================
+        //  ICON
+        // ============================================================
         private void SpawnIcons()
         {
-            // Xóa icon cũ trước khi spawn icon mới
             if (waterIcon != null) Destroy(waterIcon);
             if (harvestIcon != null) Destroy(harvestIcon);
 
@@ -129,44 +106,35 @@ namespace MapSummer
             harvestIcon?.SetActive(false);
         }
 
-        // ============================================
-        // NGÀY MỚI
-        // ============================================
+        // ============================================================
+        //  SỰ KIỆN NGÀY MỚI
+        // ============================================================
         private void HandleNewDay(int newDay)
         {
-            Debug.Log($"🌱 [CROP EVENT] {cropType} nhận OnNewDay({newDay}) | " +
-                      $"stage={currentStage} | wateredToday={isWateredToday} | lastWaterDay={lastWaterDay}");
+            if (isDead) return;
 
-            if (isDead)
-            {
-                Debug.Log($"💀 [CROP] {cropType} chết → bỏ qua");
-                return;
-            }
-
-            // kiểm tra bỏ đói 1 ngày
+            // Chưa tưới hôm qua → chết
             if (lastWaterDay < newDay - 1)
             {
-                Debug.Log($"💀 [CROP] {cropType} chết vì không tưới hôm qua (lastWaterDay={lastWaterDay}, newDay-1={newDay - 1})");
                 Die();
                 return;
             }
 
+            // Nếu đã tưới → lớn
             if (isWateredToday)
             {
-                Debug.Log($"⬆ [CROP] {cropType} LỚN LÊN! Stage {currentStage} → {currentStage + 1}");
+                lastWaterDay = newDay - 1;   // FIX QUAN TRỌNG
                 Grow();
             }
-            else
-            {
-                Debug.Log($"⚠ [CROP] {cropType} KHÔNG LỚN vì hôm nay không tưới");
-            }
 
-            // reset
+            // Reset tưới
             isWateredToday = false;
             UpdateIcons();
         }
 
-
+        // ============================================================
+        //  TƯỚI / LỚN / CHẾT / THU HOẠCH
+        // ============================================================
         public void Water()
         {
             isWateredToday = true;
@@ -177,11 +145,9 @@ namespace MapSummer
         private void Grow()
         {
             if (currentStage < stages.Length - 1)
-            {
                 currentStage++;
-                sr.sprite = stages[currentStage];
-            }
 
+            sr.sprite = stages[currentStage];
             UpdateIcons();
         }
 
@@ -194,13 +160,12 @@ namespace MapSummer
 
         public void Harvest()
         {
-            Debug.Log($"🌾 Thu hoạch cây {cropType} thành công!");
             Destroy(gameObject);
         }
 
-        // ============================================
-        // LOAD DỮ LIỆU TỪ FIREBASE
-        // ============================================
+        // ============================================================
+        //  LOAD TỪ FIREBASE
+        // ============================================================
         public void LoadFromData(CropData d)
         {
             isLoadedFromSave = true;
@@ -216,17 +181,8 @@ namespace MapSummer
             sr = GetComponent<SpriteRenderer>();
             sr.sprite = isDead ? deadSprite : stages[currentStage];
 
-            // Spawn icon mới (không cần tag)
             SpawnIcons();
             UpdateIcons();
-
-            // Reset collider nếu có
-            Collider2D col = GetComponentInChildren<Collider2D>();
-            if (col != null)
-            {
-                col.enabled = false;
-                col.enabled = true;
-            }
         }
     }
 }
