@@ -106,6 +106,7 @@ public class FirebaseDatabaseManager : MonoBehaviour
                     Destroy(old.gameObject);
 
                 // Load từng cây theo đúng loại
+                // Load từng cây theo đúng loại
                 foreach (var d in crops)
                 {
                     string path = "Crops/" + d.cropType;
@@ -123,7 +124,13 @@ public class FirebaseDatabaseManager : MonoBehaviour
                     obj.GetComponent<Crop>().LoadFromData(d);
                 }
 
+                // ⭐ FIX QUAN TRỌNG: BẮN LẠI EVENT SAU KHI LOAD FARM
+                int day = DayAndNightManager.Instance.GetCurrentDay();
+                Debug.Log("🔄 Re-trigger OnNewDay for loaded crops | Day = " + day);
+                DayAndNightEvents.InvokeNewDay(day);
+
                 Debug.Log("🌱 Farm Loaded xong!");
+
             });
     }
 

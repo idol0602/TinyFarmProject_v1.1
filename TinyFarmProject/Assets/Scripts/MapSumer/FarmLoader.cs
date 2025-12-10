@@ -5,28 +5,18 @@ public class FarmLoader : MonoBehaviour
 {
     public string userId = "Player1";
 
-    private void Start()
+    private IEnumerator Start()
     {
-        StartCoroutine(LoadFarmRoutine());
-    }
+        yield return new WaitForEndOfFrame();
 
-    IEnumerator LoadFarmRoutine()
-    {
-        // ⭐ B1: CHỜ FirebaseDatabaseManager được tạo (Awake đã chạy)
-        while (FirebaseDatabaseManager.Instance == null)
+        FirebaseDatabaseManager firebase = FirebaseDatabaseManager.Instance;
+
+        if (firebase == null)
         {
-            yield return null;
+            Debug.LogError("Firebase manager missing!");
+            yield break;
         }
 
-        // ⭐ B2: CHỜ Firebase thực sự sẵn sàng (async init)
-        while (!FirebaseDatabaseManager.FirebaseReady)
-        {
-            yield return null;
-        }
-
-        // ⭐ B3: GỌI LOAD
-        FirebaseDatabaseManager.Instance.LoadFarmFromFirebase(userId);
-
-        Debug.Log("🌱 FarmLoader → LoadFarmFromFirebase DONE!");
+        firebase.LoadFarmFromFirebase(userId);
     }
 }

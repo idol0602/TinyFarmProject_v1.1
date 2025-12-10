@@ -2,9 +2,9 @@
 
 namespace MapSummer
 {
+    [DefaultExecutionOrder(10)]
     public class Crop : MonoBehaviour
     {
-        // ⭐ LOẠI CÂY (Corn, Chili, Tomato...)
         public string cropType;
 
         [Header("Sprites theo từng Stage")]
@@ -21,7 +21,6 @@ namespace MapSummer
         private SpriteRenderer sr;
         private DayAndNightManager clock;
 
-        // Stage / Life
         private int currentStage = 0;
         private bool isDead = false;
         private int lastWaterDay = 0;
@@ -35,12 +34,28 @@ namespace MapSummer
 
         private bool isLoadedFromSave = false;
 
+        // ============================================================
+        //  ĐĂNG KÝ EVENT — chỉ chạy 1 lần / crop
+        // ============================================================
+        private void Awake()
+        {
+            DayAndNightEvents.OnNewDay -= HandleNewDay;
+            DayAndNightEvents.OnNewDay += HandleNewDay;
+        }
+
+        private void OnDestroy()
+        {
+            DayAndNightEvents.OnNewDay -= HandleNewDay;
+        }
+
+        // ============================================================
+        //  KHỞI TẠO CÂY
+        // ============================================================
         private void Start()
         {
             sr = GetComponent<SpriteRenderer>();
             clock = DayAndNightManager.Instance;
 
-            // 🌱 CÂY MỚI TRỒNG
             if (!isLoadedFromSave)
             {
                 CropID = System.Guid.NewGuid().ToString();
@@ -54,23 +69,13 @@ namespace MapSummer
                 SpawnIcons();
                 UpdateIcons();
             }
-
-            // CÂY LOAD TỪ SAVE không SpawnIcons ở đây (đã spawn trong LoadFromData)
-
-            DayAndNightEvents.OnNewDay += HandleNewDay;
         }
 
-        private void OnDestroy()
-        {
-            DayAndNightEvents.OnNewDay -= HandleNewDay;
-        }
-
-        // ============================================
-        // ICON
-        // ============================================
+        // ============================================================
+        //  ICON
+        // ============================================================
         private void SpawnIcons()
         {
-            // Xóa icon cũ trước khi spawn icon mới
             if (waterIcon != null) Destroy(waterIcon);
             if (harvestIcon != null) Destroy(harvestIcon);
 
@@ -101,28 +106,35 @@ namespace MapSummer
             harvestIcon?.SetActive(false);
         }
 
-        // ============================================
-        // NGÀY MỚI
-        // ============================================
+        // ============================================================
+        //  SỰ KIỆN NGÀY MỚI
+        // ============================================================
         private void HandleNewDay(int newDay)
         {
             if (isDead) return;
 
-            // Không tưới → chết
+            // Chưa tưới hôm qua → chết
             if (lastWaterDay < newDay - 1)
             {
                 Die();
                 return;
             }
 
-            // Tưới rồi → phát triển
+            // Nếu đã tưới → lớn
             if (isWateredToday)
+            {
+                lastWaterDay = newDay - 1;   // FIX QUAN TRỌNG
                 Grow();
+            }
 
+            // Reset tưới
             isWateredToday = false;
             UpdateIcons();
         }
 
+        // ============================================================
+        //  TƯỚI / LỚN / CHẾT / THU HOẠCH
+        // ============================================================
         public void Water()
         {
             isWateredToday = true;
@@ -133,11 +145,9 @@ namespace MapSummer
         private void Grow()
         {
             if (currentStage < stages.Length - 1)
-            {
                 currentStage++;
-                sr.sprite = stages[currentStage];
-            }
 
+            sr.sprite = stages[currentStage];
             UpdateIcons();
         }
 
@@ -150,13 +160,12 @@ namespace MapSummer
 
         public void Harvest()
         {
-            Debug.Log($"🌾 Thu hoạch cây {cropType} thành công!");
             Destroy(gameObject);
         }
 
-        // ============================================
-        // LOAD DỮ LIỆU TỪ FIREBASE
-        // ============================================
+        // ============================================================
+        //  LOAD TỪ FIREBASE
+        // ============================================================
         public void LoadFromData(CropData d)
         {
             isLoadedFromSave = true;
@@ -172,17 +181,8 @@ namespace MapSummer
             sr = GetComponent<SpriteRenderer>();
             sr.sprite = isDead ? deadSprite : stages[currentStage];
 
-            // Spawn icon mới (không cần tag)
             SpawnIcons();
             UpdateIcons();
-
-            // Reset collider nếu có
-            Collider2D col = GetComponentInChildren<Collider2D>();
-            if (col != null)
-            {
-                col.enabled = false;
-                col.enabled = true;
-            }
         }
     }
 }

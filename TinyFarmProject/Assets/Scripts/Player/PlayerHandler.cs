@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
 using System.Collections;
 using MapSummer;
+using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody2D))]
@@ -38,7 +39,8 @@ public class PlayerHandler : MonoBehaviour
     private float originalLightIntensity;
     private bool isNearBed = false;
     private bool isSleeping = false;
-public string currentCropType = "Chili"; 
+public string currentCropType = "Chili";
+
 
     void Awake()
     {
@@ -105,20 +107,60 @@ public string currentCropType = "Chili";
     }
     private void OnYesButton()
     {
+        int hour = DayAndNightManager.Instance.GetCurrentHour();
+
+        // ⭐ CHẶN NGỦ TRƯỚC 20:00 (có thể chỉnh thành 18 nếu muốn)
+        if (hour < 20)
+        {
+            Debug.Log($"⛔ Không thể ngủ bây giờ! Hiện tại mới {hour}:00. Phải sau 20:00.");
+
+            UIManager.ShowMessage("Ngủ sớm vậy ní!");
+
+            // ⭐ MỞ LẠI DI CHUYỂN
+            LockPlayerMovement(false);
+            ForceStopAllActions();
+
+            // ⭐ ẨN DIALOG vì không ngủ được
+            CloseSleepDialog();
+
+            return;
+        }
+
+
         if (isSleeping) return;
         isSleeping = true;
-        // Dịch chuyển lên giường
+
+        // ⭐ SAVE FARM TRƯỚC KHI NGỦ
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        if (currentScene == "MapSummer")
+        {
+            if (FirebaseDatabaseManager.Instance != null && FirebaseDatabaseManager.FirebaseReady)
+            {
+                FirebaseDatabaseManager.Instance.SaveFarmToFirebase("Player1");
+                Debug.Log("💾 [Sleep] SAVE farm tại MapSummer");
+            }
+        }
+        else
+        {
+            Debug.Log("⚠ Không SAVE vì đang ở scene trong nhà, không có crop!");
+        }
+
+        // ⭐ DỊCH CHUYỂN LÊN GIƯỜNG
         transform.position = new Vector3(sleepPosition.x, sleepPosition.y, transform.position.z);
-        // Ngắt hành động + khóa di chuyển
+
         ForceStopAllActions();
         animator.SetBool("isSleeping", true);
         CloseSleepDialog();
         LockPlayerMovement(true);
-        // ✅ Tối 2s → sáng lại 2s NGAY LẬP TỨC
+
+        // ⭐ FADE SÁNG TỐI
         if (globalLight != null)
             StartCoroutine(SleepLightRoutine());
+
         Debug.Log("Đi ngủ... Đang chuyển ngày...");
     }
+
     private void OnNoButton()
     {
         CloseSleepDialog();
@@ -317,19 +359,28 @@ public string currentCropType = "Chili";
         }
         globalLight.intensity = to;
     }
+    // PlayerHandler.cs (SleepLightRoutine)
     private IEnumerator SleepLightRoutine()
     {
         // 🌑 Tối 2s
         yield return StartCoroutine(FadeLight(originalLightIntensity, 0f, fadeDuration));
-        // ✅ SANG NGÀY MỚI + SET 7:00
-        DayAndNightManager dayNight = Object.FindFirstObjectByType<DayAndNightManager>();
-        if (dayNight != null)
-        {
-            dayNight.SleepToNextDay();
-        }
-        // ☀️ Sáng 2s
+
+        // ⭐ Đánh dấu là từ việc ngủ → không load khi quay lại MapSummer
+        FarmState.IsSleepTransition = true;
+
+        // ⭐ Đánh dấu cần SAVE khi quay lại MapSummer
+        FarmState.NeedSaveAfterReturn = true;
+
+        // Chuyển ngày
+        DayAndNightManager.Instance.SleepToNextDay();
+
+        // ☀️ Sáng lại 2s
         yield return StartCoroutine(FadeLight(0f, originalLightIntensity, fadeDuration));
     }
+
+
+
+
     //private void TryWaterCrop()
     //{
     //    // Lấy hướng
