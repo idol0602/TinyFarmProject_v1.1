@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 796cdcde4b8450b43ba696fb7322c2ff, type: 3}
-  m_Name: watermelon
+  m_Name: Watermelon
   m_EditorClassIdentifier: Assembly-CSharp::ProductData
-  plant_name: watermelon
-  icon: {fileID: 6937817954938267909, guid: 1c1cc540ab96f6e4a9a138c04d8b4221, type: 3}
-  price: 30
+  plant_name: Watermelon
+  icon: {fileID: 8562526799366174774, guid: cf9e2d10f85348446b6c16a88889b744, type: 3}
+  price: 20
   seedCost: 5
