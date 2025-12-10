@@ -153,6 +153,8 @@ public string currentCropType = "Chili";
         animator.SetBool("isSleeping", true);
         CloseSleepDialog();
         LockPlayerMovement(true);
+        FarmState.IsSleepTransition = true;   // <--- PHẢI CÓ
+
 
         // ⭐ FADE SÁNG TỐI
         if (globalLight != null)
