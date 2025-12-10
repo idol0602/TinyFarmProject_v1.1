@@ -8,4 +8,6 @@ public class SeedData
     public int price;              // Giá mua
     public float growTime;         // Thời gian phát triển (ngày)
     public Sprite seedIcon;        // Ảnh hạt giống
+    public int priceToSell;
+    public int numsSeed;
 }

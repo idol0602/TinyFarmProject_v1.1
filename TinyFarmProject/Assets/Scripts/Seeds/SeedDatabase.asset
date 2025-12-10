@@ -13,18 +13,38 @@ MonoBehaviour:
   m_Name: SeedDatabase
   m_EditorClassIdentifier: Assembly-CSharp::SeedDatabase
   seeds:
-  - seedName: corn_seed
-    plantName: corn
-    price: 20
+  - seedName: Tomato_seed
+    plantName: Tomato
+    price: 10
     growTime: 5
+    seedIcon: {fileID: 3041457214386405346, guid: cf9e2d10f85348446b6c16a88889b744, type: 3}
+    priceToSell: 10
+    numsSeed: 10
+  - seedName: Chili_seed
+    plantName: Chili
+    price: 10
+    growTime: 10
+    seedIcon: {fileID: -3967237929857205426, guid: cf9e2d10f85348446b6c16a88889b744, type: 3}
+    priceToSell: 10
+    numsSeed: 10
+  - seedName: Corn_seed
+    plantName: Corn
+    price: 10
+    growTime: 10
     seedIcon: {fileID: 2264594466298315286, guid: cf9e2d10f85348446b6c16a88889b744, type: 3}
-  - seedName: carrot_seed
-    plantName: carrot
+    priceToSell: 10
+    numsSeed: 10
+  - seedName: Eggplant_seed
+    plantName: Eggplant
     price: 10
-    growTime: 3
-    seedIcon: {fileID: 3614151479051087722, guid: cf9e2d10f85348446b6c16a88889b744, type: 3}
-  - seedName: carrot_seed
-    plantName: carrot
+    growTime: 10
+    seedIcon: {fileID: 5195754874138314979, guid: cf9e2d10f85348446b6c16a88889b744, type: 3}
+    priceToSell: 10
+    numsSeed: 10
+  - seedName: Watermelon_seed
+    plantName: Watermelon
     price: 10
-    growTime: 3
-    seedIcon: {fileID: 3614151479051087722, guid: cf9e2d10f85348446b6c16a88889b744, type: 3}
+    growTime: 10
+    seedIcon: {fileID: -9044214207299891722, guid: cf9e2d10f85348446b6c16a88889b744, type: 3}
+    priceToSell: 10
+    numsSeed: 10
