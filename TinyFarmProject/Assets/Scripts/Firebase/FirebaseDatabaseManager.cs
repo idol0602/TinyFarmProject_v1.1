@@ -25,7 +25,6 @@ public class FirebaseDatabaseManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
         InitFirebase();
     }
 
