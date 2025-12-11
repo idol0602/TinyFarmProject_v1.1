@@ -14,6 +14,25 @@ public class ShopDetailPanel : MonoBehaviour
     public Button buyButton;
 
     private SeedData currentSeed;
+    private InventoryManager inventoryManager;
+
+    private void Start()
+    {
+        // Lấy InventoryManager từ scene
+        if (inventoryManager == null)
+        {
+            inventoryManager = InventoryManager.Instance;
+        }
+    }
+
+    private InventoryManager GetInventoryManager()
+    {
+        if (inventoryManager == null)
+        {
+            inventoryManager = InventoryManager.Instance;
+        }
+        return inventoryManager;
+    }
 
     public void Show(SeedData seed)
     {
@@ -44,23 +63,30 @@ public class ShopDetailPanel : MonoBehaviour
             return;
         }
 
-        // Dùng hệ thống tiền để trừ
-        if (PlayerMoney.Instance.Subtract(currentSeed.price))
+        Debug.Log($"Mua: {currentSeed.plantName}");
+
+        // ✅ Quy trình: SeedData → ItemData → Add to SecondInventory
+        InventoryManager invManager = GetInventoryManager();
+        if (invManager != null)
         {
-            // MUA THÀNH CÔNG
-            Debug.Log($"Mua thành công: {currentSeed.plantName} (-{currentSeed.price:N0}đ)");
+            // 1. Convert SeedData → ItemData
+            ItemData itemData = SeedToItemConverter.ConvertSeedToItem(currentSeed);
 
-            // TODO: Thêm hạt giống vào túi đồ / inventory
-            // Ví dụ:
-            // InventoryManager.Instance.AddSeed(currentSeed);
-
-            // Có thể đóng panel hoặc làm hiệu ứng đẹp ở đây
+            // 2. Thêm ItemData vào SecondInventory (inventory dưới)
+            bool success = invManager.AddItemToSecond(itemData, 1);
+            
+            if (success)
+            {
+                Debug.Log($"✅ Thêm {currentSeed.plantName} vào second inventory thành công");
+            }
+            else
+            {
+                Debug.LogWarning($"⚠️ Second inventory đầy, không thể thêm {currentSeed.plantName}!");
+            }
         }
         else
         {
-            // KHÔNG ĐỦ TIỀN
-            Debug.Log("Không đủ tiền để mua!");
-            // Gợi ý: Thêm hiệu ứng rung panel, hiện popup "Thiếu tiền", âm thanh "lỗi", v.v.
+            Debug.LogError("❌ InventoryManager không được gán!");
         }
     }
 }

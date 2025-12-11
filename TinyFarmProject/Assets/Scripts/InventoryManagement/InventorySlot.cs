@@ -11,9 +11,55 @@ public class InventorySlot : MonoBehaviour
     [Header("Slot Data")]
     public SlotData slotData;
 
+    [Header("Detail Panel")]
+    public ItemDetailPanel detailPanel;    // Reference tới detail panel
+
+    private Button slotButton;             // Button component của slot
+
+    private void Awake()
+    {
+        // Tìm Button component
+        slotButton = GetComponent<Button>();
+        if (slotButton != null)
+        {
+            slotButton.onClick.AddListener(OnSlotClicked);
+        }
+
+        // Tìm DetailPanel nếu chưa gán (tìm trong cùng Canvas)
+        if (detailPanel == null)
+        {
+            Canvas canvas = GetComponentInParent<Canvas>();
+            if (canvas != null)
+            {
+                detailPanel = canvas.GetComponentInChildren<ItemDetailPanel>();
+            }
+            
+            // Nếu vẫn không tìm được, tìm trong toàn scene
+            if (detailPanel == null)
+            {
+                detailPanel = FindObjectOfType<ItemDetailPanel>();
+            }
+        }
+    }
+
     private void Start()
     {
         RefreshDisplay(); // load dữ liệu ban đầu
+    }
+
+    /// <summary>
+    /// Gọi khi click vào slot
+    /// </summary>
+    public void OnSlotClicked()
+    {
+        if (slotData.item != null && detailPanel != null)
+        {
+            detailPanel.Show(slotData.item, slotData.quantity);
+        }
+        else if (detailPanel != null)
+        {
+            detailPanel.Hide();
+        }
     }
 
     /// <summary>
