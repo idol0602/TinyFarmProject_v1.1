@@ -70,16 +70,16 @@ public class AIGenerateOrder : MonoBehaviour
         StringBuilder sb = new StringBuilder();
 
         sb.AppendLine("════════════════════════════════════");
-        sb.AppendLine("🧾 CHI TIẾT ĐƠN HÀNG");
+        sb.AppendLine("CHI TIẾT ĐƠN HÀNG");
         sb.AppendLine("════════════════════════════════════");
 
-        sb.AppendLine($"📌 Mã đơn hàng : #{order.id}");
-        sb.AppendLine($"⏳ Thời hạn    : {order.deadlineDays} ngày");
-        sb.AppendLine($"🌱 Chi phí hạt : {seedCost} vàng");
-        sb.AppendLine($"💰 Thưởng      : {order.totalReward} vàng");
+        sb.AppendLine($"Mã đơn hàng : #{order.id}");
+        sb.AppendLine($"Thời hạn    : {order.deadlineDays} ngày");
+        sb.AppendLine($"Chi phí hạt : {seedCost} vàng");
+        sb.AppendLine($"Thưởng      : {order.totalReward} vàng");
 
         sb.AppendLine("------------------------------------");
-        sb.AppendLine("📦 DANH SÁCH SẢN PHẨM:");
+        sb.AppendLine("DANH SÁCH SẢN PHẨM:");
 
         int index = 1;
         foreach (var item in order.items)
@@ -95,11 +95,11 @@ public class AIGenerateOrder : MonoBehaviour
         sb.AppendLine("------------------------------------");
 
         if (!string.IsNullOrEmpty(order.content))
-            sb.AppendLine($"🗣 Lời NPC: \"{order.content}\"");
+            sb.AppendLine($"Lời NPC: \"{order.content}\"");
         else
-            sb.AppendLine("🗣 Lời NPC: (chưa có)");
+            sb.AppendLine("Lời NPC: (chưa có)");
 
-        sb.AppendLine($"🕒 Thời gian tạo: {System.DateTime.Now:dd/MM/yyyy HH:mm:ss}");
+        sb.AppendLine($"Thời gian tạo: {System.DateTime.Now:dd/MM/yyyy HH:mm:ss}");
         sb.AppendLine("════════════════════════════════════");
 
         Debug.Log(sb.ToString());

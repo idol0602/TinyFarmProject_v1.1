@@ -59,6 +59,7 @@ public class OrderDetailUI : MonoBehaviour
 
         btnDeliver.onClick.AddListener(() =>
         {
+            Debug.Log(txtReward.text);
             OrderManager.Instance.DeliverOrder(order);
             if (truckMove != null && truckMove.CanRun())
             {
