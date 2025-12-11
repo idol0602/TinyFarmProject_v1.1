@@ -63,30 +63,35 @@ public class ShopDetailPanel : MonoBehaviour
             return;
         }
 
-        Debug.Log($"Mua: {currentSeed.plantName}");
+        // Lấy số tiền
+        int price = currentSeed.price;
 
-        // ✅ Quy trình: SeedData → ItemData → Add to SecondInventory
-        InventoryManager invManager = GetInventoryManager();
-        if (invManager != null)
+        // Kiểm tra đủ tiền không
+        if (!PlayerMoney.Instance.Subtract(price))
         {
-            // 1. Convert SeedData → ItemData
-            ItemData itemData = SeedToItemConverter.ConvertSeedToItem(currentSeed);
+            Debug.LogWarning("❌ Không đủ tiền để mua!");
+            return;
+        }
 
-            // 2. Thêm ItemData vào SecondInventory (inventory dưới)
-            bool success = invManager.AddItemToSecond(itemData, 1);
-            
+        Debug.Log($"💰 Đã trừ {price}đ. Tiền còn lại: {PlayerMoney.Instance.GetCurrentMoney()}");
+
+        // Convert SeedData → ItemData
+        InventoryManager inv = InventoryManager.Instance;
+        if (inv != null)
+        {
+            ItemData itemData = SeedToItemConverter.ConvertSeedToItem(currentSeed);
+            bool success = inv.AddItemToSecond(itemData, 1);
+
             if (success)
             {
-                Debug.Log($"✅ Thêm {currentSeed.plantName} vào second inventory thành công");
+                Debug.Log($"✅ Đã mua {currentSeed.plantName} và thêm vào Second Inventory");
             }
             else
             {
-                Debug.LogWarning($"⚠️ Second inventory đầy, không thể thêm {currentSeed.plantName}!");
+                Debug.LogWarning("⚠ Inventory đầy → hoàn tiền lại");
+                PlayerMoney.Instance.Add(price);   // Hoàn tiền nếu add item fail
             }
         }
-        else
-        {
-            Debug.LogError("❌ InventoryManager không được gán!");
-        }
     }
+
 }
