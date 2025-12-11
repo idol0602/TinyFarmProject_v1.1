@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class DraggableItem : MonoBehaviour,
     IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -10,11 +11,21 @@ public class DraggableItem : MonoBehaviour,
     private Image image;
     private Transform originalParent;
     private int originalSiblingIndex;
+    private CanvasGroup canvasGroup;  // Để ẩn/hiện slot gốc
+    private InventoryManager inventoryManager;  // Reference tới InventoryManager
 
     private void Awake()
     {
         image = GetComponent<Image>();
         canvas = GetComponentInParent<Canvas>();
+        canvasGroup = GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            canvasGroup = gameObject.AddComponent<CanvasGroup>();
+        }
+
+        // Tìm InventoryManager trong scene
+        inventoryManager = FindObjectOfType<InventoryManager>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -24,6 +35,10 @@ public class DraggableItem : MonoBehaviour,
         // ⭐ Lưu parent gốc và vị trí trong hierarchy
         originalParent = transform.parent;
         originalSiblingIndex = transform.GetSiblingIndex();
+
+        // ⭐ Ẩn slot gốc nhưng vẫn giữ lại vị trí
+        canvasGroup.alpha = 0.5f;
+        canvasGroup.blocksRaycasts = false;
 
         // Tạm thời chuyển lên canvas để render trên cùng khi drag
         transform.SetParent(canvas.transform);
@@ -40,101 +55,109 @@ public class DraggableItem : MonoBehaviour,
     {
         image.raycastTarget = true;
 
-        // ⭐ FIX: Tìm targetSlot từ gameObject được raycast (có thể là child của slot)
-        InventorySlot targetSlot = null;
-        
-        if (eventData.pointerCurrentRaycast.gameObject != null)
+        // Tìm target slot ở vị trí thả hiện tại
+        InventorySlot targetSlot = FindSlotUnderMouse();
+
+        // Nếu thả vào slot khác
+        if (targetSlot != null && targetSlot != originalSlot)
         {
-            // Thử lấy InventorySlot từ chính object đó hoặc từ parent của nó
-            targetSlot = eventData.pointerCurrentRaycast.gameObject.GetComponentInParent<InventorySlot>();
+            ItemData draggedItem = originalSlot.slotData.item;
+            ItemData targetItem = targetSlot.slotData.item;
+            int draggedQty = originalSlot.slotData.quantity;
+
+            // ⭐ Nếu cùng type + subtype -> MERGE (cộng stack)
+            if (draggedItem != null && targetItem != null &&
+                draggedItem.itemType == targetItem.itemType &&
+                draggedItem.itemSubtype == targetItem.itemSubtype &&
+                draggedItem.stackable && targetItem.stackable)
+            {
+                // Cộng số lượng
+                int availableSpace = targetItem.maxStack - targetSlot.slotData.quantity;
+                int amountToAdd = Mathf.Min(availableSpace, draggedQty);
+
+                targetSlot.slotData.quantity += amountToAdd;
+                originalSlot.slotData.quantity -= amountToAdd;
+
+                // Nếu hết item ở slot gốc thì xóa
+                if (originalSlot.slotData.quantity <= 0)
+                {
+                    originalSlot.slotData.item = null;
+                    originalSlot.slotData.quantity = 0;
+                }
+
+                targetSlot.Refresh();
+                originalSlot.Refresh();
+            }
+            // ⭐ Nếu khác type hoặc một trong hai null -> SWAP
+            else
+            {
+                SwapSlots(originalSlot, targetSlot);
+                targetSlot.Refresh();
+                originalSlot.Refresh();
+            }
+
+            // ⭐ Refresh cả 2 inventory nếu có InventoryManager
+            if (inventoryManager != null)
+            {
+                inventoryManager.RefreshInventoryUI();
+                inventoryManager.RefreshSecondInventoryUI();
+            }
         }
+
+        // ⭐ Hiển thị lại slot gốc
+        canvasGroup.alpha = 1f;
+        canvasGroup.blocksRaycasts = true;
 
         // ⭐ LUÔN LUÔN trả icon về đúng parent ban đầu
         transform.SetParent(originalParent);
         transform.SetSiblingIndex(originalSiblingIndex);
         transform.localPosition = Vector3.zero;
-
-        // Nếu thả vào slot khác -> swap data
-        if (targetSlot != null && targetSlot != originalSlot)
-        {
-            if (CanSwapOrMerge(originalSlot, targetSlot))
-            {
-                SwapData(originalSlot, targetSlot);
-                
-                // Refresh cả 2 slot để cập nhật UI
-                targetSlot.Refresh();
-                originalSlot.Refresh();
-            }
-        }
     }
 
     /// <summary>
-    /// Kiểm tra xem có thể swap hoặc merge 2 slot không
+    /// Tìm slot nằm dưới vị trí con chuột hiện tại
     /// </summary>
-    private bool CanSwapOrMerge(InventorySlot slotA, InventorySlot slotB)
+    private InventorySlot FindSlotUnderMouse()
     {
-        // Nếu 1 trong 2 slot rỗng -> cho phép swap
-        if (slotA.slotData.IsEmpty || slotB.slotData.IsEmpty)
-            return true;
-
-        // Nếu cả 2 đều có item
-        ItemData itemA = slotA.slotData.item;
-        ItemData itemB = slotB.slotData.item;
-
-        // ✅ Nếu cùng type + subtype + stackable -> cho phép merge
-        if (itemA.itemType == itemB.itemType &&
-            itemA.itemSubtype == itemB.itemSubtype &&
-            itemA.stackable && itemB.stackable)
+        PointerEventData pointerData = new PointerEventData(EventSystem.current)
         {
-            return true;
-        }
+            position = Input.mousePosition
+        };
 
-        // ✅ Khác type hoặc subtype -> chỉ cho swap (không merge)
-        // Tools không stack với Seeds, Crops không stack với Seeds, etc.
-        return true; // Vẫn cho swap vị trí
-    }
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
 
-    private void SwapData(InventorySlot a, InventorySlot b)
-    {
-        // ✅ Nếu cùng item type + subtype và stackable -> thử merge
-        if (!a.slotData.IsEmpty && !b.slotData.IsEmpty)
+        // Tìm InventorySlot đầu tiên trong kết quả raycast
+        foreach (RaycastResult result in results)
         {
-            ItemData itemA = a.slotData.item;
-            ItemData itemB = b.slotData.item;
-
-            if (itemA.itemType == itemB.itemType &&
-                itemA.itemSubtype == itemB.itemSubtype &&
-                itemA.stackable && itemB.stackable)
+            InventorySlot slot = result.gameObject.GetComponentInParent<InventorySlot>();
+            if (slot != null)
             {
-                // Merge vào slot B
-                int totalQty = a.slotData.quantity + b.slotData.quantity;
-
-                if (totalQty <= itemB.maxStack)
-                {
-                    // Merge hết vào B, xóa A
-                    b.slotData.quantity = totalQty;
-                    a.slotData.item = null;
-                    a.slotData.quantity = 0;
-                    return;
-                }
-                else
-                {
-                    // B đầy, A giữ phần dư
-                    b.slotData.quantity = itemB.maxStack;
-                    a.slotData.quantity = totalQty - itemB.maxStack;
-                    return;
-                }
+                return slot;
             }
         }
 
-        // Swap thông thường nếu không merge được
-        var tempItem = a.slotData.item;
-        var tempQty = a.slotData.quantity;
+        return null;
+    }
 
-        a.slotData.item = b.slotData.item;
-        a.slotData.quantity = b.slotData.quantity;
+    /// <summary>
+    /// Swap dữ liệu giữa 2 slot (chỉ đổi item + quantity, giữ nguyên vị trí)
+    /// </summary>
+    private void SwapSlots(InventorySlot slotA, InventorySlot slotB)
+    {
+        // Swap dữ liệu
+        ItemData tempItem = slotA.slotData.item;
+        int tempQty = slotA.slotData.quantity;
+        int tempIndex = slotA.slotData.slotIndex;
 
-        b.slotData.item = tempItem;
-        b.slotData.quantity = tempQty;
+        slotA.slotData.item = slotB.slotData.item;
+        slotA.slotData.quantity = slotB.slotData.quantity;
+        slotA.slotData.slotIndex = slotB.slotData.slotIndex;
+
+        slotB.slotData.item = tempItem;
+        slotB.slotData.quantity = tempQty;
+        slotB.slotData.slotIndex = tempIndex;
+
+        // ⭐ KHÔNG SWAP SIBLING INDEX - chỉ để dữ liệu đổi chỗ
     }
 }
