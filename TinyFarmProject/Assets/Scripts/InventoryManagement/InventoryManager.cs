@@ -2,12 +2,32 @@
 
 public class InventoryManager : MonoBehaviour
 {
+    // ✅ Singleton Pattern
+    public static InventoryManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        // Setup Singleton
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+
+        InitSecondInventory();  // Init second trước
+        InitInventory();        // Sau đó mới init first
+    }
+
     [Header("UI Settings")]
     public GameObject slotPrefabPanelBackground; // prefab slot UI (inventory 1)
     public Transform inventoryPanel;              // grid container (trên)
     
     public GameObject secondSlotPrefab;           // prefab slot UI khác (inventory 2) - tùy chọn
     public Transform secondInventoryPanel;        // grid container thứ 2 (dưới, ngang)
+
+    [Header("Detail Panel")]
+    public ItemDetailPanel detailPanel;           // Panel hiển thị chi tiết item (dùng chung cho 2 inventory)
 
     [Header("Inventory Settings")]
     public int inventorySize = 20;
@@ -45,12 +65,6 @@ public class InventoryManager : MonoBehaviour
         return slot.quantity < newItem.maxStack;
     }
 
-    private void Awake()
-    {
-        InitInventory();
-        InitSecondInventory();
-    }
-
     private void InitInventory()
     {
         slotDataList = new SlotData[inventorySize];
@@ -67,6 +81,10 @@ public class InventoryManager : MonoBehaviour
             InventorySlot slotUI = obj.GetComponent<InventorySlot>();
 
             slotUI.slotData = slotDataList[i];  // liên kết Data ↔ UI
+            if (detailPanel != null)
+            {
+                slotUI.detailPanel = detailPanel;  // Gán panel duy nhất cho tất cả slots
+            }
             uiSlots[i] = slotUI;                 // lưu UI reference
         }
 
@@ -107,6 +125,10 @@ public class InventoryManager : MonoBehaviour
             InventorySlot slotUI = obj.GetComponent<InventorySlot>();
 
             slotUI.slotData = secondSlotDataList[i];
+            if (detailPanel != null)
+            {
+                slotUI.detailPanel = detailPanel;  // Gán panel duy nhất cho tất cả slots
+            }
             secondUiSlots[i] = slotUI;
         }
 
@@ -145,6 +167,13 @@ public class InventoryManager : MonoBehaviour
 
     public bool AddItem(ItemData item, int qty = 1)
     {
+        // Nếu qty vượt maxStack, tách thành nhiều item
+        while (qty > item.maxStack)
+        {
+            AddItem(item, item.maxStack);  // Thêm 1 stack đầy
+            qty -= item.maxStack;           // Giảm qty còn lại
+        }
+
         // stack slot nếu có item cùng type và subtype
         if (item.stackable)
         {
@@ -180,7 +209,12 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        Debug.Log("Inventory FULL");
+        Debug.Log("Inventory FULL - Overflow to second");
+        // Nếu inventory 1 full, thêm vào inventory 2
+        if (qty > 0)
+        {
+            AddItemToSecond(item, qty);
+        }
         return false;
     }
 
@@ -190,6 +224,13 @@ public class InventoryManager : MonoBehaviour
         {
             Debug.LogWarning("Second inventory not initialized!");
             return false;
+        }
+
+        // Nếu qty vượt maxStack, tách thành nhiều item
+        while (qty > item.maxStack)
+        {
+            AddItemToSecond(item, item.maxStack);  // Thêm 1 stack đầy
+            qty -= item.maxStack;                   // Giảm qty còn lại
         }
 
         // stack slot nếu có item cùng type và subtype
