@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;        // Nếu dùng Text cũ
-using TMPro;                  // Dùng TextMeshPro
+using TMPro;
 using UnityEngine.Events;
 
 public class PlayerMoney : MonoBehaviour
@@ -10,46 +9,67 @@ public class PlayerMoney : MonoBehaviour
     [Header("=== Cấu hình tiền ===")]
     [SerializeField] private int defaultMoney = 1000;
 
-    [Header("=== UI (kéo Text vào đây) ===")]
-    [SerializeField] private TextMeshProUGUI moneyTextUI;        // Kéo TextMeshPro ở đây
-    // [SerializeField] private Text moneyTextUI;                // Nếu dùng Text cũ thì bỏ comment dòng này
+    [Header("=== UI (kéo TextMeshPro vào đây) ===")]
+    [SerializeField] private TextMeshProUGUI moneyTextUI;
 
-    // Giá trị tiền hiện tại (public readonly)
     public int CurrentMoney { get; private set; }
 
-    // Event công khai cho các hệ thống khác muốn nghe (Inventory, Shop, v.v.)
     public UnityEvent<int> OnMoneyChanged = new UnityEvent<int>();
+
+    private const string PLAYER_ID = "Player1";
 
     private void Awake()
     {
-        // Singleton
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
-
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        // Khởi tạo tiền
         CurrentMoney = defaultMoney;
         UpdateMoneyUI();
-        OnMoneyChanged.Invoke(CurrentMoney);
     }
 
-    // Gọi từ bất kỳ đâu để thêm tiền
+    private void Start()
+    {
+        // Tự động load tiền khi game chạy
+        if (FirebaseDatabaseManager.Instance != null && FirebaseDatabaseManager.FirebaseReady)
+        {
+            FirebaseDatabaseManager.Instance.LoadMoneyFromFirebase(PLAYER_ID, ApplyLoadedMoney);
+        }
+        else
+        {
+            // Nếu Firebase chưa sẵn, đợi một chút rồi thử lại
+            Invoke(nameof(TryLoadMoney), 1f);
+        }
+    }
+
+    private void TryLoadMoney()
+    {
+        if (FirebaseDatabaseManager.FirebaseReady)
+            FirebaseDatabaseManager.Instance.LoadMoneyFromFirebase(PLAYER_ID, ApplyLoadedMoney);
+    }
+
+    // Hàm này được gọi từ Firebase khi load xong
+    private void ApplyLoadedMoney(int loadedMoney)
+    {
+        CurrentMoney = loadedMoney;
+        UpdateMoneyUI();
+        OnMoneyChanged.Invoke(CurrentMoney);
+        Debug.Log($"ĐÃ LOAD TIỀN TỪ FIREBASE: {CurrentMoney:N0}đ");
+    }
+
     public bool Add(int amount)
     {
         if (amount <= 0) return false;
-
         CurrentMoney += amount;
         UpdateMoneyUI();
         OnMoneyChanged.Invoke(CurrentMoney);
         return true;
     }
 
-    // Gọi từ bất kỳ đâu để trừ tiền (có kiểm tra đủ)
     public bool Subtract(int amount)
     {
         if (amount <= 0) return false;
@@ -58,17 +78,14 @@ public class PlayerMoney : MonoBehaviour
             Debug.LogWarning("Không đủ tiền!");
             return false;
         }
-
         CurrentMoney -= amount;
         UpdateMoneyUI();
         OnMoneyChanged.Invoke(CurrentMoney);
         return true;
     }
 
-    // Lấy số tiền hiện tại
     public int GetCurrentMoney() => CurrentMoney;
 
-    // Reset về mặc định (dùng khi New Game)
     public void ResetMoney()
     {
         CurrentMoney = defaultMoney;
@@ -76,21 +93,22 @@ public class PlayerMoney : MonoBehaviour
         OnMoneyChanged.Invoke(CurrentMoney);
     }
 
-    // Hàm duy nhất chịu trách nhiệm cập nhật UI (gọi mỗi khi tiền thay đổi)
     private void UpdateMoneyUI()
     {
         if (moneyTextUI != null)
-        {
             moneyTextUI.text = CurrentMoney.ToString("N0") + "đ";
-        }
-        // Nếu chưa gán Text → vẫn log để dev biết
         else if (Application.isPlaying)
-        {
-            Debug.Log($"Tiền hiện tại: {CurrentMoney:N0}đ (chưa gán UI Text)");
-        }
+            Debug.Log($"Tiền hiện tại: {CurrentMoney:N0}đ (chưa gán UI)");
     }
 
-    // Bonus: Dọn dẹp singleton khi destroy
+    // TỰ ĐỘNG LƯU KHI TIỀN THAY ĐỔI
+    private void OnEnable() => OnMoneyChanged.AddListener(SaveOnChange);
+    private void OnDisable() => OnMoneyChanged.RemoveListener(SaveOnChange);
+
+    private void SaveOnChange(int _) => FirebaseDatabaseManager.Instance?.SaveMoneyToFirebase(PLAYER_ID);
+
+    private void OnApplicationQuit() => FirebaseDatabaseManager.Instance?.SaveMoneyToFirebase(PLAYER_ID);
+
     private void OnDestroy()
     {
         if (Instance == this) Instance = null;
