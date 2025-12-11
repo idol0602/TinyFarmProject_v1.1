@@ -173,4 +173,22 @@ public class OrderManager : MonoBehaviour
         Debug.Log("[OrderManager] ĐÃ CLEAR TOÀN BỘ ĐƠN HÀNG!");
     }
 
+    public void ClearAllOrders()
+    {
+        // Gọi sự kiện xóa UI:
+        foreach (var order in GetAllActiveOrders())
+        {
+            onOrderRemoved?.Invoke(order);
+        }
+
+        // Xóa sạch data
+        pendingOrders.Clear();
+        acceptedOrders.Clear();
+
+        // Báo UI cập nhật
+        onOrdersListChanged?.Invoke();
+
+        Debug.Log("<color=red>[OrderManager] Đã xóa tất cả đơn hàng!</color>");
+    }
+
 }

@@ -9,7 +9,7 @@ public class PlayerMoney : MonoBehaviour
     [Header("=== Cấu hình tiền ===")]
     [SerializeField] private int defaultMoney = 1000;
 
-    [Header("=== UI (kéo TextMeshPro vào đây) ===")]
+    [Header("=== UI")]
     [SerializeField] private TextMeshProUGUI moneyTextUI;
 
     public int CurrentMoney { get; private set; }
@@ -34,36 +34,33 @@ public class PlayerMoney : MonoBehaviour
 
     private void Start()
     {
-        // Tự động load tiền khi game chạy
-        if (FirebaseDatabaseManager.Instance != null && FirebaseDatabaseManager.FirebaseReady)
+        if (FirebaseDatabaseManager.FirebaseReady)
         {
             FirebaseDatabaseManager.Instance.LoadMoneyFromFirebase(PLAYER_ID, ApplyLoadedMoney);
         }
         else
         {
-            // Nếu Firebase chưa sẵn, đợi một chút rồi thử lại
-            Invoke(nameof(TryLoadMoney), 1f);
+            Invoke(nameof(TryLoadAgain), 1f);
         }
     }
 
-    private void TryLoadMoney()
+    private void TryLoadAgain()
     {
         if (FirebaseDatabaseManager.FirebaseReady)
             FirebaseDatabaseManager.Instance.LoadMoneyFromFirebase(PLAYER_ID, ApplyLoadedMoney);
     }
 
-    // Hàm này được gọi từ Firebase khi load xong
-    private void ApplyLoadedMoney(int loadedMoney)
+    private void ApplyLoadedMoney(int money)
     {
-        CurrentMoney = loadedMoney;
+        CurrentMoney = money;
         UpdateMoneyUI();
         OnMoneyChanged.Invoke(CurrentMoney);
-        Debug.Log($"ĐÃ LOAD TIỀN TỪ FIREBASE: {CurrentMoney:N0}đ");
     }
 
     public bool Add(int amount)
     {
         if (amount <= 0) return false;
+
         CurrentMoney += amount;
         UpdateMoneyUI();
         OnMoneyChanged.Invoke(CurrentMoney);
@@ -73,11 +70,8 @@ public class PlayerMoney : MonoBehaviour
     public bool Subtract(int amount)
     {
         if (amount <= 0) return false;
-        if (CurrentMoney < amount)
-        {
-            Debug.LogWarning("Không đủ tiền!");
-            return false;
-        }
+        if (CurrentMoney < amount) return false;
+
         CurrentMoney -= amount;
         UpdateMoneyUI();
         OnMoneyChanged.Invoke(CurrentMoney);
@@ -97,20 +91,14 @@ public class PlayerMoney : MonoBehaviour
     {
         if (moneyTextUI != null)
             moneyTextUI.text = CurrentMoney.ToString("N0") + "đ";
-        else if (Application.isPlaying)
-            Debug.Log($"Tiền hiện tại: {CurrentMoney:N0}đ (chưa gán UI)");
     }
 
-    // TỰ ĐỘNG LƯU KHI TIỀN THAY ĐỔI
-    private void OnEnable() => OnMoneyChanged.AddListener(SaveOnChange);
-    private void OnDisable() => OnMoneyChanged.RemoveListener(SaveOnChange);
+    // TỰ ĐỘNG LƯU MỖI KHI TIỀN THAY ĐỔI
+    private void OnEnable() => OnMoneyChanged.AddListener(AutoSave);
+    private void OnDisable() => OnMoneyChanged.RemoveListener(AutoSave);
 
-    private void SaveOnChange(int _) => FirebaseDatabaseManager.Instance?.SaveMoneyToFirebase(PLAYER_ID);
-
-    private void OnApplicationQuit() => FirebaseDatabaseManager.Instance?.SaveMoneyToFirebase(PLAYER_ID);
-
-    private void OnDestroy()
+    private void AutoSave(int _)
     {
-        if (Instance == this) Instance = null;
+        FirebaseDatabaseManager.Instance?.SaveMoneyToFirebase(PLAYER_ID);
     }
 }

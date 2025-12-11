@@ -1,5 +1,6 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OrderListPanelUI : MonoBehaviour
 {
@@ -7,12 +8,19 @@ public class OrderListPanelUI : MonoBehaviour
     public OrderTabUI tabPrefab;
     public OrderDetailUI detailUI;
 
+    [Header("Button Clear All")]
+    public Button clearAllBtn;   // 👈 Gán vào Inspector
+
     private Dictionary<int, OrderTabUI> tabMap = new();
 
     private void Start()
     {
         OrderManager.Instance.onOrderAdded.AddListener(AddTab);
         OrderManager.Instance.onOrderRemoved.AddListener(RemoveTab);
+
+        // Gán sự kiện click
+        if (clearAllBtn != null)
+            clearAllBtn.onClick.AddListener(ClearAll);
 
         RefreshAll();
     }
@@ -43,5 +51,20 @@ public class OrderListPanelUI : MonoBehaviour
 
         Destroy(tabMap[order.id].gameObject);
         tabMap.Remove(order.id);
+    }
+
+    // 👇 Hàm xóa tất cả
+    public void ClearAll()
+    {
+        // Xóa trong UI
+        foreach (Transform child in contentParent)
+            Destroy(child.gameObject);
+
+        tabMap.Clear();
+
+        // Xóa trong OrderManager
+        OrderManager.Instance.ClearAllOrders();
+
+        Debug.Log("<color=red>Đã xóa toàn bộ đơn hàng!</color>");
     }
 }

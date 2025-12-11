@@ -1,10 +1,11 @@
-﻿using UnityEngine;
-using Firebase;
+﻿using Firebase;
 using Firebase.Database;
 using Firebase.Extensions;
-using Newtonsoft.Json;
-using System.Collections.Generic;
 using MapSummer;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class FirebaseDatabaseManager : MonoBehaviour
 {
@@ -35,12 +36,77 @@ public class FirebaseDatabaseManager : MonoBehaviour
         {
             reference = FirebaseDatabase.DefaultInstance.RootReference;
             FirebaseReady = true;
-            Debug.Log("🔥 Firebase Ready");
+            Debug.Log("Firebase Ready");
         }
         else
         {
-            Debug.LogError("❌ Firebase lỗi: " + status);
+            Debug.LogError("Firebase lỗi: " + status);
         }
+    }
+
+    // ============================================================
+    // SAVE MONEY (chỉ dùng 1 hàm duy nhất này)
+    // ============================================================
+    public void SaveMoneyToFirebase(string userId)
+    {
+        if (!FirebaseReady || reference == null)
+        {
+            Debug.LogError("Firebase chưa sẵn sàng → KHÔNG SAVE TIỀN");
+            return;
+        }
+
+        int money = PlayerMoney.Instance != null ? PlayerMoney.Instance.GetCurrentMoney() : 0;
+
+        reference.Child("Money").Child(userId)
+            .SetValueAsync(money)
+            .ContinueWithOnMainThread(task =>
+            {
+                if (task.IsFaulted)
+                    Debug.LogError("Lỗi SAVE tiền: " + task.Exception);
+                else
+                    Debug.Log($"Đã lưu tiền: {money:N0}đ → /Money/{userId}");
+            });
+    }
+
+    // ============================================================
+    // LOAD MONEY (chỉ dùng 1 hàm duy nhất này)
+    // ============================================================
+    public void LoadMoneyFromFirebase(string userId, Action<int> callback)
+    {
+        if (!FirebaseReady || reference == null)
+        {
+            Debug.LogError("Firebase chưa sẵn sàng → KHÔNG LOAD TIỀN");
+            callback?.Invoke(1000); // fallback về tiền mặc định
+            return;
+        }
+
+        reference.Child("Money").Child(userId)
+            .GetValueAsync()
+            .ContinueWithOnMainThread(task =>
+            {
+                if (!task.IsCompletedSuccessfully)
+                {
+                    Debug.LogError("Lỗi LOAD tiền: " + task.Exception);
+                    callback?.Invoke(1000);
+                    return;
+                }
+
+                DataSnapshot snap = task.Result;
+
+                int loadedMoney = 1000; // default
+
+                if (snap.Value != null)
+                {
+                    loadedMoney = int.Parse(snap.Value.ToString());
+                    Debug.Log($"LOAD tiền thành công từ Firebase: {loadedMoney:N0}đ");
+                }
+                else
+                {
+                    Debug.Log("Không có dữ liệu tiền trên Firebase → dùng default 1000đ");
+                }
+
+                callback?.Invoke(loadedMoney);
+            });
     }
 
     // ============================================================
@@ -50,13 +116,12 @@ public class FirebaseDatabaseManager : MonoBehaviour
     {
         if (!FirebaseReady || reference == null)
         {
-            Debug.LogError("❌ Firebase chưa sẵn sàng → KHÔNG SAVE");
+            Debug.LogError("Firebase chưa sẵn sàng → KHÔNG SAVE FARM");
             return;
         }
 
         List<CropData> crops = new List<CropData>();
-
-        foreach (var crop in GameObject.FindObjectsOfType<Crop>())
+        foreach (var crop in FindObjectsOfType<Crop>())
             crops.Add(new CropData(crop));
 
         string json = JsonConvert.SerializeObject(crops, Formatting.Indented);
@@ -65,27 +130,28 @@ public class FirebaseDatabaseManager : MonoBehaviour
             .SetValueAsync(json)
             .ContinueWithOnMainThread(task =>
             {
-                Debug.Log($"📤 Farm Saved ({crops.Count} cây)");
+                Debug.Log($"Farm Saved ({crops.Count} cây trồng)");
             });
     }
 
     // ============================================================
-    // LOAD FARM — VERSION HỖ TRỢ NHIỀU LOẠI CÂY
+    // LOAD FARM
     // ============================================================
     public void LoadFarmFromFirebase(string userId)
     {
         if (!FirebaseReady || reference == null)
         {
-            Debug.LogError("❌ Firebase chưa sẵn sàng → KHÔNG LOAD");
+            Debug.LogError("Firebase chưa sẵn sàng → KHÔNG LOAD FARM");
             return;
         }
 
-        reference.Child("Farms").Child(userId).GetValueAsync()
+        reference.Child("Farms").Child(userId)
+            .GetValueAsync()
             .ContinueWithOnMainThread(task =>
             {
                 if (!task.IsCompletedSuccessfully)
                 {
-                    Debug.LogError("❌ Load lỗi → " + task.Exception);
+                    Debug.LogError("Load farm lỗi: " + task.Exception);
                     return;
                 }
 
@@ -93,64 +159,53 @@ public class FirebaseDatabaseManager : MonoBehaviour
 
                 if (snap.Value == null)
                 {
-                    Debug.Log("⚠ Firebase không có dữ liệu farm");
+                    Debug.Log("Firebase không có dữ liệu farm → để trống");
                     return;
                 }
 
                 string json = snap.Value.ToString();
                 List<CropData> crops = JsonConvert.DeserializeObject<List<CropData>>(json);
 
-                // Xóa cây hiện tại
-                foreach (var old in GameObject.FindObjectsOfType<Crop>())
+                // Xóa cây cũ
+                foreach (var old in FindObjectsOfType<Crop>())
                     Destroy(old.gameObject);
 
-                // Load từng cây theo đúng loại
-                // Load từng cây theo đúng loại
+                // Tạo lại cây
                 foreach (var d in crops)
                 {
                     string path = "Crops/" + d.cropType;
                     GameObject prefab = Resources.Load<GameObject>(path);
-
                     if (prefab == null)
                     {
-                        Debug.LogError("❌ Không tìm thấy prefab cho loại cây: " + d.cropType);
+                        Debug.LogError("Không tìm thấy prefab: " + d.cropType);
                         continue;
                     }
 
                     Vector3 pos = new Vector3(d.posX, d.posY, 0);
                     GameObject obj = Instantiate(prefab, pos, Quaternion.identity);
-
                     obj.GetComponent<Crop>().LoadFromData(d);
                 }
 
-                // ⭐ FIX QUAN TRỌNG: BẮN LẠI EVENT SAU KHI LOAD FARM
-                // ⭐ CHỈ GỌI OnNewDay NẾU VỪA NGỦ DẬY
+                // New day event khi ngủ dậy
                 int day = DayAndNightManager.Instance.GetCurrentDay();
-
                 if (FarmState.IsSleepTransition)
                 {
-                    Debug.Log("😴 LoadFarm → SleepTransition TRUE → OnNewDay()");
                     FarmState.IsSleepTransition = false;
-
                     DayAndNightEvents.InvokeNewDay(day);
                 }
-                else
-                {
-                    Debug.Log("🌱 LoadFarm → Bình thường → không OnNewDay()");
-                }
 
-
-                Debug.Log("🌱 Farm Loaded xong!");
-
+                Debug.Log("Farm Loaded xong!");
             });
     }
 
+    // Auto save farm khi thoát game
     private void OnApplicationQuit()
     {
         if (FirebaseReady)
         {
-            Debug.Log("💾 Auto SAVE khi thoát game");
+            Debug.Log("Auto SAVE farm + tiền khi thoát game");
             SaveFarmToFirebase("Player1");
+            SaveMoneyToFirebase("Player1");
         }
     }
 }

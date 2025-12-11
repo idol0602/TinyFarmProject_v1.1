@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
 public class OrderDetailUI : MonoBehaviour
 {
     [Header("Text")]
@@ -15,7 +14,6 @@ public class OrderDetailUI : MonoBehaviour
     public Button btnAccept;
     public Button btnReject;
     public Button btnDeliver;
-    public Button btnClearAll;
 
     public Move truckMove;
     private Order currentOrder;
@@ -31,11 +29,16 @@ public class OrderDetailUI : MonoBehaviour
 
         txtOrderID.text = $"ORDER #{order.id}";
         txtItems.text = order.GetItemListString();
-        txtReward.text = $"💰 {order.totalReward}";
-        txtDeadline.text = $"⏳ {order.deadlineDays} ngày";
+        txtReward.text = $"{order.totalReward}";
+        txtDeadline.text = $"{order.deadlineDays} ngày";
         txtNPC.text = string.IsNullOrEmpty(order.content)
             ? "Đang chờ NPC nói..."
             : order.content;
+
+        // Khôi phục trạng thái nút khi show đơn mới
+        btnAccept.interactable = true;
+        btnReject.interactable = true;
+        btnDeliver.interactable = true;
 
         btnAccept.gameObject.SetActive(!order.isAccepted);
         btnReject.gameObject.SetActive(!order.isAccepted);
@@ -59,17 +62,30 @@ public class OrderDetailUI : MonoBehaviour
 
         btnDeliver.onClick.AddListener(() =>
         {
-            Debug.Log(txtReward.text);
+            // *
+            // * KIỂM TRA VÀ XỬ LÝ TRỪ SỐ VẬT PHẨM TƯƠNG ỨNG TRONG TÚI ĐỒ
+            // *
+            Debug.Log("Reward: " + currentOrder.totalReward);
+
             OrderManager.Instance.DeliverOrder(order);
+
+            // + tiền
+            PlayerMoney.Instance.Add(order.totalReward);
+
+            // save firebase
+            FirebaseDatabaseManager.Instance.SaveMoneyToFirebase("Player1");
+
+            // xe chạy
             if (truckMove != null && truckMove.CanRun())
-            {
                 truckMove.Run();
-            }
+
+            // disable nút sau giao hàng
+            btnAccept.interactable = false;
+            btnReject.interactable = false;
+            btnDeliver.interactable = false;
+
+            // clear UI
             Clear();
-        });
-        btnClearAll.onClick.AddListener(() =>
-        {
-            OrderManager.Instance.ClearAllOrdersFull();
         });
     }
 
@@ -80,5 +96,10 @@ public class OrderDetailUI : MonoBehaviour
         txtReward.text = "";
         txtDeadline.text = "";
         txtNPC.text = "";
+
+        // Tắt nút để tránh click nhầm
+        btnAccept.interactable = false;
+        btnReject.interactable = false;
+        btnDeliver.interactable = false;
     }
 }

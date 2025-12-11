@@ -11816,7 +11816,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 427477436}
-  - component: {fileID: 427477435}
+  - component: {fileID: 427477437}
   m_Layer: 0
   m_Name: FirebaseDatabaseManager
   m_TagString: Untagged
@@ -11824,18 +11824,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &427477435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 427477434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ede34bf10f578cb40b46c3bd213078fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FirebaseDatabaseManager
 --- !u!4 &427477436
 Transform:
   m_ObjectHideFlags: 0
@@ -11851,6 +11839,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &427477437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427477434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f4c3462a52d0134ab90ba635a729046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FirebaseDatabaseManager
 --- !u!1 &433817387
 GameObject:
   m_ObjectHideFlags: 0
@@ -20155,17 +20155,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &654510382 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6890823632040142989, guid: a03c2886a4fe3424a8c9ba05149bbb0b, type: 3}
-  m_PrefabInstance: {fileID: 869991711}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &675663214
 GameObject:
   m_ObjectHideFlags: 0
@@ -24023,7 +24012,6 @@ MonoBehaviour:
   btnAccept: {fileID: 1346581153}
   btnReject: {fileID: 1507755526}
   btnDeliver: {fileID: 695398729}
-  btnClearAll: {fileID: 654510382}
   truckMove: {fileID: 0}
 --- !u!1 &1716923796
 GameObject:
@@ -24541,7 +24529,6 @@ MonoBehaviour:
   btnAccept: {fileID: 344244392}
   btnReject: {fileID: 869399333}
   btnDeliver: {fileID: 445959463}
-  btnClearAll: {fileID: 1062339577}
   truckMove: {fileID: 0}
 --- !u!114 &1833702422
 MonoBehaviour:
@@ -24734,7 +24721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e768c8f5c9edb9746918f22036c9915f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMoney
-  defaultMoney: 100000
+  defaultMoney: 0
   moneyTextUI: {fileID: 0}
   OnMoneyChanged:
     m_PersistentCalls:
@@ -24809,6 +24796,7 @@ MonoBehaviour:
   contentParent: {fileID: 1154863773}
   tabPrefab: {fileID: 8272897727597102810, guid: 387d9e81b2374dc4b941f3239a6c7768, type: 3}
   detailUI: {fileID: 1833702421}
+  clearAllBtn: {fileID: 1062339577}
 --- !u!114 &1932690309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24867,6 +24855,7 @@ MonoBehaviour:
   contentParent: {fileID: 1995711988}
   tabPrefab: {fileID: 8272897727597102810, guid: 387d9e81b2374dc4b941f3239a6c7768, type: 3}
   detailUI: {fileID: 1658467335}
+  clearAllBtn: {fileID: 0}
 --- !u!1 &1964343186
 GameObject:
   m_ObjectHideFlags: 0
