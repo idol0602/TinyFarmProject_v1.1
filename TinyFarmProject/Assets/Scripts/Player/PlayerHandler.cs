@@ -108,9 +108,10 @@ public string currentCropType = "Chili";
     private void OnYesButton()
     {
         int hour = DayAndNightManager.Instance.GetCurrentHour();
+        bool canSleep = (hour >= 20) || (hour < 6);
 
         // ⭐ CHẶN NGỦ TRƯỚC 20:00 (có thể chỉnh thành 18 nếu muốn)
-        if (hour < 20)
+        if (!canSleep)
         {
             Debug.Log($"⛔ Không thể ngủ bây giờ! Hiện tại mới {hour}:00. Phải sau 20:00.");
 

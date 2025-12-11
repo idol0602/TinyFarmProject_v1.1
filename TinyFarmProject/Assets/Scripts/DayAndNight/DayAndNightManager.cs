@@ -9,6 +9,10 @@ public class DayAndNightManager : MonoBehaviour
 {
     public static DayAndNightManager Instance { get; private set; }
 
+    [Header("=== GIỜ BẮT ĐẦU GAME ===")]
+    [Range(0, 23)] public int startHour = 7;
+    [Range(0, 59)] public int startMinute = 0;
+
     [Header("=== HIỂN THỊ ===")]
     public TMP_Text textTimeInGame;
     public TMP_Text textDayInGame;
@@ -22,11 +26,10 @@ public class DayAndNightManager : MonoBehaviour
 
     private const float SECONDS_PER_DAY = 86400f;
     private float timeScale;
+    private float totalGameSeconds = 0f;
+    private int currentDay = 1;
 
     private static float savedTotalGameSeconds = -1f;
-    private float totalGameSeconds = 0f;
-
-    private int currentDay = 1;
 
     private void Awake()
     {
@@ -39,6 +42,9 @@ public class DayAndNightManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
+        // ==========================
+        // LOAD / SETUP GAME TIME
+        // ==========================
         if (savedTotalGameSeconds >= 0f)
         {
             totalGameSeconds = savedTotalGameSeconds;
@@ -46,7 +52,8 @@ public class DayAndNightManager : MonoBehaviour
         }
         else
         {
-            totalGameSeconds = 7 * 3600f; // 7:00 sáng
+            // ⭐ Giờ bắt đầu có thể chỉnh trong Inspector
+            totalGameSeconds = (startHour * 3600f) + (startMinute * 60f);
             currentDay = 1;
         }
 
@@ -68,8 +75,6 @@ public class DayAndNightManager : MonoBehaviour
         UpdateUIAndLight();
     }
 
-    // ================= UI FINDER =====================
-
     private void FindUIReferences()
     {
         if (textTimeInGame == null)
@@ -89,8 +94,6 @@ public class DayAndNightManager : MonoBehaviour
         UpdateUIAndLight();
     }
 
-    // ================= GAME LOOP =====================
-
     private void Update()
     {
         totalGameSeconds += Time.deltaTime * timeScale;
@@ -98,7 +101,6 @@ public class DayAndNightManager : MonoBehaviour
 
         int calcDay = Mathf.FloorToInt(totalGameSeconds / SECONDS_PER_DAY) + 1;
 
-        // ⭐⭐ FIX LỖI QUAN TRỌNG ⭐⭐
         if (calcDay != currentDay)
         {
             currentDay = calcDay;
@@ -109,15 +111,11 @@ public class DayAndNightManager : MonoBehaviour
         UpdateUIAndLight();
     }
 
-    // ================= EVENT CALLER =====================
-
     private void OnNewDay()
     {
         Debug.Log($"🔥 [DayAndNightManager] Trigger New Day {currentDay}");
         DayAndNightEvents.InvokeNewDay(currentDay);
     }
-
-    // ================= UI / LIGHT =====================
 
     private void UpdateUIAndLight()
     {
@@ -139,22 +137,23 @@ public class DayAndNightManager : MonoBehaviour
         }
     }
 
-    // ================= SLEEP SYSTEM =====================
-
+    // ========================================================
+    // SLEEP SYSTEM (20:00 → 06:00)
+    // ========================================================
     public void SleepToNextDay()
     {
         int hour = GetCurrentHour();
 
-        // ⭐ Chỉ được ngủ từ 18:00 trở lên
-        if (hour < 20)
+        // ⭐ Được ngủ khi: (20h → 23h) hoặc (0h → 6h)
+        bool canSleep = (hour >= 20) || (hour < 6);
+
+        if (!canSleep)
         {
-            Debug.Log("🌙 Không thể ngủ lúc này! Còn quá sớm (phải sau 18:00).");
-            // Nếu muốn hiện UI thông báo:
-            // UIManager.ShowMessage("Còn quá sớm để ngủ!");
+            Debug.Log($"⛔ Không thể ngủ bây giờ ({hour}:00). Chỉ ngủ 20:00 → 06:00.");
             return;
         }
 
-        Debug.Log("😴 [Sleep] Gọi SleepToNextDay()");
+        Debug.Log("😴 [Sleep] Bắt đầu chuyển sang ngày mới...");
 
         float secondsToday = totalGameSeconds % SECONDS_PER_DAY;
         float morning = 7 * 3600f;
@@ -166,20 +165,19 @@ public class DayAndNightManager : MonoBehaviour
 
         savedTotalGameSeconds = totalGameSeconds;
 
-        int newDay = Mathf.FloorToInt(totalGameSeconds / SECONDS_PER_DAY) + 1;
+        currentDay = Mathf.FloorToInt(totalGameSeconds / SECONDS_PER_DAY) + 1;
 
-        currentDay = newDay;
+        Debug.Log($"🌅 [Sleep] Sang ngày mới: Day {currentDay}");
 
-        Debug.Log($"🌅 [Sleep] Sang ngày mới = {currentDay}");
-
-        OnNewDay();  // Bắn event tăng trưởng cây
-
+        OnNewDay();
         UpdateUIAndLight();
     }
 
-
-    // ================= GETTERS =====================
-
     public int GetCurrentDay() => currentDay;
-    public int GetCurrentHour() => Mathf.FloorToInt((totalGameSeconds % SECONDS_PER_DAY) / 3600f);
+
+    public int GetCurrentHour()
+    {
+        float secondsToday = totalGameSeconds % SECONDS_PER_DAY;
+        return Mathf.FloorToInt(secondsToday / 3600f);
+    }
 }
