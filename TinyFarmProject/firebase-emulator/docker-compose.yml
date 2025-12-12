@@ -1,0 +1,8 @@
+services:
+  firebase:
+    build: .
+    image: firebase-emulator-firebase
+    container_name: tinyfarm-firebase
+    ports:
+      - "0.0.0.0:4000:4000"
+      - "0.0.0.0:9000:9000"
