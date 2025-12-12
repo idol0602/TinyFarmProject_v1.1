@@ -2824,6 +2824,10 @@ PrefabInstance:
       propertyPath: moneyTextUI
       value: 
       objectReference: {fileID: 1774566137}
+    - target: {fileID: 3780568610945210694, guid: 6a5b7cb526fff9442b4743e5fc25609b, type: 3}
+      propertyPath: defaultMoney
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5921939346006938285, guid: 6a5b7cb526fff9442b4743e5fc25609b, type: 3}
       propertyPath: m_Name
       value: MoneyManager
@@ -9021,6 +9025,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8198268023090061958, guid: a100cc1649c32554793c87c4945d1150, type: 3}
+      propertyPath: detailPanel
+      value: 
+      objectReference: {fileID: 1382688372}
+    - target: {fileID: 8198268023090061958, guid: a100cc1649c32554793c87c4945d1150, type: 3}
       propertyPath: inventorySize
       value: 9
       objectReference: {fileID: 0}
@@ -9038,7 +9046,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8198268023090061958, guid: a100cc1649c32554793c87c4945d1150, type: 3}
       propertyPath: slotSlot.Array.size
-      value: 11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8198268023090061958, guid: a100cc1649c32554793c87c4945d1150, type: 3}
       propertyPath: secondInventoryPanel
@@ -14119,7 +14127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 647788681649879484, guid: a03c2886a4fe3424a8c9ba05149bbb0b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -22.92987
+      value: -22.929749
       objectReference: {fileID: 0}
     - target: {fileID: 647788681649879484, guid: a03c2886a4fe3424a8c9ba05149bbb0b, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -14223,7 +14231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1785800890229910097, guid: a03c2886a4fe3424a8c9ba05149bbb0b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -29.500061
+      value: -29.499695
       objectReference: {fileID: 0}
     - target: {fileID: 1785800890229910097, guid: a03c2886a4fe3424a8c9ba05149bbb0b, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -14263,11 +14271,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3640208543019499317, guid: a03c2886a4fe3424a8c9ba05149bbb0b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -21.546997
+      value: -21.546936
       objectReference: {fileID: 0}
     - target: {fileID: 3690542246817009145, guid: a03c2886a4fe3424a8c9ba05149bbb0b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -26.161957
+      value: -26.161987
       objectReference: {fileID: 0}
     - target: {fileID: 3970705489571567493, guid: a03c2886a4fe3424a8c9ba05149bbb0b, type: 3}
       propertyPath: m_SizeDelta.x
@@ -14295,11 +14303,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5289663951575974758, guid: a03c2886a4fe3424a8c9ba05149bbb0b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -22.97705
+      value: -22.97699
       objectReference: {fileID: 0}
     - target: {fileID: 5992470265269321074, guid: a03c2886a4fe3424a8c9ba05149bbb0b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -33.121033
+      value: -33.12091
       objectReference: {fileID: 0}
     - target: {fileID: 6112662089594060312, guid: a03c2886a4fe3424a8c9ba05149bbb0b, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -14315,7 +14323,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7498012638709197918, guid: a03c2886a4fe3424a8c9ba05149bbb0b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -2.500122
+      value: -2.5002441
       objectReference: {fileID: 0}
     - target: {fileID: 7498012638709197918, guid: a03c2886a4fe3424a8c9ba05149bbb0b, type: 3}
       propertyPath: m_AnchoredPosition.y

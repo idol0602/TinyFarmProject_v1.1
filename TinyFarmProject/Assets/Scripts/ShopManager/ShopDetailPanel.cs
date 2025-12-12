@@ -63,6 +63,8 @@ public class ShopDetailPanel : MonoBehaviour
             return;
         }
 
+        Debug.Log($"[Shop] OnBuy called - Purchasing: {currentSeed.plantName}");
+
         // Lấy số tiền
         int price = currentSeed.price;
 
@@ -79,18 +81,42 @@ public class ShopDetailPanel : MonoBehaviour
         InventoryManager inv = InventoryManager.Instance;
         if (inv != null)
         {
+            Debug.Log($"[Shop] InventoryManager found: {inv.name}");
+            
             ItemData itemData = SeedToItemConverter.ConvertSeedToItem(currentSeed);
+            Debug.Log($"[Shop] Converted to ItemData: {itemData.itemName}");
+            
             bool success = inv.AddItemToSecond(itemData, 1);
 
             if (success)
             {
                 Debug.Log($"✅ Đã mua {currentSeed.plantName} và thêm vào Second Inventory");
+                
+                // ✅ LƯU INVENTORY NGAY SAU KHI MUA
+                Debug.Log($"[Shop] Firebase ready: {FirebaseDatabaseManager.FirebaseReady}");
+                
+                if (FirebaseDatabaseManager.FirebaseReady)
+                {
+                    Debug.Log("[Shop] Saving inventory to Firebase after purchase...");
+                    FirebaseDatabaseManager.Instance.SaveInventoryToFirebase("Player1");
+                }
+                else
+                {
+                    Debug.LogWarning("[Shop] Firebase NOT ready, inventory won't be saved immediately");
+                    Debug.LogWarning($"[Shop] FirebaseReady={FirebaseDatabaseManager.FirebaseReady}, Instance={FirebaseDatabaseManager.Instance}");
+                }
             }
             else
             {
                 Debug.LogWarning("⚠ Inventory đầy → hoàn tiền lại");
                 PlayerMoney.Instance.Add(price);   // Hoàn tiền nếu add item fail
+                
+                // ✅ LƯU TIỀN KHI HOÀN LẠI (vì PlayerMoney.Add() sẽ auto-save)
             }
+        }
+        else
+        {
+            Debug.LogError("[Shop] InventoryManager NOT found!");
         }
     }
 
