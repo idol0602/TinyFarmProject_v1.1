@@ -1,0 +1,82 @@
+{
+  "rules": {
+    "players": {
+      "$playerId": {
+        ".read": "$playerId === auth.uid",
+        ".write": "$playerId === auth.uid",
+        "money": {
+          ".validate": "newData.isNumber() && newData.val() >= 0"
+        },
+        "level": {
+          ".validate": "newData.isNumber() && newData.val() >= 1"
+        },
+        "lastLogin": {
+          ".validate": "newData.isNumber()"
+        }
+      }
+    },
+    "farms": {
+      "$playerId": {
+        ".read": "$playerId === auth.uid",
+        ".write": "$playerId === auth.uid",
+        "plots": {
+          "$plotId": {
+            "x": {
+              ".validate": "newData.isNumber()"
+            },
+            "y": {
+              ".validate": "newData.isNumber()"
+            },
+            "type": {
+              ".validate": "newData.isString()"
+            }
+          }
+        },
+        "crops": {
+          "$cropId": {
+            "type": {
+              ".validate": "newData.isString()"
+            },
+            "plantedTime": {
+              ".validate": "newData.isNumber()"
+            },
+            "growthStage": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100"
+            },
+            "plotId": {
+              ".validate": "newData.isString()"
+            }
+          }
+        }
+      }
+    },
+    "inventory": {
+      "$playerId": {
+        ".read": "$playerId === auth.uid",
+        ".write": "$playerId === auth.uid",
+        "seeds": {
+          "$seedType": {
+            ".validate": "newData.isNumber() && newData.val() >= 0"
+          }
+        },
+        "tools": {
+          "$toolType": {
+            ".validate": "newData.isNumber() && newData.val() >= 0"
+          }
+        }
+      }
+    },
+    "leaderboard": {
+      ".read": true,
+      "$playerId": {
+        ".write": "$playerId === auth.uid",
+        "money": {
+          ".validate": "newData.isNumber() && newData.val() >= 0"
+        },
+        "crops": {
+          ".validate": "newData.isNumber() && newData.val() >= 0"
+        }
+      }
+    }
+  }
+}
