@@ -211,6 +211,13 @@ public class DraggableItem : MonoBehaviour,
         {
             inventoryManager.RefreshInventoryUI();
             inventoryManager.RefreshSecondInventoryUI();
+            
+            // 🔧 SAVE lên Firebase sau khi thay đổi inventory
+            if (FirebaseDatabaseManager.FirebaseReady)
+            {
+                Debug.Log("[DraggableItem] Saving inventory to Firebase after drag...");
+                FirebaseDatabaseManager.Instance.SaveInventoryToFirebase("Player1");
+            }
         }
 
         // ⭐ Hiển thị lại slot gốc
