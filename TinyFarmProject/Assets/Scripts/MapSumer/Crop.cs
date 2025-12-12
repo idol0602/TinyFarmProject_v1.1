@@ -41,11 +41,18 @@ namespace MapSummer
         {
             DayAndNightEvents.OnNewDay -= HandleNewDay;
             DayAndNightEvents.OnNewDay += HandleNewDay;
+
+            // ⭐ LẮNG NGHE MƯA
+            RainManager.OnRainChanged -= HandleRainChanged;
+            RainManager.OnRainChanged += HandleRainChanged;
+
         }
 
         private void OnDestroy()
         {
             DayAndNightEvents.OnNewDay -= HandleNewDay;
+            RainManager.OnRainChanged -= HandleRainChanged;
+
         }
 
         // ============================================================
@@ -61,8 +68,21 @@ namespace MapSummer
                 CropID = System.Guid.NewGuid().ToString();
                 currentStage = 0;
 
-                lastWaterDay = clock.GetCurrentDay();
-                isWateredToday = false;
+                int today = clock.GetCurrentDay();
+
+                // ⭐ FIX QUAN TRỌNG
+                if (RainManager.Instance != null && RainManager.Instance.isRaining)
+                {
+                    // 🌧️ Trồng lúc mưa → coi như đã tưới
+                    lastWaterDay = today;
+                    isWateredToday = true;
+                    Debug.Log($"🌧️ {cropType} trồng lúc mưa → auto tưới");
+                }
+                else
+                {
+                    lastWaterDay = today;
+                    isWateredToday = false;
+                }
 
                 sr.sprite = stages[currentStage];
 
@@ -70,6 +90,7 @@ namespace MapSummer
                 UpdateIcons();
             }
         }
+
 
         // ============================================================
         //  ICON
@@ -102,9 +123,12 @@ namespace MapSummer
                 return;
             }
 
+            // ⭐ CHỈ PHỤ THUỘC TRẠNG THÁI CÂY
             waterIcon?.SetActive(!isWateredToday);
             harvestIcon?.SetActive(false);
         }
+
+
 
         // ============================================================
         //  SỰ KIỆN NGÀY MỚI
@@ -113,24 +137,25 @@ namespace MapSummer
         {
             if (isDead) return;
 
-            // Chưa tưới hôm qua → chết
-            if (lastWaterDay < newDay - 1)
+            // ❌ Không tưới hôm qua → chết
+            if (!isWateredToday && lastWaterDay < newDay - 1)
             {
                 Die();
                 return;
             }
 
-            // Nếu đã tưới → lớn
+            // 🌱 Có tưới → lớn
             if (isWateredToday)
             {
-                lastWaterDay = newDay - 1;   // FIX QUAN TRỌNG
                 Grow();
+                lastWaterDay = newDay - 1;
             }
 
-            // Reset tưới
             isWateredToday = false;
             UpdateIcons();
         }
+
+
 
         // ============================================================
         //  TƯỚI / LỚN / CHẾT / THU HOẠCH
@@ -184,5 +209,17 @@ namespace MapSummer
             SpawnIcons();
             UpdateIcons();
         }
+        private void HandleRainChanged(bool isRaining)
+        {
+            // 🌧️ Nếu đang mưa → coi như đã tưới trong ngày
+            if (isRaining && !isDead)
+            {
+                isWateredToday = true;
+            }
+
+            UpdateIcons();
+        }
+
     }
+
 }

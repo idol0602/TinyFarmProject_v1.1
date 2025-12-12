@@ -8,6 +8,7 @@ TagManager:
   - Bed
   - GlobalLight
   - Icon
+  - Rain
   layers:
   - Default
   - TransparentFX
