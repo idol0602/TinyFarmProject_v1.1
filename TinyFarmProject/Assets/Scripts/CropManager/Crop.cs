@@ -70,24 +70,21 @@ namespace MapSummer
 
                 int today = clock.GetCurrentDay();
 
-                // ⭐ FIX QUAN TRỌNG
-                if (RainManager.Instance != null && RainManager.Instance.isRaining)
-                {
-                    // 🌧️ Trồng lúc mưa → coi như đã tưới
-                    lastWaterDay = today;
-                    isWateredToday = true;
-                    Debug.Log($"🌧️ {cropType} trồng lúc mưa → auto tưới");
-                }
-                else
-                {
-                    lastWaterDay = today;
-                    isWateredToday = false;
-                }
+                // ⭐ KHÔNG TỰ ĐỘNG TƯỚI NGAY KHI TRỒNG LÚC MƯA
+                // MƯA PHẢI RƠI XUỐNG CÂY MỚI TÍNH LÀ TƯỚI
+                lastWaterDay = today;
+                isWateredToday = false;
 
                 sr.sprite = stages[currentStage];
 
                 SpawnIcons();
                 UpdateIcons();
+                
+                // ⭐ NẾU TRỜI ĐANG MƯA KHI TRỒNG → START COROUTINE TƯỚI
+                if (RainManager.Instance != null && RainManager.Instance.isRaining)
+                {
+                    StartCoroutine(nameof(WaterAfterDelay));
+                }
             }
         }
 
@@ -151,12 +148,8 @@ namespace MapSummer
                 lastWaterDay = newDay - 1;
             }
 
-            // ⭐ RESET isWateredToday, NHƯNG NẾU TRỜI ĐANG MƯA THÌ TỰ ĐỘNG TƯỚI
+            // ⭐ RESET isWateredToday (mưa phải rơi trúng cây mới tưới)
             isWateredToday = false;
-            if (RainManager.Instance != null && RainManager.Instance.isRaining)
-            {
-                isWateredToday = true;
-            }
             
             UpdateIcons();
         }
@@ -257,13 +250,25 @@ namespace MapSummer
         }
         private void HandleRainChanged(bool isRaining)
         {
-            // 🌧️ Nếu đang mưa → coi như đã tưới trong ngày
+            // ⭐ KHI TRỜI MƯA → CHỜ 10s RỒI TỰ ĐỘNG TƯỚI
             if (isRaining && !isDead)
             {
-                isWateredToday = true;
+                StopCoroutine(nameof(WaterAfterDelay));
+                StartCoroutine(nameof(WaterAfterDelay));
             }
 
             UpdateIcons();
+        }
+
+        // ⭐ COROUTINE: CHỜ 10s RỒI TƯỚI
+        private System.Collections.IEnumerator WaterAfterDelay()
+        {
+            yield return new WaitForSeconds(4f);
+            if (!isDead && !isWateredToday)
+            {
+                Water();
+                Debug.Log($"🌧️ Mưa {cropType} sau 10s → tưới");
+            }
         }
 
     }
