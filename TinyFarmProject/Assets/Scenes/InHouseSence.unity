@@ -14718,7 +14718,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3605005952128631939, guid: a03c2886a4fe3424a8c9ba05149bbb0b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3742567772618467538, guid: a03c2886a4fe3424a8c9ba05149bbb0b, type: 3}
       propertyPath: m_IsActive
@@ -14737,16 +14737,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a03c2886a4fe3424a8c9ba05149bbb0b, type: 3}
---- !u!224 &189466499 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1785800890229910097, guid: a03c2886a4fe3424a8c9ba05149bbb0b, type: 3}
-  m_PrefabInstance: {fileID: 189466498}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &189466500 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5500522637037561364, guid: a03c2886a4fe3424a8c9ba05149bbb0b, type: 3}
-  m_PrefabInstance: {fileID: 189466498}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &189466501 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5151398112929434972, guid: a03c2886a4fe3424a8c9ba05149bbb0b, type: 3}
@@ -16965,6 +16955,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 484714844}
   m_CullTransparentMesh: 1
+--- !u!224 &489353207 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3970705489571567493, guid: a03c2886a4fe3424a8c9ba05149bbb0b, type: 3}
+  m_PrefabInstance: {fileID: 189466498}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &493042999
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17049,7 +17044,7 @@ PrefabInstance:
     - target: {fileID: 8198268023090061958, guid: a100cc1649c32554793c87c4945d1150, type: 3}
       propertyPath: inventoryPanel
       value: 
-      objectReference: {fileID: 189466500}
+      objectReference: {fileID: 489353207}
     - target: {fileID: 8198268023090061958, guid: a100cc1649c32554793c87c4945d1150, type: 3}
       propertyPath: secondSlotPrefab
       value: 
@@ -17061,7 +17056,7 @@ PrefabInstance:
     - target: {fileID: 8198268023090061958, guid: a100cc1649c32554793c87c4945d1150, type: 3}
       propertyPath: secondInventoryPanel
       value: 
-      objectReference: {fileID: 189466499}
+      objectReference: {fileID: 1748743506}
     - target: {fileID: 8198268023090061958, guid: a100cc1649c32554793c87c4945d1150, type: 3}
       propertyPath: slotPrefabPanelBackground
       value: 
@@ -29678,6 +29673,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &1748743506 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 9013317838512337156, guid: a03c2886a4fe3424a8c9ba05149bbb0b, type: 3}
+  m_PrefabInstance: {fileID: 189466498}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1750279958
 GameObject:
   m_ObjectHideFlags: 0
