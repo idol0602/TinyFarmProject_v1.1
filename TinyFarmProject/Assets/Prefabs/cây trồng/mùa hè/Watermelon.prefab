@@ -271,6 +271,6 @@ MonoBehaviour:
   - {fileID: 4854659274246444853, guid: 7d7eba1891327744f975ac8fc1f06b5e, type: 3}
   - {fileID: -7553651991473413757, guid: 7d7eba1891327744f975ac8fc1f06b5e, type: 3}
   - {fileID: -8989569366271797681, guid: 7d7eba1891327744f975ac8fc1f06b5e, type: 3}
-  waterIconPrefab: {fileID: 2013663978913582430, guid: 367c5097dd070e74d96e6892cc7eae4a, type: 3}
+  waterIconPrefab: {fileID: 4963695546249548820, guid: fbf948ed2dff8d54cba071059d1f7a98, type: 3}
   harvestIconPrefab: {fileID: 6827111459838974423, guid: 1f3c6666830b9684fb08e9c2b1d4488e, type: 3}
   deadSprite: {fileID: -3485062167535903570, guid: 7d7eba1891327744f975ac8fc1f06b5e, type: 3}

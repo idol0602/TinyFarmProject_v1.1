@@ -151,7 +151,13 @@ namespace MapSummer
                 lastWaterDay = newDay - 1;
             }
 
+            // ⭐ RESET isWateredToday, NHƯNG NẾU TRỜI ĐANG MƯA THÌ TỰ ĐỘNG TƯỚI
             isWateredToday = false;
+            if (RainManager.Instance != null && RainManager.Instance.isRaining)
+            {
+                isWateredToday = true;
+            }
+            
             UpdateIcons();
         }
 

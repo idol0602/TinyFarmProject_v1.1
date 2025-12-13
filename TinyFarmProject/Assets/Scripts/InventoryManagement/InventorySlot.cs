@@ -47,7 +47,7 @@ public class InventorySlot : MonoBehaviour
 
     private void Start()
     {
-        RefreshDisplay(); // load dữ liệu ban đầu
+        RefreshDisplay(); // load   dữ liệu ban đầu
     }
 
     /// <summary>

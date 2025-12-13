@@ -32,6 +32,10 @@ public class FarmLoader : MonoBehaviour
             firebase.LoadInventoryFromFirebase(userId);
         }
 
+        // ⭐ Load rain state khi vào MapSummer
+        Debug.Log("[FarmLoader] Loading rain state from Firebase");
+        firebase.LoadRainFromFirebase(userId);
+
         // 🔧 Nếu enable loading screen, dùng FarmLoadingManager
         if (useLoadingScreen && FarmLoadingManager.Instance != null)
         {

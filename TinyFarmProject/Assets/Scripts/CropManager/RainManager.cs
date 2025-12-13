@@ -5,6 +5,9 @@ public class RainManager : MonoBehaviour
 {
     public static RainManager Instance;
 
+    // ⭐ STATIC CACHE để giữ rain state giữa scene
+    public static bool CachedRainState = false;
+
     // ⭐ EVENT BÁO CHO CÂY
     public static event Action<bool> OnRainChanged;
 
@@ -27,8 +30,8 @@ public class RainManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        // ⭐ ĐẢM BẢO KHI START GAME KHÔNG MƯA
-        SetRain(false, true);
+        // ⭐ RESTORE RAIN STATE TỪ CACHE KHI START
+        SetRain(CachedRainState, true);
     }
 
     private void Update()
@@ -54,6 +57,9 @@ public class RainManager : MonoBehaviour
         if (_isRaining == value) return;
 
         _isRaining = value;
+        
+        // ⭐ CACHE RAIN STATE
+        CachedRainState = value;
 
         // Particle
         if (rainParticle != null)

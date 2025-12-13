@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FirebaseDatabaseManager : MonoBehaviour
 {
@@ -39,6 +40,9 @@ public class FirebaseDatabaseManager : MonoBehaviour
             return;
         }
         InitFirebase();
+        
+        // ⭐ LẮNG NGHE SCENE UNLOAD ĐỂ SAVE RAIN STATE
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
     }
 
     private async void InitFirebase()
@@ -53,6 +57,15 @@ public class FirebaseDatabaseManager : MonoBehaviour
         else
         {
             Debug.LogError("Firebase lỗi: " + status);
+        }
+    }
+
+    // ⭐ SAVE RAIN STATE KHI UNLOAD SCENE
+    private void OnSceneUnloaded(Scene scene)
+    {
+        if (FirebaseReady && scene.name == "MapSummer")
+        {
+            SaveDayAndTimeToFirebase(PlayerSession.GetCurrentUserId());
         }
     }
 
@@ -112,14 +125,18 @@ public class FirebaseDatabaseManager : MonoBehaviour
         };
 
         // 🔧 Convert sang Dictionary thay vì JSON string
+        // ⭐ LẤY TRẠNG THÁI MƯA
+        bool isRaining = RainManager.Instance != null ? RainManager.Instance.isRaining : false;
+        
         var updates = new Dictionary<string, object>
         {
             { $"{userId}/DayAndTime/currentDay", currentDay },
             { $"{userId}/DayAndTime/currentHour", currentHour },
-            { $"{userId}/DayAndTime/currentMinute", currentMinute }
+            { $"{userId}/DayAndTime/currentMinute", currentMinute },
+            { $"{userId}/DayAndTime/isRaining", isRaining }
         };
         
-        Debug.Log($"[Firebase] Saving day/time: Day {currentDay} {currentHour:00}:{currentMinute:00} → /{userId}/DayAndTime");
+        Debug.Log($"[Firebase] Saving day/time: Day {currentDay} {currentHour:00}:{currentMinute:00} (Mưa: {isRaining}) → /{userId}/DayAndTime");
 
         reference.UpdateChildrenAsync(updates)
             .ContinueWithOnMainThread(task =>
@@ -128,6 +145,47 @@ public class FirebaseDatabaseManager : MonoBehaviour
                     Debug.LogError("❌ Lỗi SAVE day/time: " + task.Exception);
                 else
                     Debug.Log($"✓ Đã lưu day/time: Day {currentDay} {currentHour:00}:{currentMinute:00} → /{userId}/DayAndTime");
+            });
+    }
+
+    // ============================================================
+    // LOAD RAIN STATE
+    // ============================================================
+    public void LoadRainFromFirebase(string userId)
+    {
+        if (!FirebaseReady || reference == null)
+        {
+            Debug.LogWarning("[Firebase] Firebase chưa sẵn sàng → không load rain state");
+            return;
+        }
+
+        reference.Child(userId).Child("DayAndTime").Child("isRaining")
+            .GetValueAsync()
+            .ContinueWithOnMainThread(task =>
+            {
+                if (!task.IsCompletedSuccessfully)
+                {
+                    Debug.LogWarning("[Firebase] Lỗi load rain state: " + task.Exception);
+                    return;
+                }
+
+                DataSnapshot snap = task.Result;
+
+                if (snap.Value != null)
+                {
+                    bool isRaining = System.Convert.ToBoolean(snap.Value);
+                    if (RainManager.Instance != null)
+                    {
+                        RainManager.Instance.SetRain(isRaining, silent: true);
+                        Debug.Log($"☔ Load rain state: {(isRaining ? "MƯA" : "HẾT MƯA")}");
+                    }
+                }
+                else
+                {
+                    Debug.Log("[Firebase] Không có rain state → mặc định hết mưa");
+                    if (RainManager.Instance != null)
+                        RainManager.Instance.SetRain(false, silent: true);
+                }
             });
     }
 
@@ -668,7 +726,7 @@ public class FirebaseDatabaseManager : MonoBehaviour
             Debug.Log("Auto SAVE farm + tiền + day/time + inventory khi thoát game");
             SaveFarmToFirebase(PlayerSession.GetCurrentUserId());
             SaveMoneyToFirebase(PlayerSession.GetCurrentUserId());
-            SaveDayAndTimeToFirebase(PlayerSession.GetCurrentUserId());
+            SaveDayAndTimeToFirebase(PlayerSession.GetCurrentUserId()); // ⭐ Cũng save rain state
             
             // 🔧 Chỉ save inventory nếu đã được load từ Firebase
             // Tránh việc save inventory trống và xóa data cũ
