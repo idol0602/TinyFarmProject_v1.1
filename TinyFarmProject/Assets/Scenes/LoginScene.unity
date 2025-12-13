@@ -119,6 +119,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &151059369 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2433158878495274772, guid: 959cf3f46cfa71f41a64a75d02becd35, type: 3}
+  m_PrefabInstance: {fileID: 944920435}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &176422954 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7676350677870099792, guid: 959cf3f46cfa71f41a64a75d02becd35, type: 3}
@@ -128,6 +139,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d199490a83bb2b844b9695cbf13b01ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &228838071 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9198322692002466082, guid: 959cf3f46cfa71f41a64a75d02becd35, type: 3}
+  m_PrefabInstance: {fileID: 944920435}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &418915440 stripped
@@ -182,6 +204,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4791225585059353331, guid: 959cf3f46cfa71f41a64a75d02becd35, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7585379837241490924, guid: 959cf3f46cfa71f41a64a75d02becd35, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7885219800426229554, guid: 959cf3f46cfa71f41a64a75d02becd35, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -518,6 +548,17 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &1826835568 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6426787073784572676, guid: 959cf3f46cfa71f41a64a75d02becd35, type: 3}
+  m_PrefabInstance: {fileID: 944920435}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d199490a83bb2b844b9695cbf13b01ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1965343760 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1714074354943887424, guid: 959cf3f46cfa71f41a64a75d02becd35, type: 3}
@@ -595,6 +636,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1965343760}
     - target: {fileID: 8028301631106586020, guid: 6e7ffa84161d8bc459d519985beae759, type: 3}
+      propertyPath: textMessage
+      value: 
+      objectReference: {fileID: 228838071}
+    - target: {fileID: 8028301631106586020, guid: 6e7ffa84161d8bc459d519985beae759, type: 3}
       propertyPath: ipLoginEmail
       value: 
       objectReference: {fileID: 419062948}
@@ -615,6 +660,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1021130871}
     - target: {fileID: 8028301631106586020, guid: 6e7ffa84161d8bc459d519985beae759, type: 3}
+      propertyPath: loginMessageText
+      value: 
+      objectReference: {fileID: 228838071}
+    - target: {fileID: 8028301631106586020, guid: 6e7ffa84161d8bc459d519985beae759, type: 3}
       propertyPath: buttonMoveToSignIn
       value: 
       objectReference: {fileID: 677490556}
@@ -623,9 +672,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 176422954}
     - target: {fileID: 8028301631106586020, guid: 6e7ffa84161d8bc459d519985beae759, type: 3}
+      propertyPath: nextSceneAfterLogin
+      value: 
+      objectReference: {fileID: 102900000, guid: 9e32df2c8b2140a4882930a1aa2869b6, type: 3}
+    - target: {fileID: 8028301631106586020, guid: 6e7ffa84161d8bc459d519985beae759, type: 3}
+      propertyPath: registerMessageText
+      value: 
+      objectReference: {fileID: 151059369}
+    - target: {fileID: 8028301631106586020, guid: 6e7ffa84161d8bc459d519985beae759, type: 3}
       propertyPath: buttonMoveToRegister
       value: 
       objectReference: {fileID: 418915440}
+    - target: {fileID: 8028301631106586020, guid: 6e7ffa84161d8bc459d519985beae759, type: 3}
+      propertyPath: ipRegisterConfirmPassword
+      value: 
+      objectReference: {fileID: 1826835568}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
