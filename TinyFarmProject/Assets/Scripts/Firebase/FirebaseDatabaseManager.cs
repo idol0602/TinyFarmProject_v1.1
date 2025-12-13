@@ -16,6 +16,12 @@ public class FirebaseDatabaseManager : MonoBehaviour
     
     // 🔧 Track xem inventory đã được load từ Firebase hay chưa
     private bool inventoryLoaded = false;
+    
+    // 🔧 Track xem farm đã được load từ Firebase hay chưa
+    private bool farmLoaded = false;
+    
+    // 📢 Event callback khi farm load xong
+    public static event Action<bool> OnFarmLoadComplete;
 
     private void Awake()
     {
@@ -163,11 +169,12 @@ public class FirebaseDatabaseManager : MonoBehaviour
     // ============================================================
     // LOAD FARM
     // ============================================================
-    public void LoadFarmFromFirebase(string userId)
+    public void LoadFarmFromFirebase(string userId, System.Action onLoadComplete = null)
     {
         if (!FirebaseReady || reference == null)
         {
             Debug.LogError("Firebase chưa sẵn sàng → KHÔNG LOAD FARM");
+            onLoadComplete?.Invoke();
             return;
         }
 
@@ -178,6 +185,8 @@ public class FirebaseDatabaseManager : MonoBehaviour
                 if (!task.IsCompletedSuccessfully)
                 {
                     Debug.LogError("Load farm lỗi: " + task.Exception);
+                    farmLoaded = true;
+                    onLoadComplete?.Invoke();
                     return;
                 }
 
@@ -186,6 +195,8 @@ public class FirebaseDatabaseManager : MonoBehaviour
                 if (snap.Value == null)
                 {
                     Debug.Log("Firebase không có dữ liệu farm → để trống");
+                    farmLoaded = true;
+                    onLoadComplete?.Invoke();
                     return;
                 }
 
@@ -221,6 +232,11 @@ public class FirebaseDatabaseManager : MonoBehaviour
                 }
 
                 Debug.Log("Farm Loaded xong!");
+                
+                // 🔧 Mark farm as loaded + invoke callback
+                farmLoaded = true;
+                OnFarmLoadComplete?.Invoke(true);
+                onLoadComplete?.Invoke();
             });
     }
 
@@ -321,6 +337,14 @@ public class FirebaseDatabaseManager : MonoBehaviour
         {
             Debug.LogError("InventoryManager không tìm thấy");
             return;
+        }
+
+        // 🔧 Ensure ItemDatabase is initialized
+        if (ItemDatabase.Instance == null)
+        {
+            Debug.LogWarning("[Firebase] ItemDatabase not found, creating it...");
+            GameObject dbGO = new GameObject("ItemDatabase");
+            dbGO.AddComponent<ItemDatabase>();
         }
 
         // Load main inventory
@@ -515,4 +539,7 @@ public class FirebaseDatabaseManager : MonoBehaviour
             }
         }
     }
+    
+    // 🔧 Public getter để check farm load status
+    public bool IsFarmLoaded => farmLoaded;
 }

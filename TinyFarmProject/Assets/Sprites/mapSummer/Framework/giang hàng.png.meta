@@ -1,0 +1,845 @@
+fileFormatVersion: 2
+guid: 9260eb04a005c0d43b2f23f3f327379f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -864570914932353570
+    second: "giang h\xE0ng_0"
+  - first:
+      213: 3829009149195080867
+    second: "giang h\xE0ng_1"
+  - first:
+      213: -5055902521787551304
+    second: "giang h\xE0ng_2"
+  - first:
+      213: -2470858164326869146
+    second: "giang h\xE0ng_3"
+  - first:
+      213: 8167195125267439808
+    second: "giang h\xE0ng_4"
+  - first:
+      213: -3715860257172735580
+    second: "giang h\xE0ng_5"
+  - first:
+      213: 3882337890305223255
+    second: "giang h\xE0ng_6"
+  - first:
+      213: 9095684436566965789
+    second: "giang h\xE0ng_7"
+  - first:
+      213: -4146302252117509643
+    second: "giang h\xE0ng_8"
+  - first:
+      213: -3117108580392923028
+    second: "giang h\xE0ng_9"
+  - first:
+      213: -3919310927136452155
+    second: "giang h\xE0ng_10"
+  - first:
+      213: 2408062071464799339
+    second: "giang h\xE0ng_11"
+  - first:
+      213: 8777366283800896500
+    second: "giang h\xE0ng_12"
+  - first:
+      213: -853148316580614086
+    second: "giang h\xE0ng_13"
+  - first:
+      213: 2485001337243425036
+    second: "giang h\xE0ng_14"
+  - first:
+      213: 4305694714603479927
+    second: "giang h\xE0ng_15"
+  - first:
+      213: 7742914192989825215
+    second: "giang h\xE0ng_16"
+  - first:
+      213: -3837737118701311899
+    second: "giang h\xE0ng_17"
+  - first:
+      213: -7830033249878328246
+    second: "giang h\xE0ng_18"
+  - first:
+      213: -2363577171927725745
+    second: "giang h\xE0ng_19"
+  - first:
+      213: 8896911052088357092
+    second: "giang h\xE0ng_20"
+  - first:
+      213: -149813967311571390
+    second: "giang h\xE0ng_21"
+  - first:
+      213: 4461951414083918594
+    second: "giang h\xE0ng_22"
+  - first:
+      213: 4979015764157289570
+    second: "giang h\xE0ng_23"
+  - first:
+      213: 2995473639019182112
+    second: "giang h\xE0ng_24"
+  - first:
+      213: -7742879964116985210
+    second: "giang h\xE0ng_25"
+  - first:
+      213: 5925077111388401857
+    second: "giang h\xE0ng_26"
+  - first:
+      213: -7061072081604225332
+    second: "giang h\xE0ng_27"
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 8
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "giang h\xE0ng_0"
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 147
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed59254655d6004f0800000000000000
+      internalID: -864570914932353570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_1"
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 147
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a45e73c88f532530800000000000000
+      internalID: 3829009149195080867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_2"
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 147
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b1f9d99173d5d9b0800000000000000
+      internalID: -5055902521787551304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_3"
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 147
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6675ce8379fb5bdd0800000000000000
+      internalID: -2470858164326869146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_4"
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 99
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c02edcd1b4b75170800000000000000
+      internalID: 8167195125267439808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_5"
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 99
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a93a3898cc9e6cc0800000000000000
+      internalID: -3715860257172735580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_6"
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 99
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75aaea1edb5d0e530800000000000000
+      internalID: 3882337890305223255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_7"
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 99
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1e7f96ddcc5a3e70800000000000000
+      internalID: 9095684436566965789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_8"
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 99
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f9322bd1106576c0800000000000000
+      internalID: -4146302252117509643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_9"
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 99
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c609b53e24ecdb4d0800000000000000
+      internalID: -3117108580392923028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_10"
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 99
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c199b72a7fcb99c0800000000000000
+      internalID: -3919310927136452155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_11"
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 99
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6c20ce02b72b6120800000000000000
+      internalID: 2408062071464799339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_12"
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 51
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f3617171287fc970800000000000000
+      internalID: 8777366283800896500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_13"
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 51
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a307d7150220924f0800000000000000
+      internalID: -853148316580614086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_14"
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 51
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c09d3c4dc8f7c7220800000000000000
+      internalID: 2485001337243425036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_15"
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 51
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 773a737c786e0cb30800000000000000
+      internalID: 4305694714603479927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_16"
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 51
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb82d7f4f6b547b60800000000000000
+      internalID: 7742914192989825215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_17"
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 51
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5682a7a7c6e9dbac0800000000000000
+      internalID: -3837737118701311899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_18"
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 51
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4c31899e32265390800000000000000
+      internalID: -7830033249878328246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_19"
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 51
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f49860cb513e23fd0800000000000000
+      internalID: -2363577171927725745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_20"
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 3
+        width: 42
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e039f9c67d287b70800000000000000
+      internalID: 8896911052088357092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_21"
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 3
+        width: 42
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24670009df0cbedf0800000000000000
+      internalID: -149813967311571390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_22"
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 3
+        width: 42
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20b1681bb290ced30800000000000000
+      internalID: 4461951414083918594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_23"
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 3
+        width: 42
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2645aa12574091540800000000000000
+      internalID: 4979015764157289570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_24"
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 3
+        width: 42
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 028f8cb676f029920800000000000000
+      internalID: 2995473639019182112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_25"
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 3
+        width: 42
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68a515832b3cb8490800000000000000
+      internalID: -7742879964116985210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_26"
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 3
+        width: 42
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c07a1b8d3a1a3250800000000000000
+      internalID: 5925077111388401857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "giang h\xE0ng_27"
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 3
+        width: 42
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc65d8a5a58020e90800000000000000
+      internalID: -7061072081604225332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      "giang h\xE0ng_0": -864570914932353570
+      "giang h\xE0ng_1": 3829009149195080867
+      "giang h\xE0ng_10": -3919310927136452155
+      "giang h\xE0ng_11": 2408062071464799339
+      "giang h\xE0ng_12": 8777366283800896500
+      "giang h\xE0ng_13": -853148316580614086
+      "giang h\xE0ng_14": 2485001337243425036
+      "giang h\xE0ng_15": 4305694714603479927
+      "giang h\xE0ng_16": 7742914192989825215
+      "giang h\xE0ng_17": -3837737118701311899
+      "giang h\xE0ng_18": -7830033249878328246
+      "giang h\xE0ng_19": -2363577171927725745
+      "giang h\xE0ng_2": -5055902521787551304
+      "giang h\xE0ng_20": 8896911052088357092
+      "giang h\xE0ng_21": -149813967311571390
+      "giang h\xE0ng_22": 4461951414083918594
+      "giang h\xE0ng_23": 4979015764157289570
+      "giang h\xE0ng_24": 2995473639019182112
+      "giang h\xE0ng_25": -7742879964116985210
+      "giang h\xE0ng_26": 5925077111388401857
+      "giang h\xE0ng_27": -7061072081604225332
+      "giang h\xE0ng_3": -2470858164326869146
+      "giang h\xE0ng_4": 8167195125267439808
+      "giang h\xE0ng_5": -3715860257172735580
+      "giang h\xE0ng_6": 3882337890305223255
+      "giang h\xE0ng_7": 9095684436566965789
+      "giang h\xE0ng_8": -4146302252117509643
+      "giang h\xE0ng_9": -3117108580392923028
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

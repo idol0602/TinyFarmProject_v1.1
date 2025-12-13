@@ -369,7 +369,18 @@ public class InventoryManager : MonoBehaviour
         if (string.IsNullOrEmpty(itemName))
             return null;
 
-        // Tìm trong slotSlot array (main inventory initial data)
+        // 🔧 Tìm trong ItemDatabase (cách tốt nhất - cached tất cả assets)
+        if (ItemDatabase.Instance != null)
+        {
+            ItemData item = ItemDatabase.Instance.GetItemByName(itemName);
+            if (item != null)
+            {
+                Debug.Log($"[InventoryManager] Found ItemData for '{itemName}' in ItemDatabase");
+                return item;
+            }
+        }
+
+        // Fallback: Tìm trong slotSlot array (main inventory initial data)
         if (slotSlot != null)
         {
             foreach (var inventoryItem in slotSlot)
@@ -382,7 +393,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        // Tìm trong secondSlotSlot array (second inventory initial data)
+        // Fallback: Tìm trong secondSlotSlot array (second inventory initial data)
         if (secondSlotSlot != null)
         {
             foreach (var inventoryItem in secondSlotSlot)
@@ -395,19 +406,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        // 🔍 Fallback: Tìm trong tất cả ItemData assets trong project
-        Debug.Log($"[InventoryManager] '{itemName}' not found in slotSlot/secondSlotSlot, searching all ItemData assets...");
-        ItemData[] allItems = Resources.FindObjectsOfTypeAll<ItemData>();
-        foreach (var item in allItems)
-        {
-            if (item != null && item.itemName == itemName)
-            {
-                Debug.Log($"[InventoryManager] ✅ Found ItemData for '{itemName}' in project assets");
-                return item;
-            }
-        }
-
-        Debug.LogWarning($"[InventoryManager] ❌ ItemData NOT found for name: '{itemName}' (checked slotSlot, secondSlotSlot, and all project assets)");
+        Debug.LogWarning($"[InventoryManager] ❌ ItemData NOT found for name: '{itemName}' (checked ItemDatabase, slotSlot, secondSlotSlot)");
         return null;
     }
 }
