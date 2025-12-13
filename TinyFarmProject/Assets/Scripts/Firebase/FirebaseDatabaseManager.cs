@@ -110,13 +110,11 @@ public class FirebaseDatabaseManager : MonoBehaviour
             currentHour = currentHour,
             currentMinute = currentMinute
         };
-
-        string json = JsonConvert.SerializeObject(dayTimeData, Formatting.Indented);
         
         Debug.Log($"[Firebase] Saving day/time: Day {currentDay} {currentHour:00}:{currentMinute:00} → /{userId}/DayAndTime");
 
         reference.Child(userId).Child("DayAndTime")
-            .SetValueAsync(json)
+            .SetValueAsync(dayTimeData)
             .ContinueWithOnMainThread(task =>
             {
                 if (task.IsFaulted)
@@ -159,8 +157,26 @@ public class FirebaseDatabaseManager : MonoBehaviour
                     Debug.Log($"[Firebase] snap.Value type (DayAndTime): {snap.Value.GetType()}, value: {snap.Value}");
                     try
                     {
-                        string json = snap.Value.ToString();
-                        DayTimeData dayTimeData = JsonConvert.DeserializeObject<DayTimeData>(json);
+                        // 🔧 Firebase trả về Dictionary từ object, chuyển thành DayTimeData
+                        DayTimeData dayTimeData = null;
+                        
+                        if (snap.Value is Dictionary<string, object> dict)
+                        {
+                            // Firebase trả về Dictionary
+                            dayTimeData = new DayTimeData();
+                            if (dict.TryGetValue("currentDay", out var dayObj))
+                                dayTimeData.currentDay = System.Convert.ToInt32(dayObj);
+                            if (dict.TryGetValue("currentHour", out var hourObj))
+                                dayTimeData.currentHour = System.Convert.ToInt32(hourObj);
+                            if (dict.TryGetValue("currentMinute", out var minObj))
+                                dayTimeData.currentMinute = System.Convert.ToInt32(minObj);
+                        }
+                        else
+                        {
+                            // Fallback: thử parse JSON string
+                            string json = snap.Value.ToString();
+                            dayTimeData = JsonConvert.DeserializeObject<DayTimeData>(json);
+                        }
                         
                         if (dayTimeData != null)
                         {

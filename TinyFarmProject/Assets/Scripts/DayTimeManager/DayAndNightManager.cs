@@ -32,6 +32,7 @@ public class DayAndNightManager : MonoBehaviour
     private static float savedTotalGameSeconds = -1f;
     private bool isGameTimeSet = false;  // 🔧 Track xem đã set game time từ Firebase hay chưa
     private bool hasInitializedTime = false;  // 🔧 Track xem đã setup time trong Start hay chưa
+    private bool shouldUpdateUI = false;  // 🔧 Track xem nên update UI hay chưa (chờ Firebase ready)
 
     private void Awake()
     {
@@ -54,6 +55,9 @@ public class DayAndNightManager : MonoBehaviour
             totalGameSeconds = (startHour * 3600f) + (startMinute * 60f);
             currentDay = 1;
         }
+        
+        // 🔧 KHÔNG gọi UpdateUIAndLight() ở đây - chờ cho Firebase ready
+        Debug.Log("[DayAndNightManager] Awake: Skipping UI update - waiting for Firebase");
     }
 
     private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
@@ -68,7 +72,16 @@ public class DayAndNightManager : MonoBehaviour
     {
         yield return null;
         FindUIReferences();
-        UpdateUIAndLight();
+        
+        // 🔧 KHÔNG update UI ngay - chờ Firebase ready
+        if (shouldUpdateUI)
+        {
+            UpdateUIAndLight();
+        }
+        else
+        {
+            Debug.Log("[DayAndNightManager] DelayedUpdate: Skipping UpdateUI - waiting for Firebase");
+        }
     }
 
     private void FindUIReferences()
@@ -86,61 +99,91 @@ public class DayAndNightManager : MonoBehaviour
 
     private void Start()
     {
-        // ⭐ INITIALIZE TIME từ Firebase cache (trong Start để cho async callback kịp)
+        Debug.Log($"[DayAndNightManager] Start() called. FirebaseReady: {FirebaseDatabaseManager.FirebaseReady}, CachedDayTimeData: {FirebaseDatabaseManager.CachedDayTimeData}");
+        
+        FindUIReferences();  // Tìm UI trước
+        
         if (!hasInitializedTime)
         {
-            Debug.Log($"[DayAndNightManager] START: CachedDayTimeData={FirebaseDatabaseManager.CachedDayTimeData}, isGameTimeSet={isGameTimeSet}");
-            
+            // ⭐ Cách 1: Nếu cache đã sẵn sàng, dùng ngay
             if (FirebaseDatabaseManager.CachedDayTimeData != null && !isGameTimeSet)
             {
-                Debug.Log($"[DayAndNightManager] ⭐ START: Loading cached day/time from Firebase!");
-                var cached = FirebaseDatabaseManager.CachedDayTimeData;
-                Debug.Log($"[DayAndNightManager] Cached data: Day {cached.currentDay} {cached.currentHour:00}:{cached.currentMinute:00}");
-                SetGameTime(cached.currentDay, cached.currentHour, cached.currentMinute);
+                Debug.Log($"[DayAndNightManager] ✅ Cache ready! Applying day/time...");
+                ApplyDayTime(FirebaseDatabaseManager.CachedDayTimeData);
             }
+            // ⭐ Cách 2: Nếu Firebase ready nhưng cache chưa, load ngay
+            else if (FirebaseDatabaseManager.FirebaseReady && !isGameTimeSet)
+            {
+                Debug.Log($"[DayAndNightManager] Firebase ready, loading day/time directly...");
+                FirebaseDatabaseManager.Instance.LoadDayAndTimeFromFirebase("Player1", ApplyDayTime);
+            }
+            // ⭐ Cách 3: Firebase chưa ready, đợi 1 giây rồi thử lại
             else if (!isGameTimeSet)
             {
-                // Nếu cache chưa sẵn sàng, đợi một chút rồi check lại
-                Debug.Log($"[DayAndNightManager] START: Cache not ready yet, waiting for Firebase...");
-                StartCoroutine(WaitForCachedDayTime());
-            }
-            else
-            {
-                Debug.Log($"[DayAndNightManager] START: Time already set (isGameTimeSet=true), skipping");
+                Debug.LogWarning("[DayAndNightManager] Firebase NOT ready, retrying in 1 second...");
+                Invoke(nameof(TryLoadDayTimeAgain), 1f);
             }
             
             hasInitializedTime = true;
         }
 
-        FindUIReferences();
-        UpdateUIAndLight();
+        // 🔧 Update UI SAU KHI đã load Firebase data (nếu có sẵn)
+        // Nếu Firebase chậm, sẽ update lại trong ApplyDayTime() hoặc TryLoadDayTimeAgain()
+        if (isGameTimeSet || FirebaseDatabaseManager.CachedDayTimeData != null)
+        {
+            Debug.Log($"[DayAndNightManager Start()] ⚠️ Condition TRUE: isGameTimeSet={isGameTimeSet}, CachedDayTimeData={FirebaseDatabaseManager.CachedDayTimeData != null}");
+            shouldUpdateUI = true;
+            UpdateUIAndLight();
+        }
+        else
+        {
+            Debug.Log($"[DayAndNightManager Start()] ⏸️ Condition FALSE: isGameTimeSet={isGameTimeSet}, CachedDayTimeData={FirebaseDatabaseManager.CachedDayTimeData != null}");
+        }
     }
 
-    // Đợi cache data từ Firebase
-    private System.Collections.IEnumerator WaitForCachedDayTime()
+    // Retry mechanism tương tự PlayerMoney
+    private void TryLoadDayTimeAgain()
     {
-        float waitTime = 0f;
-        while (FirebaseDatabaseManager.CachedDayTimeData == null && waitTime < 5f && !isGameTimeSet)
-        {
-            Debug.Log($"[DayAndNightManager] Waiting for cached day/time... ({waitTime:F1}s)");
-            waitTime += 0.2f;
-            yield return new WaitForSeconds(0.2f);
-        }
-
+        Debug.Log($"[DayAndNightManager] TryLoadDayTimeAgain() called. FirebaseReady: {FirebaseDatabaseManager.FirebaseReady}");
+        
         if (FirebaseDatabaseManager.CachedDayTimeData != null && !isGameTimeSet)
         {
-            Debug.Log($"[DayAndNightManager] ⭐ Finally got cached day/time!");
-            var cached = FirebaseDatabaseManager.CachedDayTimeData;
-            Debug.Log($"[DayAndNightManager] Cached data: Day {cached.currentDay} {cached.currentHour:00}:{cached.currentMinute:00}");
-            SetGameTime(cached.currentDay, cached.currentHour, cached.currentMinute);
+            Debug.Log($"[DayAndNightManager] ✅ Cache now ready! Applying day/time...");
+            ApplyDayTime(FirebaseDatabaseManager.CachedDayTimeData);
+        }
+        else if (FirebaseDatabaseManager.FirebaseReady && !isGameTimeSet)
+        {
+            Debug.Log("[DayAndNightManager] Retrying Firebase load...");
+            FirebaseDatabaseManager.Instance.LoadDayAndTimeFromFirebase("Player1", ApplyDayTime);
         }
         else if (!isGameTimeSet)
         {
-            Debug.LogWarning($"[DayAndNightManager] Timeout waiting for cache, using default time {startHour:00}:{startMinute:00}");
+            Debug.LogError("[DayAndNightManager] Firebase still NOT ready after retry! Using default...");
             totalGameSeconds = (startHour * 3600f) + (startMinute * 60f);
             currentDay = 1;
             isGameTimeSet = true;
+            
+            // 🔧 Enable UI update với default time
+            shouldUpdateUI = true;
+            UpdateUIAndLight();
         }
+    }
+
+    // Callback để apply day/time từ Firebase
+    private void ApplyDayTime(FirebaseDatabaseManager.DayTimeData dayTimeData)
+    {
+        if (dayTimeData == null)
+        {
+            Debug.LogWarning("[DayAndNightManager] DayTimeData is null!");
+            return;
+        }
+
+        Debug.Log($"[DayAndNightManager] ⭐ ApplyDayTime: Day {dayTimeData.currentDay} {dayTimeData.currentHour:00}:{dayTimeData.currentMinute:00}");
+        SetGameTime(dayTimeData.currentDay, dayTimeData.currentHour, dayTimeData.currentMinute);
+        
+        // 🔧 Enable UI update SAU KHI set time từ Firebase
+        shouldUpdateUI = true;
+        UpdateUIAndLight();
     }
 
     private void Update()
@@ -168,6 +211,13 @@ public class DayAndNightManager : MonoBehaviour
 
     private void UpdateUIAndLight()
     {
+        // 🔧 KHÔNG update UI nếu Firebase chưa ready
+        if (!shouldUpdateUI)
+        {
+            Debug.Log("[DayAndNightManager] UpdateUIAndLight skipped - shouldUpdateUI=false");
+            return;
+        }
+
         float secondsToday = totalGameSeconds % SECONDS_PER_DAY;
 
         int hours = Mathf.FloorToInt(secondsToday / 3600f);
@@ -258,6 +308,7 @@ public class DayAndNightManager : MonoBehaviour
         isGameTimeSet = true;  // 🔧 Mark rằng đã set từ Firebase
 
         Debug.Log($"[DayAndNightManager] Set game time: Day {currentDay} {hour:00}:{minute:00} (totalGameSeconds: {totalGameSeconds})");
-        UpdateUIAndLight();
+        
+        // 🔧 KHÔNG gọi UpdateUIAndLight() ở đây - ApplyDayTime() sẽ gọi nó sau khi set shouldUpdateUI=true
     }
 }
