@@ -77,6 +77,27 @@ public class ItemDatabase : MonoBehaviour
     }
 
     /// <summary>
+    /// Get ItemData bằng ItemSubtype
+    /// </summary>
+    public ItemData GetItemBySubtype(ItemSubtype subtype)
+    {
+        if (!isInitialized)
+            InitializeDatabase();
+
+        foreach (var kvp in itemCache)
+        {
+            if (kvp.Value != null && kvp.Value.itemSubtype == subtype)
+            {
+                Debug.Log($"[ItemDatabase] ✅ Found item with subtype {subtype}: {kvp.Key}");
+                return kvp.Value;
+            }
+        }
+
+        Debug.LogWarning($"[ItemDatabase] ❌ No item found with subtype: {subtype}");
+        return null;
+    }
+
+    /// <summary>
     /// Get tất cả items trong database
     /// </summary>
     public ItemData[] GetAllItems()

@@ -86,11 +86,87 @@ public class DayAndNightManager : MonoBehaviour
 
     private void FindUIReferences()
     {
-        if (textTimeInGame == null)
-            textTimeInGame = GameObject.Find("TimeText")?.GetComponent<TMP_Text>();
+        Debug.Log("[DayAndNightManager] FindUIReferences() started");
+        
+        // Kiểm tra xem reference còn valid không
+        if (textTimeInGame != null && textTimeInGame.gameObject.activeInHierarchy)
+        {
+            Debug.Log("[DayAndNightManager] ✅ textTimeInGame reference still valid");
+        }
+        else
+        {
+            textTimeInGame = null;
+            
+            // Cách 1: Tìm theo tag "TimeText"
+            GameObject timeTextGO = GameObject.FindWithTag("TimeText");
+            if (timeTextGO != null)
+            {
+                textTimeInGame = timeTextGO.GetComponent<TMP_Text>();
+                if (textTimeInGame != null)
+                {
+                    Debug.Log("[DayAndNightManager] ✅ Found TimeText via tag");
+                }
+            }
+            
+            // Cách 2: Tìm theo GameObject.Find
+            if (textTimeInGame == null)
+            {
+                GameObject timeGO = GameObject.Find("TimeText");
+                if (timeGO != null)
+                {
+                    textTimeInGame = timeGO.GetComponent<TMP_Text>();
+                    if (textTimeInGame != null)
+                    {
+                        Debug.Log("[DayAndNightManager] ✅ Found TimeText via GameObject.Find");
+                    }
+                }
+            }
+            
+            if (textTimeInGame == null)
+            {
+                Debug.LogWarning("[DayAndNightManager] ⚠️ Could not find TimeText UI");
+            }
+        }
 
-        if (textDayInGame == null)
-            textDayInGame = GameObject.Find("DayText")?.GetComponent<TMP_Text>();
+        // Tìm DayText UI
+        if (textDayInGame != null && textDayInGame.gameObject.activeInHierarchy)
+        {
+            Debug.Log("[DayAndNightManager] ✅ textDayInGame reference still valid");
+        }
+        else
+        {
+            textDayInGame = null;
+            
+            // Cách 1: Tìm theo tag "DayText"
+            GameObject dayTextGO = GameObject.FindWithTag("DayText");
+            if (dayTextGO != null)
+            {
+                textDayInGame = dayTextGO.GetComponent<TMP_Text>();
+                if (textDayInGame != null)
+                {
+                    Debug.Log("[DayAndNightManager] ✅ Found DayText via tag");
+                }
+            }
+            
+            // Cách 2: Tìm theo GameObject.Find
+            if (textDayInGame == null)
+            {
+                GameObject dayGO = GameObject.Find("DayText");
+                if (dayGO != null)
+                {
+                    textDayInGame = dayGO.GetComponent<TMP_Text>();
+                    if (textDayInGame != null)
+                    {
+                        Debug.Log("[DayAndNightManager] ✅ Found DayText via GameObject.Find");
+                    }
+                }
+            }
+            
+            if (textDayInGame == null)
+            {
+                Debug.LogWarning("[DayAndNightManager] ⚠️ Could not find DayText UI");
+            }
+        }
 
         GameObject lightObj = GameObject.Find("Global Light 2D") ?? GameObject.FindWithTag("GlobalLight");
         if (lightObj != null)
@@ -212,6 +288,17 @@ public class DayAndNightManager : MonoBehaviour
     {
         Debug.Log($"🔥 [DayAndNightManager] Trigger New Day {currentDay}");
         DayAndNightEvents.InvokeNewDay(currentDay);
+
+        // ✅ TẠO ORDER MỚI MỖI NGÀY
+        if (OrderManager.Instance != null)
+        {
+            Debug.Log($"[DayAndNightManager] 📦 Gọi RefreshDailyOrders() cho ngày {currentDay}");
+            OrderManager.Instance.RefreshDailyOrders();
+        }
+        else
+        {
+            Debug.LogWarning("[DayAndNightManager] ⚠️ OrderManager.Instance là null!");
+        }
     }
 
     private void UpdateUIAndLight()

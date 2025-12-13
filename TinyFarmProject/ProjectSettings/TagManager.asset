@@ -10,6 +10,9 @@ TagManager:
   - Icon
   - Rain
   - MoneyText
+  - DayText
+  - UsernameText
+  - TimeText
   layers:
   - Default
   - TransparentFX

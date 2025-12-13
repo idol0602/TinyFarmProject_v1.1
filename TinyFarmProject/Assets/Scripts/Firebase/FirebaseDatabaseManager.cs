@@ -96,6 +96,30 @@ public class FirebaseDatabaseManager : MonoBehaviour
     }
 
     // ============================================================
+    // SAVE ORDERS (lưu danh sách order lên Firebase)
+    // ============================================================
+    public void SaveOrdersToDatabase(string userId, string ordersJson)
+    {
+        if (!FirebaseReady || reference == null)
+        {
+            Debug.LogError("Firebase chưa sẵn sàng → KHÔNG SAVE ORDERS");
+            return;
+        }
+
+        Debug.Log($"[Firebase] Saving orders to /{userId}/Orders");
+
+        reference.Child(userId).Child("Orders")
+            .SetValueAsync(ordersJson)
+            .ContinueWithOnMainThread(task =>
+            {
+                if (task.IsFaulted)
+                    Debug.LogError("Lỗi SAVE orders: " + task.Exception);
+                else
+                    Debug.Log($"✓ Đã lưu orders lên Firebase");
+            });
+    }
+
+    // ============================================================
     // SAVE DAY AND TIME (chỉ dùng 1 hàm duy nhất này)
     // ============================================================
     public void SaveDayAndTimeToFirebase(string userId)

@@ -11,9 +11,10 @@ public class Order
     public string content = "";
     public List<OrderItem> items = new List<OrderItem>();
 
-    // THÊM 4 DÒNG NÀY LÀ HẾT LỖI NGAY
+    // THÊM CÁC FIELD NÀY
     public bool isAccepted = false;   // đã nhận đơn chưa
     public bool isCompleted = false;  // đã giao xong chưa
+    public bool isTestOrder = false;  // đây có phải order test không
     public float remainingTime;       // thời gian còn lại (nếu bạn có hệ thống đếm ngược)
 
     // Hàm tiện ích (tùy chọn)

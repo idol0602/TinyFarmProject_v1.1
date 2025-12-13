@@ -6089,7 +6089,7 @@ GameObject:
   - component: {fileID: 976030683188500601}
   m_Layer: 5
   m_Name: MoneyText
-  m_TagString: Untagged
+  m_TagString: MoneyText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6881,7 +6881,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 289, y: 258}
+  m_AnchoredPosition: {x: 264, y: 237}
   m_SizeDelta: {x: 82.696, y: 78.651}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4214127644402401871
@@ -13574,7 +13574,7 @@ GameObject:
   - component: {fileID: 3146990962143510398}
   m_Layer: 5
   m_Name: UserNameText
-  m_TagString: Untagged
+  m_TagString: UsernameText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15457,7 +15457,7 @@ GameObject:
   - component: {fileID: 6280195711517369980}
   m_Layer: 5
   m_Name: TimeText
-  m_TagString: Untagged
+  m_TagString: TimeText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15677,12 +15677,12 @@ MonoBehaviour:
   txtDeadline: {fileID: 4532665977096664282}
   txtNPC: {fileID: 0}
   txtErrorMessage: {fileID: 0}
+  panelNotEnough: {fileID: 8496701267524815437}
+  txtNotEnoughMessage: {fileID: 6639599018717468212}
+  btnClosePanel: {fileID: 7641856147798733977}
   btnAccept: {fileID: 6451465330858416332}
   btnReject: {fileID: 4966151759696661873}
   btnDeliver: {fileID: 5730832258491199859}
-  errorPopup: {fileID: 8496701267524815437}
-  errorPopupText: {fileID: 6639599018717468212}
-  errorPopupCloseBtn: {fileID: 7641856147798733977}
   truckMove: {fileID: 0}
 --- !u!1 &6944298211912096988
 GameObject:
@@ -18012,9 +18012,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '
-
-'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b427c249afe42ff4a95385e5ec43809e, type: 2}
   m_sharedMaterial: {fileID: 4442160455409998183, guid: b427c249afe42ff4a95385e5ec43809e, type: 2}
@@ -18023,8 +18021,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4279571948
+  m_fontColor: {r: 0.9245283, g: 0.08198643, b: 0.08198643, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -18041,13 +18039,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -18079,7 +18077,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 31.263031, y: -78.15715, z: 0.0013428202, w: -88.578354}
+  m_margin: {x: 31.263031, y: -67.67056, z: 27.965698, w: -71.1006}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -18314,7 +18312,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7620666064826117524
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18364,8 +18362,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: -3571245019227250870, guid: 086a8b90697153247819908bd0c722d5, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -19047,7 +19045,7 @@ GameObject:
   - component: {fileID: 3166515436158999935}
   m_Layer: 5
   m_Name: textDay
-  m_TagString: Untagged
+  m_TagString: DayText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
