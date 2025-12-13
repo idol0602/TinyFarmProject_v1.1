@@ -98,7 +98,7 @@ public class ShopDetailPanel : MonoBehaviour
                 if (FirebaseDatabaseManager.FirebaseReady)
                 {
                     Debug.Log("[Shop] Saving inventory to Firebase after purchase...");
-                    FirebaseDatabaseManager.Instance.SaveInventoryToFirebase("Player1");
+                    FirebaseDatabaseManager.Instance.SaveInventoryToFirebase(PlayerSession.GetCurrentUserId());
                 }
                 else
                 {

@@ -34,12 +34,12 @@ public class FarmLoadingManager : MonoBehaviour
         if (FirebaseDatabaseManager.FirebaseReady)
         {
             Debug.Log("[FarmLoadingManager] Start: Firebase ready, preloading day/time...");
-            PreloadDayAndTimeFromFirebase("Player1");
+            PreloadDayAndTimeFromFirebase(PlayerSession.GetCurrentUserId());
         }
         else
         {
             Debug.LogWarning("[FarmLoadingManager] Start: Firebase NOT ready yet, waiting...");
-            StartCoroutine(WaitForFirebaseAndPreload("Player1"));
+            StartCoroutine(WaitForFirebaseAndPreload(PlayerSession.GetCurrentUserId()));
         }
     }
 
@@ -75,8 +75,21 @@ public class FarmLoadingManager : MonoBehaviour
         FirebaseDatabaseManager.OnFarmLoadComplete -= OnFarmLoadComplete;
     }
 
-    public void StartLoadingFarm(string userId = "Player1")
+    public void StartLoadingFarm(string userId = null)
     {
+        // 🔧 Nếu userId null, lấy từ PlayerSession
+        if (string.IsNullOrEmpty(userId))
+        {
+            userId = PlayerSession.GetCurrentUserId();
+        }
+        
+        // 🔧 Clear cache để force load dữ liệu mới từ Firebase
+        if (FirebaseDatabaseManager.Instance != null)
+        {
+            Debug.Log("[FarmLoadingManager] Clearing cache before load");
+            FirebaseDatabaseManager.Instance.ClearCacheForNewUser();
+        }
+        
         if (isLoading)
         {
             Debug.LogWarning("[FarmLoadingManager] Already loading, skip");

@@ -3,9 +3,8 @@ using System.Collections;
 
 public class CropFarmLoader : MonoBehaviour
 {
-    public string userId = "Player1";
-    
-    [SerializeField] private bool useLoadingScreen = true;  // Toggle để use loading screen
+        private string userId => PlayerSession.GetCurrentUserId();
+        [SerializeField] private bool useLoadingScreen = true;  // Toggle để use loading screen
 
     private IEnumerator Start()
     {

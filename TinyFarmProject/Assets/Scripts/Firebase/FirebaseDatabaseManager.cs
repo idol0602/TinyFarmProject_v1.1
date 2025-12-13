@@ -666,15 +666,15 @@ public class FirebaseDatabaseManager : MonoBehaviour
         if (FirebaseReady)
         {
             Debug.Log("Auto SAVE farm + tiền + day/time + inventory khi thoát game");
-            SaveFarmToFirebase("Player1");
-            SaveMoneyToFirebase("Player1");
-            SaveDayAndTimeToFirebase("Player1");
+            SaveFarmToFirebase(PlayerSession.GetCurrentUserId());
+            SaveMoneyToFirebase(PlayerSession.GetCurrentUserId());
+            SaveDayAndTimeToFirebase(PlayerSession.GetCurrentUserId());
             
             // 🔧 Chỉ save inventory nếu đã được load từ Firebase
             // Tránh việc save inventory trống và xóa data cũ
             if (inventoryLoaded)
             {
-                SaveInventoryToFirebase("Player1");
+                SaveInventoryToFirebase(PlayerSession.GetCurrentUserId());
             }
             else
             {
@@ -685,4 +685,110 @@ public class FirebaseDatabaseManager : MonoBehaviour
     
     // 🔧 Public getter để check farm load status
     public bool IsFarmLoaded => farmLoaded;
+
+    // ============================================================
+    // INITIALIZE NEW USER DATA
+    // ============================================================
+    /// <summary>
+    /// Reset tất cả cache khi user mới login
+    /// Tránh dữ liệu của user cũ bị load cho user mới
+    /// </summary>
+    public void ClearCacheForNewUser()
+    {
+        Debug.Log("[Firebase] Clearing all cache for new user login");
+        
+        // Clear static cache
+        CachedDayTimeData = null;
+        
+        // Reset instance variables
+        inventoryLoaded = false;
+        farmLoaded = false;
+        
+        // Clear FarmState
+        FarmState.IsSleepTransition = false;
+        FarmState.NeedSaveAfterReturn = false;
+        
+        // Clear RainState
+        RainState.WasRaining = false;
+        
+        Debug.Log("[Firebase] ✅ Cache cleared");
+    }
+
+    /// <summary>
+    /// Tạo dữ liệu mặc định cho user mới
+    /// Gọi sau khi user đăng ký/đăng nhập thành công
+    /// </summary>
+    public void InitializeNewUserData(string userId)
+    {
+        if (!FirebaseReady || reference == null)
+        {
+            Debug.LogError("Firebase chưa sẵn sàng → KHÔNG THỂ INITIALIZE USER DATA");
+            return;
+        }
+
+        Debug.Log($"[Firebase] Initializing data for new user: {userId}");
+
+        // Dữ liệu mặc định
+        Dictionary<string, object> userData = new Dictionary<string, object>
+        {
+            // Money
+            { "Money", 1000 },
+
+            // Day and Time
+            { "DayTime/currentDay", 1 },
+            { "DayTime/currentHour", 7 },
+            { "DayTime/currentMinute", 0 },
+
+            // Farm - Empty farm state
+            { "Farm/farmState", "{\"crops\":[]}" },
+
+            // Inventory - Empty inventory
+            { "Inventory", "{\"slots\":[]}" }
+        };
+
+        reference.Child(userId).UpdateChildrenAsync(userData)
+            .ContinueWithOnMainThread(task =>
+            {
+                if (task.IsFaulted)
+                {
+                    Debug.LogError($"❌ Lỗi initialize user data: {task.Exception}");
+                }
+                else
+                {
+                    Debug.Log($"✅ Đã tạo dữ liệu mặc định cho user: {userId}");
+                }
+            });
+    }
+
+    /// <summary>
+    /// Kiểm tra user đã có dữ liệu trong Firebase hay chưa
+    /// </summary>
+    public async void CheckAndInitializeUserData(string userId)
+    {
+        if (!FirebaseReady || reference == null)
+        {
+            Debug.LogError("Firebase chưa sẵn sàng");
+            return;
+        }
+
+        try
+        {
+            DataSnapshot snapshot = await reference.Child(userId).GetValueAsync();
+            
+            if (!snapshot.Exists)
+            {
+                // User chưa có dữ liệu → Tạo dữ liệu mặc định
+                Debug.Log($"[Firebase] User {userId} có dữ liệu mới, initializing...");
+                InitializeNewUserData(userId);
+            }
+            else
+            {
+                Debug.Log($"[Firebase] User {userId} đã có dữ liệu, không cần initialize");
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Lỗi check user data: {e.Message}");
+        }
+    }
 }

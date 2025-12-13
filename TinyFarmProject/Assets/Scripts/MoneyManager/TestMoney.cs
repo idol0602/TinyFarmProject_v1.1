@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TestMoney : MonoBehaviour
 {
-    private const string PLAYER_ID = "Player1"; // Đổi nếu cần test nhiều người chơi
+    private string PLAYER_ID => PlayerSession.GetCurrentUserId(); // Đổi nếu cần test nhiều người chơi
 
     // ---------------------------------------------------------
     // TEST: Thêm tiền

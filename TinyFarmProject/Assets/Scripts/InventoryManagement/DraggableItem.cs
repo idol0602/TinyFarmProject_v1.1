@@ -216,7 +216,7 @@ public class DraggableItem : MonoBehaviour,
             if (FirebaseDatabaseManager.FirebaseReady)
             {
                 Debug.Log("[DraggableItem] Saving inventory to Firebase after drag...");
-                FirebaseDatabaseManager.Instance.SaveInventoryToFirebase("Player1");
+                FirebaseDatabaseManager.Instance.SaveInventoryToFirebase(PlayerSession.GetCurrentUserId());
             }
         }
 

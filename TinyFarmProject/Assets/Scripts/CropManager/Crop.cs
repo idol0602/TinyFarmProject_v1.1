@@ -215,7 +215,7 @@ namespace MapSummer
                     // ⭐ SAVE INVENTORY VÀO FIREBASE
                     if (FirebaseDatabaseManager.Instance != null && FirebaseDatabaseManager.FirebaseReady)
                     {
-                        FirebaseDatabaseManager.Instance.SaveInventoryToFirebase("Player1");
+                        FirebaseDatabaseManager.Instance.SaveInventoryToFirebase(PlayerSession.GetCurrentUserId());
                         Debug.Log("💾 Save Inventory sau khi thu hoạch");
                     }
                 }

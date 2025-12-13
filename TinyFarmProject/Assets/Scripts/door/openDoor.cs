@@ -114,7 +114,7 @@ public class OpenDoor : MonoBehaviour
             var firebase = Object.FindObjectOfType<FirebaseDatabaseManager>();
             if (firebase != null)
             {
-                firebase.SaveFarmToFirebase("Player1");
+                firebase.SaveFarmToFirebase(PlayerSession.GetCurrentUserId());
             }
             else
             {

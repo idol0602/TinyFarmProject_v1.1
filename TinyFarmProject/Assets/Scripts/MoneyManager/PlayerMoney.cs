@@ -18,7 +18,7 @@ public class PlayerMoney : MonoBehaviour
 
     public UnityEvent<int> OnMoneyChanged = new UnityEvent<int>();
 
-    private const string PLAYER_ID = "Player1";
+    private string PLAYER_ID => PlayerSession.GetCurrentUserId();
     
     // ⚠️ Flag để tránh auto-save khi đang load từ Firebase
     private bool isLoadingFromFirebase = true;

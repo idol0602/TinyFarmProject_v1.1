@@ -101,6 +101,11 @@ public class DayAndNightManager : MonoBehaviour
     {
         Debug.Log($"[DayAndNightManager] Start() called. FirebaseReady: {FirebaseDatabaseManager.FirebaseReady}, CachedDayTimeData: {FirebaseDatabaseManager.CachedDayTimeData}");
         
+        // 🔧 Reset time state khi scene mới load
+        isGameTimeSet = false;
+        shouldUpdateUI = false;
+        savedTotalGameSeconds = -1f;
+        
         FindUIReferences();  // Tìm UI trước
         
         if (!hasInitializedTime)
@@ -115,7 +120,7 @@ public class DayAndNightManager : MonoBehaviour
             else if (FirebaseDatabaseManager.FirebaseReady && !isGameTimeSet)
             {
                 Debug.Log($"[DayAndNightManager] Firebase ready, loading day/time directly...");
-                FirebaseDatabaseManager.Instance.LoadDayAndTimeFromFirebase("Player1", ApplyDayTime);
+                FirebaseDatabaseManager.Instance.LoadDayAndTimeFromFirebase(PlayerSession.GetCurrentUserId(), ApplyDayTime);
             }
             // ⭐ Cách 3: Firebase chưa ready, đợi 1 giây rồi thử lại
             else if (!isGameTimeSet)
@@ -154,7 +159,7 @@ public class DayAndNightManager : MonoBehaviour
         else if (FirebaseDatabaseManager.FirebaseReady && !isGameTimeSet)
         {
             Debug.Log("[DayAndNightManager] Retrying Firebase load...");
-            FirebaseDatabaseManager.Instance.LoadDayAndTimeFromFirebase("Player1", ApplyDayTime);
+            FirebaseDatabaseManager.Instance.LoadDayAndTimeFromFirebase(PlayerSession.GetCurrentUserId(), ApplyDayTime);
         }
         else if (!isGameTimeSet)
         {

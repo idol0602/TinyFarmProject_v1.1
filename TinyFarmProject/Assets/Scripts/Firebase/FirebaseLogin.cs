@@ -53,6 +53,19 @@ public class FirebaseLogin : MonoBehaviour
 
             // Chỉ chạy khi thật sự thành công
             Debug.Log("Dang ki thanh cong");
+            FirebaseUser user = task.Result.User;
+            
+            // 🔧 Lưu User ID từ Firebase Authentication
+            // (Cache sẽ tự động clear)
+            PlayerSession.SetCurrentUserId(user.UserId);
+            Debug.Log($"[FirebaseLogin] New user registered with ID: {user.UserId}");
+            
+            // 🔧 Tạo dữ liệu mặc định cho user mới
+            if (FirebaseDatabaseManager.Instance != null)
+            {
+                FirebaseDatabaseManager.Instance.InitializeNewUserData(user.UserId);
+                Debug.Log($"[FirebaseLogin] Initialized default data for new user");
+            }
         });
     }
 
@@ -78,6 +91,18 @@ public class FirebaseLogin : MonoBehaviour
             // Chỉ chạy khi thật sự thành công
             Debug.Log("Dang nhap thanh cong");
             FirebaseUser user = task.Result.User;
+            
+            // 🔧 Lưu User ID từ Firebase Authentication
+            // (Cache sẽ tự động clear)
+            PlayerSession.SetCurrentUserId(user.UserId);
+            Debug.Log($"[FirebaseLogin] Player logged in with ID: {user.UserId}");
+            
+            // 🔧 Kiểm tra và initialize user data nếu cần
+            if (FirebaseDatabaseManager.Instance != null)
+            {
+                FirebaseDatabaseManager.Instance.CheckAndInitializeUserData(user.UserId);
+                Debug.Log($"[FirebaseLogin] Checking user data...");
+            }
 
             SceneManager.LoadScene("mapSummer");
         });

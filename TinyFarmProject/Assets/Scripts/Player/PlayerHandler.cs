@@ -138,7 +138,7 @@ public string currentCropType = "Chili";
         {
             if (FirebaseDatabaseManager.Instance != null && FirebaseDatabaseManager.FirebaseReady)
             {
-                FirebaseDatabaseManager.Instance.SaveFarmToFirebase("Player1");
+                FirebaseDatabaseManager.Instance.SaveFarmToFirebase(PlayerSession.GetCurrentUserId());
                 Debug.Log("💾 [Sleep] SAVE farm tại MapSummer");
             }
         }
@@ -344,7 +344,7 @@ public string currentCropType = "Chili";
         // ⭐ SAVE INVENTORY SAU KHI TRỒNG
         if (FirebaseDatabaseManager.Instance != null && FirebaseDatabaseManager.FirebaseReady)
         {
-            FirebaseDatabaseManager.Instance.SaveInventoryToFirebase("Player1");
+            FirebaseDatabaseManager.Instance.SaveInventoryToFirebase(PlayerSession.GetCurrentUserId());
             Debug.Log("💾 Save Inventory sau khi trồng");
         }
     }
@@ -533,7 +533,7 @@ public string currentCropType = "Chili";
         // ⭐ Tự động SAVE sau khi thu hoạch
         if (FirebaseDatabaseManager.Instance != null && FirebaseDatabaseManager.FirebaseReady)
         {
-            FirebaseDatabaseManager.Instance.SaveFarmToFirebase("Player1");
+            FirebaseDatabaseManager.Instance.SaveFarmToFirebase(PlayerSession.GetCurrentUserId());
             Debug.Log("💾 Save Farm sau khi thu hoạch");
         }
     }

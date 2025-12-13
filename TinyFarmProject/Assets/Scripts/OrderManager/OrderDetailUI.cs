@@ -73,7 +73,7 @@ public class OrderDetailUI : MonoBehaviour
             PlayerMoney.Instance.Add(order.totalReward);
 
             // save firebase
-            FirebaseDatabaseManager.Instance.SaveMoneyToFirebase("Player1");
+            FirebaseDatabaseManager.Instance.SaveMoneyToFirebase(PlayerSession.GetCurrentUserId());
 
             // xe chạy
             if (truckMove != null && truckMove.CanRun())

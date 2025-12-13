@@ -33,7 +33,7 @@ public class InventoryManager : MonoBehaviour
             if (FirebaseDatabaseManager.FirebaseReady)
             {
                 Debug.Log("[InventoryManager] Firebase ready, loading inventory from Firebase...");
-                FirebaseDatabaseManager.Instance.LoadInventoryFromFirebase("Player1");
+                FirebaseDatabaseManager.Instance.LoadInventoryFromFirebase(PlayerSession.GetCurrentUserId());
             }
             else
             {
@@ -50,7 +50,7 @@ public class InventoryManager : MonoBehaviour
         if (FirebaseDatabaseManager.FirebaseReady)
         {
             Debug.Log("[InventoryManager] Retrying Firebase load...");
-            FirebaseDatabaseManager.Instance.LoadInventoryFromFirebase("Player1");
+            FirebaseDatabaseManager.Instance.LoadInventoryFromFirebase(PlayerSession.GetCurrentUserId());
         }
         else
         {
