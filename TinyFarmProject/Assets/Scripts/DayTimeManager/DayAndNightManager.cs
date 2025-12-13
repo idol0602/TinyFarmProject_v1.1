@@ -30,6 +30,8 @@ public class DayAndNightManager : MonoBehaviour
     private int currentDay = 1;
 
     private static float savedTotalGameSeconds = -1f;
+    private bool isGameTimeSet = false;  // 🔧 Track xem đã set game time từ Firebase hay chưa
+    private bool hasInitializedTime = false;  // 🔧 Track xem đã setup time trong Start hay chưa
 
     private void Awake()
     {
@@ -42,22 +44,16 @@ public class DayAndNightManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        // ==========================
-        // LOAD / SETUP GAME TIME
-        // ==========================
-        if (savedTotalGameSeconds >= 0f)
+        // 🔧 CHỈ khởi tạo timeScale, KHÔNG set time trong Awake
+        // Để cho Firebase callback kịp gọi SetGameTime() trước Start()
+        timeScale = SECONDS_PER_DAY / (realMinutesPerGameDay * 60f);
+        
+        // Set default time để game không bị lỗi nếu Firebase chậm
+        if (!isGameTimeSet)
         {
-            totalGameSeconds = savedTotalGameSeconds;
-            currentDay = Mathf.FloorToInt(totalGameSeconds / SECONDS_PER_DAY) + 1;
-        }
-        else
-        {
-            // ⭐ Giờ bắt đầu có thể chỉnh trong Inspector
             totalGameSeconds = (startHour * 3600f) + (startMinute * 60f);
             currentDay = 1;
         }
-
-        timeScale = SECONDS_PER_DAY / (realMinutesPerGameDay * 60f);
     }
 
     private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
@@ -90,8 +86,61 @@ public class DayAndNightManager : MonoBehaviour
 
     private void Start()
     {
+        // ⭐ INITIALIZE TIME từ Firebase cache (trong Start để cho async callback kịp)
+        if (!hasInitializedTime)
+        {
+            Debug.Log($"[DayAndNightManager] START: CachedDayTimeData={FirebaseDatabaseManager.CachedDayTimeData}, isGameTimeSet={isGameTimeSet}");
+            
+            if (FirebaseDatabaseManager.CachedDayTimeData != null && !isGameTimeSet)
+            {
+                Debug.Log($"[DayAndNightManager] ⭐ START: Loading cached day/time from Firebase!");
+                var cached = FirebaseDatabaseManager.CachedDayTimeData;
+                Debug.Log($"[DayAndNightManager] Cached data: Day {cached.currentDay} {cached.currentHour:00}:{cached.currentMinute:00}");
+                SetGameTime(cached.currentDay, cached.currentHour, cached.currentMinute);
+            }
+            else if (!isGameTimeSet)
+            {
+                // Nếu cache chưa sẵn sàng, đợi một chút rồi check lại
+                Debug.Log($"[DayAndNightManager] START: Cache not ready yet, waiting for Firebase...");
+                StartCoroutine(WaitForCachedDayTime());
+            }
+            else
+            {
+                Debug.Log($"[DayAndNightManager] START: Time already set (isGameTimeSet=true), skipping");
+            }
+            
+            hasInitializedTime = true;
+        }
+
         FindUIReferences();
         UpdateUIAndLight();
+    }
+
+    // Đợi cache data từ Firebase
+    private System.Collections.IEnumerator WaitForCachedDayTime()
+    {
+        float waitTime = 0f;
+        while (FirebaseDatabaseManager.CachedDayTimeData == null && waitTime < 5f && !isGameTimeSet)
+        {
+            Debug.Log($"[DayAndNightManager] Waiting for cached day/time... ({waitTime:F1}s)");
+            waitTime += 0.2f;
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        if (FirebaseDatabaseManager.CachedDayTimeData != null && !isGameTimeSet)
+        {
+            Debug.Log($"[DayAndNightManager] ⭐ Finally got cached day/time!");
+            var cached = FirebaseDatabaseManager.CachedDayTimeData;
+            Debug.Log($"[DayAndNightManager] Cached data: Day {cached.currentDay} {cached.currentHour:00}:{cached.currentMinute:00}");
+            SetGameTime(cached.currentDay, cached.currentHour, cached.currentMinute);
+        }
+        else if (!isGameTimeSet)
+        {
+            Debug.LogWarning($"[DayAndNightManager] Timeout waiting for cache, using default time {startHour:00}:{startMinute:00}");
+            totalGameSeconds = (startHour * 3600f) + (startMinute * 60f);
+            currentDay = 1;
+            isGameTimeSet = true;
+        }
     }
 
     private void Update()
@@ -179,5 +228,36 @@ public class DayAndNightManager : MonoBehaviour
     {
         float secondsToday = totalGameSeconds % SECONDS_PER_DAY;
         return Mathf.FloorToInt(secondsToday / 3600f);
+    }
+
+    public int GetCurrentMinute()
+    {
+        float secondsToday = totalGameSeconds % SECONDS_PER_DAY;
+        return Mathf.FloorToInt((secondsToday % 3600f) / 60f);
+    }
+
+    // ========================================================
+    // SET GAME TIME (từ Firebase load)
+    // ========================================================
+    public void SetGameTime(int day, int hour, int minute)
+    {
+        if (day <= 0)
+            day = 1;
+        if (hour < 0 || hour > 23)
+            hour = Mathf.Clamp(hour, 0, 23);
+        if (minute < 0 || minute > 59)
+            minute = Mathf.Clamp(minute, 0, 59);
+
+        // Tính tổng giây từ day, hour, minute
+        float secondsInDay = (hour * 3600f) + (minute * 60f);
+        float dayInSeconds = (day - 1) * SECONDS_PER_DAY;
+        
+        totalGameSeconds = dayInSeconds + secondsInDay;
+        savedTotalGameSeconds = totalGameSeconds;
+        currentDay = day;
+        isGameTimeSet = true;  // 🔧 Mark rằng đã set từ Firebase
+
+        Debug.Log($"[DayAndNightManager] Set game time: Day {currentDay} {hour:00}:{minute:00} (totalGameSeconds: {totalGameSeconds})");
+        UpdateUIAndLight();
     }
 }

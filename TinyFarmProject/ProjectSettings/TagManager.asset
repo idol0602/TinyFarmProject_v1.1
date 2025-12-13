@@ -9,6 +9,7 @@ TagManager:
   - GlobalLight
   - Icon
   - Rain
+  - MoneyText
   layers:
   - Default
   - TransparentFX

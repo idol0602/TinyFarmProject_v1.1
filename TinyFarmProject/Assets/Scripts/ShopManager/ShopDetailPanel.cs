@@ -86,7 +86,7 @@ public class ShopDetailPanel : MonoBehaviour
             ItemData itemData = SeedToItemConverter.ConvertSeedToItem(currentSeed);
             Debug.Log($"[Shop] Converted to ItemData: {itemData.itemName}");
             
-            bool success = inv.AddItemToSecond(itemData, 1);
+            bool success = inv.AddItemToSecond(itemData, currentSeed.numsSeed);
 
             if (success)
             {

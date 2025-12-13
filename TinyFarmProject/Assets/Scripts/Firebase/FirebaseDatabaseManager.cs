@@ -20,7 +20,10 @@ public class FirebaseDatabaseManager : MonoBehaviour
     // 🔧 Track xem farm đã được load từ Firebase hay chưa
     private bool farmLoaded = false;
     
-    // 📢 Event callback khi farm load xong
+    // � Cache day/time data từ Firebase để DayAndNightManager có thể lấy ngay
+    public static DayTimeData CachedDayTimeData = null;
+    
+    // �📢 Event callback khi farm load xong
     public static event Action<bool> OnFarmLoadComplete;
 
     private void Awake()
@@ -66,16 +69,133 @@ public class FirebaseDatabaseManager : MonoBehaviour
 
         int money = PlayerMoney.Instance != null ? PlayerMoney.Instance.GetCurrentMoney() : 0;
         
-        Debug.Log($"[Firebase] Saving money: {money:N0}đ → /Money/{userId}");
+        Debug.Log($"[Firebase] Saving money: {money:N0}đ → /{userId}/Money");
 
-        reference.Child("Money").Child(userId)
+        reference.Child(userId).Child("Money")
             .SetValueAsync(money)
             .ContinueWithOnMainThread(task =>
             {
                 if (task.IsFaulted)
                     Debug.LogError("Lỗi SAVE tiền: " + task.Exception);
                 else
-                    Debug.Log($"✓ Đã lưu tiền: {money:N0}đ → /Money/{userId}");
+                    Debug.Log($"✓ Đã lưu tiền: {money:N0}đ → /{userId}/Money");
+            });
+    }
+
+    // ============================================================
+    // SAVE DAY AND TIME (chỉ dùng 1 hàm duy nhất này)
+    // ============================================================
+    public void SaveDayAndTimeToFirebase(string userId)
+    {
+        if (!FirebaseReady || reference == null)
+        {
+            Debug.LogError("Firebase chưa sẵn sàng → KHÔNG SAVE DAY/TIME");
+            return;
+        }
+
+        if (DayAndNightManager.Instance == null)
+        {
+            Debug.LogError("DayAndNightManager không tìm thấy");
+            return;
+        }
+
+        int currentDay = DayAndNightManager.Instance.GetCurrentDay();
+        int currentHour = DayAndNightManager.Instance.GetCurrentHour();
+        int currentMinute = DayAndNightManager.Instance.GetCurrentMinute();
+        
+        // Tạo data structure cho day/time
+        DayTimeData dayTimeData = new DayTimeData
+        {
+            currentDay = currentDay,
+            currentHour = currentHour,
+            currentMinute = currentMinute
+        };
+
+        string json = JsonConvert.SerializeObject(dayTimeData, Formatting.Indented);
+        
+        Debug.Log($"[Firebase] Saving day/time: Day {currentDay} {currentHour:00}:{currentMinute:00} → /{userId}/DayAndTime");
+
+        reference.Child(userId).Child("DayAndTime")
+            .SetValueAsync(json)
+            .ContinueWithOnMainThread(task =>
+            {
+                if (task.IsFaulted)
+                    Debug.LogError("❌ Lỗi SAVE day/time: " + task.Exception);
+                else
+                    Debug.Log($"✓ Đã lưu day/time: Day {currentDay} {currentHour:00}:{currentMinute:00} → /{userId}/DayAndTime");
+            });
+    }
+
+    // ============================================================
+    // LOAD DAY AND TIME (chỉ dùng 1 hàm duy nhất này)
+    // ============================================================
+    public void LoadDayAndTimeFromFirebase(string userId, Action<DayTimeData> callback)
+    {
+        if (!FirebaseReady || reference == null)
+        {
+            Debug.LogError("Firebase chưa sẵn sàng → KHÔNG LOAD DAY/TIME");
+            callback?.Invoke(new DayTimeData { currentDay = 1, currentHour = 7, currentMinute = 0 }); // fallback
+            return;
+        }
+
+        Debug.Log($"[Firebase] Loading day/time from /{userId}/DayAndTime...");
+        reference.Child(userId).Child("DayAndTime")
+            .GetValueAsync()
+            .ContinueWithOnMainThread(task =>
+            {
+                if (!task.IsCompletedSuccessfully)
+                {
+                    Debug.LogError("Lỗi LOAD day/time: " + task.Exception);
+                    callback?.Invoke(new DayTimeData { currentDay = 1, currentHour = 7, currentMinute = 0 });
+                    return;
+                }
+
+                DataSnapshot snap = task.Result;
+
+                DayTimeData loadedData = new DayTimeData { currentDay = 1, currentHour = 7, currentMinute = 0 }; // default
+
+                if (snap.Value != null)
+                {
+                    Debug.Log($"[Firebase] snap.Value type (DayAndTime): {snap.Value.GetType()}, value: {snap.Value}");
+                    try
+                    {
+                        string json = snap.Value.ToString();
+                        DayTimeData dayTimeData = JsonConvert.DeserializeObject<DayTimeData>(json);
+                        
+                        if (dayTimeData != null)
+                        {
+                            loadedData = dayTimeData;
+                            
+                            if (loadedData.currentDay <= 0)
+                            {
+                                Debug.LogWarning($"⚠ Day bằng {loadedData.currentDay} (invalid) → dùng default 1");
+                                loadedData.currentDay = 1;
+                            }
+                            else
+                            {
+                                Debug.Log($"✓ LOAD day/time thành công từ Firebase: Day {loadedData.currentDay} {loadedData.currentHour:00}:{loadedData.currentMinute:00}");
+                            }
+                        }
+                        else
+                        {
+                            Debug.LogWarning("⚠ DayTimeData deserialize thành null → dùng default");
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                        Debug.LogError($"❌ Lỗi parse day/time: {ex.Message}, raw value: {snap.Value}");
+                    }
+                }
+                else
+                {
+                    Debug.Log("⚠ Không có dữ liệu day/time trên Firebase → dùng default");
+                }
+
+                // 🔧 CACHE data để DayAndNightManager có thể dùng ngay
+                CachedDayTimeData = loadedData;
+                Debug.Log($"[Firebase] ✅ Cached day/time: Day {loadedData.currentDay} {loadedData.currentHour:00}:{loadedData.currentMinute:00}");
+                
+                callback?.Invoke(loadedData);
             });
     }
 
@@ -91,8 +211,8 @@ public class FirebaseDatabaseManager : MonoBehaviour
             return;
         }
 
-        Debug.Log($"[Firebase] Loading money from /Money/{userId}...");
-        reference.Child("Money").Child(userId)
+        Debug.Log($"[Firebase] Loading money from /{userId}/Money...");
+        reference.Child(userId).Child("Money")
             .GetValueAsync()
             .ContinueWithOnMainThread(task =>
             {
@@ -158,7 +278,7 @@ public class FirebaseDatabaseManager : MonoBehaviour
 
         string json = JsonConvert.SerializeObject(crops, Formatting.Indented);
 
-        reference.Child("Farms").Child(userId)
+        reference.Child(userId).Child("Farms")
             .SetValueAsync(json)
             .ContinueWithOnMainThread(task =>
             {
@@ -178,7 +298,7 @@ public class FirebaseDatabaseManager : MonoBehaviour
             return;
         }
 
-        reference.Child("Farms").Child(userId)
+        reference.Child(userId).Child("Farms")
             .GetValueAsync()
             .ContinueWithOnMainThread(task =>
             {
@@ -518,14 +638,26 @@ public class FirebaseDatabaseManager : MonoBehaviour
         public int quantity;
     }
 
+    // ============================================================
+    // Serializable class cho Day and Time
+    // ============================================================
+    [System.Serializable]
+    public class DayTimeData
+    {
+        public int currentDay;
+        public int currentHour;
+        public int currentMinute;
+    }
+
     // Auto save farm khi thoát game
     private void OnApplicationQuit()
     {
         if (FirebaseReady)
         {
-            Debug.Log("Auto SAVE farm + tiền + inventory khi thoát game");
+            Debug.Log("Auto SAVE farm + tiền + day/time + inventory khi thoát game");
             SaveFarmToFirebase("Player1");
             SaveMoneyToFirebase("Player1");
+            SaveDayAndTimeToFirebase("Player1");
             
             // 🔧 Chỉ save inventory nếu đã được load từ Firebase
             // Tránh việc save inventory trống và xóa data cũ
