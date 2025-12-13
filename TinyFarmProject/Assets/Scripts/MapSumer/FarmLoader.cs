@@ -26,6 +26,13 @@ public class FarmLoader : MonoBehaviour
             PlayerMoney.Instance.ReloadMoneyForNewScene();
         }
 
+        // 🔧 Load Inventory khi vào MapSummer
+        if (InventoryManager.Instance != null)
+        {
+            Debug.Log("[FarmLoader] Loading inventory from Firebase");
+            firebase.LoadInventoryFromFirebase(userId);
+        }
+
         // 🔧 Nếu enable loading screen, dùng FarmLoadingManager
         if (useLoadingScreen && FarmLoadingManager.Instance != null)
         {

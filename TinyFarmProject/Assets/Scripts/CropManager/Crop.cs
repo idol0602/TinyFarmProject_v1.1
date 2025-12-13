@@ -185,6 +185,46 @@ namespace MapSummer
 
         public void Harvest()
         {
+            // ⭐ NẾU CÂY ĐÃ CHẾT → CHỈ XÓA ĐI, KHÔNG THU HOẠCH
+            if (isDead)
+            {
+                Debug.Log($"💀 {cropType} đã chết, xóa khỏi farm");
+                Destroy(gameObject);
+                return;
+            }
+
+            // ⭐ KIỂM TRA CÂY PHẢI CHÍN (STAGE CUỐI) MỚI CÓ THỂ THU HOẠCH
+            if (currentStage != stages.Length - 1)
+            {
+                Debug.Log($"⚠️ {cropType} chưa chín! Stage hiện tại: {currentStage}/{stages.Length - 1}");
+                return;
+            }
+
+            // ⭐ THÊM SẢN PHẨM VÀO TÚI ĐỒ
+            string productName = cropType + "Crop"; // VD: "Chili" → "ChiliCrop"
+            
+            ItemDatabase itemDB = ItemDatabase.Instance;
+            if (itemDB != null)
+            {
+                ItemData productItem = itemDB.GetItemByName(productName);
+                if (productItem != null)
+                {
+                    InventoryManager.Instance.AddItem(productItem, 1);
+                    Debug.Log($"✅ Thu hoạch thành công! Thêm {productName} vào túi");
+
+                    // ⭐ SAVE INVENTORY VÀO FIREBASE
+                    if (FirebaseDatabaseManager.Instance != null && FirebaseDatabaseManager.FirebaseReady)
+                    {
+                        FirebaseDatabaseManager.Instance.SaveInventoryToFirebase("Player1");
+                        Debug.Log("💾 Save Inventory sau khi thu hoạch");
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning($"⚠️ Không tìm thấy item: {productName}");
+                }
+            }
+            
             Destroy(gameObject);
         }
 

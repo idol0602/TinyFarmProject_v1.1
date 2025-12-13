@@ -16,6 +16,9 @@ public class InventorySlot : MonoBehaviour
 
     private Button slotButton;             // Button component của slot
 
+    // Static variable để lưu slot được chọn
+    public static InventorySlot selectedSlot = null;
+
     private void Awake()
     {
         // Tìm Button component
@@ -52,6 +55,19 @@ public class InventorySlot : MonoBehaviour
     /// </summary>
     public void OnSlotClicked()
     {
+        // Lưu slot được chọn
+        selectedSlot = this;
+
+        // Log thông tin slot được chọn
+        if (slotData.item != null)
+        {
+            Debug.Log($"✅ CHỌN ITEM: {slotData.item.itemName} x{slotData.quantity}");
+        }
+        else
+        {
+            Debug.Log($"⚠️ CHỌN SLOT TRỐNG");
+        }
+
         if (slotData.item != null && detailPanel != null)
         {
             detailPanel.Show(slotData.item, slotData.quantity);
@@ -82,6 +98,26 @@ public class InventorySlot : MonoBehaviour
         slotData.quantity = 0;
 
         RefreshDisplay();
+    }
+
+    /// <summary>
+    /// Tiêu thụ/giảm số lượng item
+    /// </summary>
+    public void ConsumeItem(int amount = 1)
+    {
+        if (slotData == null || slotData.item == null)
+            return;
+
+        slotData.quantity -= amount;
+        
+        if (slotData.quantity <= 0)
+        {
+            Clear();
+        }
+        else
+        {
+            RefreshDisplay();
+        }
     }
 
     /// <summary>

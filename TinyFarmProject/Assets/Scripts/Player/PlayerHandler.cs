@@ -268,6 +268,31 @@ public string currentCropType = "Chili";
     {
         if (isSleeping || moveScript == null) return;
 
+        // ⭐ LẤY HẠNG GIỐNG TỪ SLOT ĐƯỢC CHỌN
+        if (InventorySlot.selectedSlot == null)
+        {
+            Debug.Log("❌ Chưa chọn hạt giống! Click vào slot trong túi để chọn.");
+            return;
+        }
+
+        ItemData selectedItem = InventorySlot.selectedSlot.slotData.item;
+        if (selectedItem == null)
+        {
+            Debug.Log("❌ Slot trống!");
+            return;
+        }
+
+        // ⭐ KIỂM TRA CÓ PHẢI HẠNG GIỐNG KHÔNG
+        if (!selectedItem.itemSubtype.ToString().Contains("Seed"))
+        {
+            Debug.Log($"❌ {selectedItem.itemName} không phải hạt giống!");
+            return;
+        }
+
+        // ⭐ LẤY LOẠI CÂY TỪ HẠNG GIỐNG
+        string seedType = selectedItem.itemSubtype.ToString();
+        currentCropType = seedType.Replace("Seed", ""); // VD: "ChiliSeed" → "Chili"
+
         Vector2 dir = moveScript.lastMoveDirection.normalized;
         if (dir == Vector2.zero) dir = Vector2.down;
 
@@ -312,7 +337,16 @@ public string currentCropType = "Chili";
         // Animation
         TriggerPlantAction(dir);
 
-        Debug.Log("🌱 Trồng thành công loại: " + currentCropType);
+        // ⭐ GIẢM SỐ LƯỢNG HẠNG GIỐNG
+        InventorySlot.selectedSlot.ConsumeItem(1);
+        Debug.Log($"🌱 Trồng thành công {currentCropType}! Hạt giống còn: {InventorySlot.selectedSlot.slotData.quantity}");
+
+        // ⭐ SAVE INVENTORY SAU KHI TRỒNG
+        if (FirebaseDatabaseManager.Instance != null && FirebaseDatabaseManager.FirebaseReady)
+        {
+            FirebaseDatabaseManager.Instance.SaveInventoryToFirebase("Player1");
+            Debug.Log("💾 Save Inventory sau khi trồng");
+        }
     }
 
 

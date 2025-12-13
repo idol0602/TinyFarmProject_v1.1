@@ -238,7 +238,7 @@ SpriteRenderer:
   m_SortingLayerID: -261522289
   m_SortingLayer: 4
   m_SortingOrder: 10
-  m_Sprite: {fileID: -5983871247479075639, guid: 7d7eba1891327744f975ac8fc1f06b5e, type: 3}
+  m_Sprite: {fileID: 7720591941682457659, guid: 7d7eba1891327744f975ac8fc1f06b5e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -261,17 +261,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d709a9c5e1ce5a419ff3bbb0d7b6b86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Crop
+  cropType: 
   stages:
   - {fileID: 5073794917520219306, guid: 7d7eba1891327744f975ac8fc1f06b5e, type: 3}
-  - {fileID: -5983871247479075639, guid: 7d7eba1891327744f975ac8fc1f06b5e, type: 3}
-  - {fileID: 4377769482769880857, guid: 7d7eba1891327744f975ac8fc1f06b5e, type: 3}
-  - {fileID: -2280435927532573047, guid: 7d7eba1891327744f975ac8fc1f06b5e, type: 3}
-  - {fileID: 6211993039380093445, guid: 7d7eba1891327744f975ac8fc1f06b5e, type: 3}
-  - {fileID: -702110350576635582, guid: 7d7eba1891327744f975ac8fc1f06b5e, type: 3}
-  - {fileID: 1592697119506763579, guid: 7d7eba1891327744f975ac8fc1f06b5e, type: 3}
   - {fileID: 7688069564123055224, guid: 7d7eba1891327744f975ac8fc1f06b5e, type: 3}
   waterIconPrefab: {fileID: 2013663978913582430, guid: 367c5097dd070e74d96e6892cc7eae4a, type: 3}
   harvestIconPrefab: {fileID: 6827111459838974423, guid: 1f3c6666830b9684fb08e9c2b1d4488e, type: 3}
   deadSprite: {fileID: -3485062167535903570, guid: 7d7eba1891327744f975ac8fc1f06b5e, type: 3}
-  morningHour: 6
-  eveningHour: 18

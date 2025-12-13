@@ -320,7 +320,12 @@ public class FirebaseDatabaseManager : MonoBehaviour
 
                 if (snap.Value == null)
                 {
-                    Debug.Log("Firebase không có dữ liệu farm → để trống");
+                    Debug.Log("Firebase không có dữ liệu farm → xóa cây cũ");
+                    
+                    // ⭐ XÓA CÂY CŨ NGAY CẢ KHI FIREBASE TRỐNG
+                    foreach (var old in FindObjectsOfType<Crop>())
+                        Destroy(old.gameObject);
+                    
                     farmLoaded = true;
                     onLoadComplete?.Invoke();
                     return;
