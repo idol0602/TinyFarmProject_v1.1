@@ -110,11 +110,18 @@ public class FirebaseDatabaseManager : MonoBehaviour
             currentHour = currentHour,
             currentMinute = currentMinute
         };
+
+        // 🔧 Convert sang Dictionary thay vì JSON string
+        var updates = new Dictionary<string, object>
+        {
+            { $"{userId}/DayAndTime/currentDay", currentDay },
+            { $"{userId}/DayAndTime/currentHour", currentHour },
+            { $"{userId}/DayAndTime/currentMinute", currentMinute }
+        };
         
         Debug.Log($"[Firebase] Saving day/time: Day {currentDay} {currentHour:00}:{currentMinute:00} → /{userId}/DayAndTime");
 
-        reference.Child(userId).Child("DayAndTime")
-            .SetValueAsync(dayTimeData)
+        reference.UpdateChildrenAsync(updates)
             .ContinueWithOnMainThread(task =>
             {
                 if (task.IsFaulted)
@@ -149,7 +156,6 @@ public class FirebaseDatabaseManager : MonoBehaviour
                 }
 
                 DataSnapshot snap = task.Result;
-
                 DayTimeData loadedData = new DayTimeData { currentDay = 1, currentHour = 7, currentMinute = 0 }; // default
 
                 if (snap.Value != null)
@@ -157,44 +163,28 @@ public class FirebaseDatabaseManager : MonoBehaviour
                     Debug.Log($"[Firebase] snap.Value type (DayAndTime): {snap.Value.GetType()}, value: {snap.Value}");
                     try
                     {
-                        // 🔧 Firebase trả về Dictionary từ object, chuyển thành DayTimeData
-                        DayTimeData dayTimeData = null;
-                        
+                        // 🔧 Firebase trả về Dictionary với 3 fields
                         if (snap.Value is Dictionary<string, object> dict)
                         {
-                            // Firebase trả về Dictionary
-                            dayTimeData = new DayTimeData();
+                            loadedData = new DayTimeData();
                             if (dict.TryGetValue("currentDay", out var dayObj))
-                                dayTimeData.currentDay = System.Convert.ToInt32(dayObj);
+                                loadedData.currentDay = System.Convert.ToInt32(dayObj);
                             if (dict.TryGetValue("currentHour", out var hourObj))
-                                dayTimeData.currentHour = System.Convert.ToInt32(hourObj);
+                                loadedData.currentHour = System.Convert.ToInt32(hourObj);
                             if (dict.TryGetValue("currentMinute", out var minObj))
-                                dayTimeData.currentMinute = System.Convert.ToInt32(minObj);
+                                loadedData.currentMinute = System.Convert.ToInt32(minObj);
+                            
+                            Debug.Log($"✓ LOAD day/time thành công từ Firebase: Day {loadedData.currentDay} {loadedData.currentHour:00}:{loadedData.currentMinute:00}");
                         }
                         else
                         {
-                            // Fallback: thử parse JSON string
-                            string json = snap.Value.ToString();
-                            dayTimeData = JsonConvert.DeserializeObject<DayTimeData>(json);
+                            Debug.LogWarning($"⚠ snap.Value type không phải Dictionary: {snap.Value.GetType()}");
                         }
                         
-                        if (dayTimeData != null)
+                        if (loadedData.currentDay <= 0)
                         {
-                            loadedData = dayTimeData;
-                            
-                            if (loadedData.currentDay <= 0)
-                            {
-                                Debug.LogWarning($"⚠ Day bằng {loadedData.currentDay} (invalid) → dùng default 1");
-                                loadedData.currentDay = 1;
-                            }
-                            else
-                            {
-                                Debug.Log($"✓ LOAD day/time thành công từ Firebase: Day {loadedData.currentDay} {loadedData.currentHour:00}:{loadedData.currentMinute:00}");
-                            }
-                        }
-                        else
-                        {
-                            Debug.LogWarning("⚠ DayTimeData deserialize thành null → dùng default");
+                            Debug.LogWarning($"⚠ Day bằng {loadedData.currentDay} (invalid) → dùng default 1");
+                            loadedData.currentDay = 1;
                         }
                     }
                     catch (System.Exception ex)
