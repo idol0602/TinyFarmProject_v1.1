@@ -49,7 +49,7 @@ MonoBehaviour:
   rainEndHour: 22
   testRainChance: 100
   aiRainProbability: 100
-  geminiApiKey: AIzaSyB-Yvru4aR-jgy-TZCmJaFf6vj1DHBEC-M
+  geminiApiKey: AIzaSyACuP85bsfMY6RexD3kzUFOFHha8CUFbLs
   onRainStart:
     m_PersistentCalls:
       m_Calls: []

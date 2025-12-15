@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ProductData
   plant_name: Chili
   icon: {fileID: -1840034058219844767, guid: cf9e2d10f85348446b6c16a88889b744, type: 3}
-  price: 20
-  seedCost: 5
+  price: 50
+  seedCost: 50

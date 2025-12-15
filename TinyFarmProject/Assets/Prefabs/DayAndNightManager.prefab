@@ -48,7 +48,7 @@ MonoBehaviour:
   startMinute: 0
   textTimeInGame: {fileID: 0}
   textDayInGame: {fileID: 0}
-  realMinutesPerGameDay: 3
+  realMinutesPerGameDay: 2
   globalLight: {fileID: 0}
   gradient:
     serializedVersion: 2

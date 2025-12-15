@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
@@ -21,6 +23,7 @@ public class OrderManager : MonoBehaviour
 
     // Kiểm tra orders đã tạo trong ngày
     private int lastDayOrdersCreated = -1; // Ngày cuối cùng tạo orders (-1 = chưa tạo)
+    private bool isCreatingDailyOrders = false; // guard to avoid concurrent creation
 
     // Events để UI tự động cập nhật (rất quan trọng!)
     public UnityEvent<Order> onOrderAdded = new UnityEvent<Order>();
@@ -166,29 +169,8 @@ public class OrderManager : MonoBehaviour
             }
         }
 
-        // Tạo 1 order test (10 CornCrop) mỗi ngày
-        var testOrder = GenerateTestOrder();
-        if (testOrder == null)
-        {
-            Debug.LogError("[OrderManager] ❌ Tạo test order thất bại!");
-            return;
-        }
-        
-        // Tạo 1 order từ AI mỗi ngày
-        var aiOrder = GenerateNewOrder();
-        if (aiOrder == null)
-        {
-            Debug.LogError("[OrderManager] ❌ Tạo AI order thất bại!");
-            return;
-        }
-
-        // ✅ Đánh dấu đã tạo orders hôm nay
-        lastDayOrdersCreated = currentDay;
-        
-        Debug.Log($"[OrderManager] ✅ Tạo thành công: Test Order #{testOrder.id} + AI Order #{aiOrder.id}");
-        Debug.Log($"[OrderManager] ✅ Đánh dấu đã tạo orders cho Day {currentDay}");
-
-        // Lưu lên Firebase
+        // Tạo 1 order từ AI mỗi ngày (và test order nếu orderTest=true bên trong AIGenerateOrder)
+        // Chạy coroutine để chờ AI hoàn tất rồi lưu lên Firebase
         string userId = PlayerSession.GetCurrentUserId();
         if (string.IsNullOrEmpty(userId))
         {
@@ -196,7 +178,12 @@ public class OrderManager : MonoBehaviour
             return;
         }
 
-        SaveOrdersToFirebase(userId);
+        // Mark day and guard immediately to prevent duplicate starts
+        lastDayOrdersCreated = currentDay;
+        isCreatingDailyOrders = true;
+        Debug.Log($"[OrderManager] 🔒 Marking Day {currentDay} as creating (guard on)");
+
+        StartCoroutine(CreateDailyOrdersAndSave(userId, currentDay));
     }
 
     /// <summary>
@@ -224,23 +211,53 @@ public class OrderManager : MonoBehaviour
     /// <summary>
     /// HÀM CHÍNH: Tạo đơn hàng mới từ AI và đẩy vào pending
     /// </summary>
-    public Order GenerateNewOrder()
+    public void GenerateNewOrder()
     {
         if (orderGenerator == null)
         {
             Debug.LogError("Không tìm thấy AIGenerateOrder!");
-            return null;
+            return;
         }
 
-        Order newOrder = orderGenerator.GenerateNewOrder();
-        if (newOrder != null)
+        StartCoroutine(GenerateNewOrderCoroutine());
+    }
+
+    private IEnumerator GenerateNewOrderCoroutine()
+    {
+        yield return StartCoroutine(orderGenerator.GenerateNewOrder());
+        
+        // ✅ THÊM ORDERS PENDING VÀO (nếu có items)
+        foreach (var order in orderGenerator.GetGeneratedOrders())
         {
-            pendingOrders.Add(newOrder);
-            onOrderAdded?.Invoke(newOrder);
-            onOrdersListChanged?.Invoke();
-            Debug.Log($"[OrderManager] Đơn hàng mới #{newOrder.id} đã được tạo!");
+            if (order != null && order.items.Count > 0)
+            {
+                pendingOrders.Add(order);
+                onOrderAdded?.Invoke(order);
+                onOrdersListChanged?.Invoke();
+                Debug.Log($"[OrderManager] Đơn hàng mới #{order.id} đã được tạo!");
+            }
         }
-        return newOrder;
+    }
+
+    // Coroutine để tạo orders trong ngày rồi lưu lên Firebase
+    private IEnumerator CreateDailyOrdersAndSave(string userId, int currentDay)
+    {
+        try
+        {
+            // Chạy coroutine tạo order (AI + optional test)
+            yield return StartCoroutine(GenerateNewOrderCoroutine());
+
+            Debug.Log($"[OrderManager] ✅ Đã tạo orders cho Day {currentDay}");
+
+            // Lưu lên Firebase
+            SaveOrdersToFirebase(userId);
+        }
+        finally
+        {
+            // Release guard so future days can run
+            isCreatingDailyOrders = false;
+            Debug.Log("[OrderManager] 🔓 CreateDailyOrdersAndSave finished (guard off)");
+        }
     }
 
     /// <summary>
@@ -287,7 +304,7 @@ public class OrderManager : MonoBehaviour
 
         Order testOrder = new Order
         {
-            id = Random.Range(50000, 59999), // ID khác nhau để phân biệt order test
+            id = UnityEngine.Random.Range(50000, 59999), // ID khác nhau để phân biệt order test
             deadlineDays = 3
         };
 

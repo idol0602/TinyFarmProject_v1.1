@@ -45,4 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AIGenerateOrder
   productDatabase: {fileID: 11400000, guid: 901e3372089f8f448a440fbb501a35c9, type: 2}
-  geminiApiKey: AIzaSyB-Nbb-mQ6SDwD-PB4VfapDKBS0ZXz70yo
+  seedDatabase: {fileID: 11400000, guid: 2656afd5d1ca35d449d6ede2d86af80f, type: 2}
+  orderTest: 1
+  geminiApiKey: AIzaSyACuP85bsfMY6RexD3kzUFOFHha8CUFbLs
