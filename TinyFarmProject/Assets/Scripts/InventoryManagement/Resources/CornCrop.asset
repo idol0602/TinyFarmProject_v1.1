@@ -18,5 +18,5 @@ MonoBehaviour:
   itemSubtype: 8
   stackable: 1
   maxStack: 99
-  growTimeDays: 1
-  sellPrice: 50
+  growTimeDays: 2
+  sellPrice: 30

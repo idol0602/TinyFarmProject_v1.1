@@ -53,8 +53,6 @@ public class PlayerSession : MonoBehaviour
     {
         Instance._currentUserId = userId;
         Debug.Log($"[PlayerSession] Current user ID set to: {userId}");
-        
-        // 🔧 Reset cache khi user thay đổi
         if (FirebaseDatabaseManager.Instance != null)
         {
             FirebaseDatabaseManager.Instance.ClearCacheForNewUser();

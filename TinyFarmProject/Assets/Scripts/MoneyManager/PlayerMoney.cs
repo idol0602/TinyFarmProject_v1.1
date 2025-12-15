@@ -279,7 +279,6 @@ public class PlayerMoney : MonoBehaviour
 
     private void AutoSave(int _)
     {
-        // ⚠️ CHỈ save nếu đã load xong từ Firebase
         if (isLoadingFromFirebase)
         {
             Debug.Log("[PlayerMoney] Skipping auto-save (still loading from Firebase)");

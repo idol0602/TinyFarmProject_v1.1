@@ -34,6 +34,9 @@ namespace MapSummer
 
         private bool isLoadedFromSave = false;
 
+        // ⭐ FLAG NGĂN TƯỚI 2 LẦN CÙNG 1 SỰKIỆN MƯA
+        private bool hasAutoWateredThisRain = false;
+
         // ============================================================
         //  ĐĂNG KÝ EVENT — chỉ chạy 1 lần / crop
         // ============================================================
@@ -55,6 +58,23 @@ namespace MapSummer
 
         }
 
+        // ⭐ UPDATE: KIỂM TRA MƯA LIÊN TỤC
+        // FIX: CÂY SPAWN SAU KHI SỰ KIỆN MƯA PHÁT SINH CẦN ĐƯỢC TƯỚI
+        private void Update()
+        {
+            if (isDead) return;
+            if (isWateredToday) return;  // Đã tưới hôm nay rồi
+            if (RainManager.Instance == null) return;
+
+            // ⭐ NẾU TRỜI ĐANG MƯA & CHƯA TƯỚI → TƯỚI NGAY
+            if (RainManager.Instance.isRaining && !hasAutoWateredThisRain)
+            {
+                Water();
+                hasAutoWateredThisRain = true;  // Đánh dấu đã tưới từ sự kiện mưa này
+                Debug.Log($"🌧️ Update detect: Trời mưa → Tưới {cropType} ngay");
+            }
+        }
+
         // ============================================================
         //  KHỞI TẠO CÂY
         // ============================================================
@@ -70,8 +90,6 @@ namespace MapSummer
 
                 int today = clock.GetCurrentDay();
 
-                // ⭐ KHÔNG TỰ ĐỘNG TƯỚI NGAY KHI TRỒNG LÚC MƯA
-                // MƯA PHẢI RƠI XUỐNG CÂY MỚI TÍNH LÀ TƯỚI
                 lastWaterDay = today;
                 isWateredToday = false;
 
@@ -80,10 +98,10 @@ namespace MapSummer
                 SpawnIcons();
                 UpdateIcons();
                 
-                // ⭐ NẾU TRỜI ĐANG MƯA KHI TRỒNG → START COROUTINE TƯỚI
+                // ⭐ NẾU TRỜI ĐANG MƯA KHI TRỒNG → TƯỚI NGAY
                 if (RainManager.Instance != null && RainManager.Instance.isRaining)
                 {
-                    StartCoroutine(nameof(WaterAfterDelay));
+                    Water();
                 }
             }
         }
@@ -148,8 +166,9 @@ namespace MapSummer
                 lastWaterDay = newDay - 1;
             }
 
-            // ⭐ RESET isWateredToday (mưa phải rơi trúng cây mới tưới)
+            // ⭐ RESET isWateredToday
             isWateredToday = false;
+            hasAutoWateredThisRain = false;  // ⭐ RESET flag mưa cho ngày mới
             
             UpdateIcons();
         }
@@ -170,7 +189,6 @@ namespace MapSummer
         {
             if (currentStage < stages.Length - 1)
                 currentStage++;
-
             sr.sprite = stages[currentStage];
             UpdateIcons();
         }
@@ -250,25 +268,21 @@ namespace MapSummer
         }
         private void HandleRainChanged(bool isRaining)
         {
-            // ⭐ KHI TRỜI MƯA → CHỜ 10s RỒI TỰ ĐỘNG TƯỚI
-            if (isRaining && !isDead)
+            // ⭐ TRỜI MƯA → TƯỚI NGAY TẤT CẢ CÂY HIỆN TẠI
+            if (isRaining && !isDead && !isWateredToday && !hasAutoWateredThisRain)
             {
-                StopCoroutine(nameof(WaterAfterDelay));
-                StartCoroutine(nameof(WaterAfterDelay));
+                Water();
+                hasAutoWateredThisRain = true;  // Đánh dấu đã tưới từ sự kiện này
+                Debug.Log($"🌧️ Event detect: Trời mưa → Tưới {cropType} ngay");
+            }
+            
+            // ⭐ TRỜI HẾT MƯA → RESET FLAG
+            if (!isRaining)
+            {
+                hasAutoWateredThisRain = false;
             }
 
             UpdateIcons();
-        }
-
-        // ⭐ COROUTINE: CHỜ 10s RỒI TƯỚI
-        private System.Collections.IEnumerator WaterAfterDelay()
-        {
-            yield return new WaitForSeconds(4f);
-            if (!isDead && !isWateredToday)
-            {
-                Water();
-                Debug.Log($"🌧️ Mưa {cropType} sau 10s → tưới");
-            }
         }
 
     }

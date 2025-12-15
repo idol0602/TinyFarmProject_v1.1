@@ -5,7 +5,7 @@ using MapSummer;
 public class CropData
 {
     public string cropID;
-    public string cropType;   // ⭐ LOẠI CÂY (Corn, Chili, Tomato...)
+    public string cropType;   
 
     public int stage;
     public bool isDead;
@@ -20,7 +20,7 @@ public class CropData
     public CropData(Crop crop)
     {
         cropID = crop.CropID;
-        cropType = crop.cropType;    // ⭐ LƯU LOẠI CÂY TẠI ĐÂY
+        cropType = crop.cropType;    
 
         stage = crop.CurrentStage;
         isDead = crop.IsDead;

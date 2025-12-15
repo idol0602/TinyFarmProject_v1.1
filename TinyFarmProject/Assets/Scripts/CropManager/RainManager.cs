@@ -6,10 +6,10 @@ public class RainManager : MonoBehaviour
 {
     public static RainManager Instance;
 
-    // ⭐ STATIC CACHE để giữ rain state giữa scene
+    // ⭐ CACHE RAIN STATE
     public static bool CachedRainState = false;
 
-    // ⭐ EVENT BÁO CHO CÂY
+    // ⭐ EVENT
     public static event Action<bool> OnRainChanged;
 
     [Header("Rain State")]
@@ -21,9 +21,11 @@ public class RainManager : MonoBehaviour
 
     private AIDecisionWeather weatherSystem;
 
+    // =====================================================
+    // UNITY
+    // =====================================================
     private void Awake()
     {
-        // ===== SINGLETON =====
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -33,34 +35,43 @@ public class RainManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        // ⭐ RESTORE RAIN STATE TỪ CACHE KHI START
-        SetRain(CachedRainState, true);
+        _isRaining = CachedRainState;
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void Start()
     {
-        // ⭐ SUBSCRIBE VÀO SCENE LOAD ĐỂ KHÔI PHỤC PARTICLE
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        
-        // ⭐ SUBSCRIBE VÀO WEATHER SYSTEM
         weatherSystem = FindObjectOfType<AIDecisionWeather>();
         if (weatherSystem != null)
         {
             weatherSystem.onRainStart.AddListener(OnWeatherRainStart);
             weatherSystem.onRainEnd.AddListener(OnWeatherRainEnd);
-            Debug.Log("[RainManager] ✅ Subscribed to AIDecisionWeather events");
         }
-        else
+
+        ApplyRainState();
+    }
+    private void Update()
+    {
+        // Nhấn R để bật / tắt mưa thủ công
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            Debug.LogWarning("[RainManager] ⚠️ AIDecisionWeather not found in scene!");
+            ToggleRain();
+            Debug.Log("[RainManager] ⌨ Nhấn R → Toggle Rain");
         }
     }
 
+
     private void OnDestroy()
     {
-        // ⭐ UNSUBSCRIBE KHI DESTROY
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-        
         if (weatherSystem != null)
         {
             weatherSystem.onRainStart.RemoveListener(OnWeatherRainStart);
@@ -68,69 +79,79 @@ public class RainManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Callback khi scene load (để tìm particle mới)
-    /// </summary>
+    // =====================================================
+    // SCENE
+    // =====================================================
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log($"[RainManager] Scene '{scene.name}' loaded - khôi phục trạng thái mưa...");
-        
-        // Tìm particle mới trong scene
+        Debug.Log($"[RainManager] Scene loaded: {scene.name}");
+        ApplyRainState();
+    }
+
+    private void ApplyRainState()
+    {
+        // 🔍 Tìm spawn point trong scene
+        RainSpawnPoint spawn = FindObjectOfType<RainSpawnPoint>();
+
+        // ❌ Map KHÔNG có RainSpawnPoint → ẨN MƯA
+        if (spawn == null)
+        {
+            if (rainParticle != null)
+            {
+                rainParticle.Stop();
+                rainParticle.gameObject.SetActive(false);
+            }
+
+            Debug.Log("[RainManager] ⛔ Map này không có mưa");
+            return;
+        }
+
+        // ✅ Map có mưa
         if (rainParticle == null)
         {
             rainParticle = FindObjectOfType<ParticleSystem>();
-            if (rainParticle != null)
-                Debug.Log("[RainManager] ✅ Tìm thấy ParticleSystem mới");
+            if (rainParticle == null)
+            {
+                Debug.LogWarning("[RainManager] ⚠ Không tìm thấy ParticleSystem!");
+                return;
+            }
         }
-        
-        // Khôi phục trạng thái mưa từ cache (không gọi event)
-        if (_isRaining && rainParticle != null)
+
+        // 👉 MOVE VỀ SPAWN CỦA MAP
+        rainParticle.transform.position = spawn.transform.position;
+        rainParticle.gameObject.SetActive(true);
+
+        if (_isRaining)
         {
+            rainParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            rainParticle.Clear(true);
             rainParticle.Play();
-            Debug.Log("[RainManager] ✅ Khôi phục animation mưa từ cache");
-        }
-        else if (!_isRaining && rainParticle != null)
-        {
-            rainParticle.Stop();
-            Debug.Log("[RainManager] ✅ Dừng animation mưa");
-        }
-    }
 
-    private void Update()
-    {
-        // ⭐ TEST NHANH BẰNG PHÍM R
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ToggleRain();
+            Debug.Log("[RainManager] 🌧 Reset particle để rebind collision");
         }
+        else
+        {
+            rainParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        }
+
     }
 
     // =====================================================
-    //  CALLBACKS TỪ WEATHER SYSTEM
+    // WEATHER CALLBACK
     // =====================================================
-
-    /// <summary>
-    /// Gọi khi trời bắt đầu mưa (từ AIDecisionWeather)
-    /// </summary>
     private void OnWeatherRainStart(int rainIntensity)
     {
-        Debug.Log($"[RainManager] 🌧️ Thời tiết bắt đầu mưa! Mức độ: {rainIntensity}%");
         SetRain(true);
     }
 
-    /// <summary>
-    /// Gọi khi trời hết mưa (từ AIDecisionWeather)
-    /// </summary>
     private void OnWeatherRainEnd()
     {
-        Debug.Log("[RainManager] ☀️ Thời tiết hết mưa!");
         SetRain(false);
     }
 
     // =====================================================
-    //  API
+    // API
     // =====================================================
-
     public void ToggleRain()
     {
         SetRain(!_isRaining);
@@ -141,25 +162,13 @@ public class RainManager : MonoBehaviour
         if (_isRaining == value) return;
 
         _isRaining = value;
-        
-        // ⭐ CACHE RAIN STATE
         CachedRainState = value;
 
-        // Particle
-        if (rainParticle != null)
-        {
-            if (_isRaining)
-                rainParticle.Play();
-            else
-                rainParticle.Stop();
-        }
+        ApplyRainState();
 
-        // Event
         if (!silent)
         {
             OnRainChanged?.Invoke(_isRaining);
         }
-
-        Debug.Log(_isRaining ? "🌧️ TRỜI ĐANG MƯA" : "☀️ TRỜI HẾT MƯA");
     }
 }
