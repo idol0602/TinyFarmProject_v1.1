@@ -49,6 +49,8 @@ public class FirebaseLogin : MonoBehaviour
     // =====================================================
     void Start()
     {
+        // ⭐ Emulator variables đã được set trong FirebaseBootstrap.Awake() (trong LoadingScene)
+        // Nên Firebase Auth sẽ dùng emulator ngay
         auth = FirebaseAuth.DefaultInstance;
 
         buttonRegister.onClick.AddListener(RegisterAccountFirebase);
@@ -84,6 +86,13 @@ public class FirebaseLogin : MonoBehaviour
 
         ShowRegisterLoading("Đang đăng ký...");
 
+        // 🚀 ENSURE emulator config is set before Firebase call
+#if UNITY_EDITOR
+        System.Environment.SetEnvironmentVariable("USE_AUTH_EMULATOR", "127.0.0.1:9099");
+        System.Environment.SetEnvironmentVariable("FIREBASE_DATABASE_EMULATOR_HOST", "127.0.0.1:9000");
+        Debug.Log("[FirebaseLogin] Ensuring emulator variables are set");
+#endif
+
         auth.CreateUserWithEmailAndPasswordAsync(email, password)
             .ContinueWithOnMainThread(task =>
             {
@@ -105,9 +114,16 @@ public class FirebaseLogin : MonoBehaviour
 
                 ShowRegisterSuccess("Đăng ký thành công!");
 
-                if (FirebaseDatabaseManager.Instance != null)
+                // Đảm bảo FirebaseDatabaseManager tồn tại cả ở LoginScene khi test emulator
+                var dbManager = FirebaseDatabaseManager.Instance ?? FirebaseDatabaseManager.EnsureInstance();
+                if (dbManager != null)
                 {
-                    FirebaseDatabaseManager.Instance.InitializeNewUserData(user.UserId);
+                    // Chờ Firebase sẵn sàng rồi initialize user data
+                    StartCoroutine(dbManager.WaitForFirebaseReadyThenInitUser(user.UserId));
+                }
+                else
+                {
+                    Debug.LogError("[FirebaseLogin] Không thể khởi tạo FirebaseDatabaseManager để initialize user data");
                 }
             });
     }
@@ -149,9 +165,15 @@ public class FirebaseLogin : MonoBehaviour
 
                 ShowLoginSuccess("Đăng nhập thành công!");
 
-                if (FirebaseDatabaseManager.Instance != null)
+                var dbManager = FirebaseDatabaseManager.Instance ?? FirebaseDatabaseManager.EnsureInstance();
+                if (dbManager != null)
                 {
-                    FirebaseDatabaseManager.Instance.CheckAndInitializeUserData(user.UserId);
+                    // Chờ Firebase sẵn sàng rồi check/initialize user data
+                    StartCoroutine(dbManager.WaitForFirebaseReadyThenCheckAndInit(user.UserId));
+                }
+                else
+                {
+                    Debug.LogError("[FirebaseLogin] Không thể khởi tạo FirebaseDatabaseManager khi đăng nhập");
                 }
 
 #if UNITY_EDITOR

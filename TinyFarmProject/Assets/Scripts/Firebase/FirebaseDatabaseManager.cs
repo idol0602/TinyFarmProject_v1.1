@@ -27,6 +27,73 @@ public class FirebaseDatabaseManager : MonoBehaviour
     // �📢 Event callback khi farm load xong
     public static event Action<bool> OnFarmLoadComplete;
 
+    // ============================================================
+    // STATIC HELPER: Đảm bảo luôn có Instance (dùng được cả ở LoginScene)
+    // ============================================================
+    public static FirebaseDatabaseManager EnsureInstance()
+    {
+        if (Instance != null)
+            return Instance;
+
+        GameObject go = new GameObject("FirebaseDatabaseManager(Auto)");
+        var manager = go.AddComponent<FirebaseDatabaseManager>();
+        return manager;
+    }
+
+    // ============================================================
+    // COROUTINE: Chờ Firebase sẵn sàng rồi thực hiện action
+    // ============================================================
+    public System.Collections.IEnumerator WaitForFirebaseReadyThenInitUser(string userId)
+    {
+        float timeout = 10f;
+        float elapsed = 0f;
+        
+        Debug.Log("[Firebase] ⏳ Waiting for Firebase to be ready before initializing user...");
+        
+        while (!FirebaseReady && elapsed < timeout)
+        {
+            elapsed += 0.1f;
+            yield return new WaitForSeconds(0.1f);
+        }
+        
+        if (FirebaseReady)
+        {
+            Debug.Log("[Firebase] ✅ Firebase is ready, now initializing user data");
+            InitializeNewUserData(userId);
+        }
+        else
+        {
+            Debug.LogError($"[Firebase] ❌ Firebase failed to ready after {timeout}s");
+        }
+    }
+
+    // ============================================================
+    // COROUTINE: Chờ Firebase sẵn sàng rồi check/init user data
+    // ============================================================
+    public System.Collections.IEnumerator WaitForFirebaseReadyThenCheckAndInit(string userId)
+    {
+        float timeout = 10f;
+        float elapsed = 0f;
+        
+        Debug.Log("[Firebase] ⏳ Waiting for Firebase to be ready before checking user data...");
+        
+        while (!FirebaseReady && elapsed < timeout)
+        {
+            elapsed += 0.1f;
+            yield return new WaitForSeconds(0.1f);
+        }
+        
+        if (FirebaseReady)
+        {
+            Debug.Log("[Firebase] ✅ Firebase is ready, now checking user data");
+            CheckAndInitializeUserData(userId);
+        }
+        else
+        {
+            Debug.LogError($"[Firebase] ❌ Firebase failed to ready after {timeout}s");
+        }
+    }
+
     private void Awake()
     {
         if (Instance == null)
@@ -39,6 +106,10 @@ public class FirebaseDatabaseManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        // ⭐ Environment variables đã được set trong FirebaseEmulatorInit.Awake()
+        // (chạy TRƯỚC FirebaseDatabaseManager)
+        // Nên bây giờ chỉ cần gọi InitFirebase()
         InitFirebase();
         
         // ⭐ LẮNG NGHE SCENE UNLOAD ĐỂ SAVE RAIN STATE
@@ -50,9 +121,15 @@ public class FirebaseDatabaseManager : MonoBehaviour
         var status = await FirebaseApp.CheckAndFixDependenciesAsync();
         if (status == DependencyStatus.Available)
         {
+            // ⭐ IMPORTANT: Biến môi trường đã được set trong Awake() trước khi gọi hàm này
+            // Nên bây giờ khi gọi FirebaseDatabase.DefaultInstance, nó sẽ tự động
+            // trỏ về emulator (127.0.0.1:9000) nếu biến được set đúng.
+
+            // Lấy Realtime Database reference
             reference = FirebaseDatabase.DefaultInstance.RootReference;
+
             FirebaseReady = true;
-            Debug.Log("Firebase Ready");
+            Debug.Log("[Firebase] ✅ Firebase Ready (using emulator if FIREBASE_DATABASE_EMULATOR_HOST set)");
         }
         else
         {
@@ -130,9 +207,10 @@ public class FirebaseDatabaseManager : MonoBehaviour
             return;
         }
 
+        // ⭐ Nếu DayAndNightManager không tồn tại (ở LoginScene), skip save
         if (DayAndNightManager.Instance == null)
         {
-            Debug.LogError("DayAndNightManager không tìm thấy");
+            Debug.LogWarning("[Firebase] DayAndNightManager không tồn tại (có lẽ ở LoginScene) → skip save day/time");
             return;
         }
 
@@ -747,20 +825,28 @@ public class FirebaseDatabaseManager : MonoBehaviour
     {
         if (FirebaseReady)
         {
-            Debug.Log("Auto SAVE farm + tiền + day/time + inventory khi thoát game");
-            SaveFarmToFirebase(PlayerSession.GetCurrentUserId());
-            SaveMoneyToFirebase(PlayerSession.GetCurrentUserId());
-            SaveDayAndTimeToFirebase(PlayerSession.GetCurrentUserId()); // ⭐ Cũng save rain state
-            
-            // 🔧 Chỉ save inventory nếu đã được load từ Firebase
-            // Tránh việc save inventory trống và xóa data cũ
-            if (inventoryLoaded)
+            // Chỉ save khi thực sự đang ở trong game map (không phải ở LoginScene)
+            if (DayAndNightManager.Instance != null)
             {
-                SaveInventoryToFirebase(PlayerSession.GetCurrentUserId());
+                Debug.Log("Auto SAVE farm + tiền + day/time + inventory khi thoát game");
+                SaveFarmToFirebase(PlayerSession.GetCurrentUserId());
+                SaveMoneyToFirebase(PlayerSession.GetCurrentUserId());
+                SaveDayAndTimeToFirebase(PlayerSession.GetCurrentUserId()); // ⭐ Cũng save rain state
+                
+                // 🔧 Chỉ save inventory nếu đã được load từ Firebase
+                // Tránh việc save inventory trống và xóa data cũ
+                if (inventoryLoaded)
+                {
+                    SaveInventoryToFirebase(PlayerSession.GetCurrentUserId());
+                }
+                else
+                {
+                    Debug.LogWarning("⚠ Inventory chưa được load từ Firebase, skip save để tránh xóa data");
+                }
             }
             else
             {
-                Debug.LogWarning("⚠ Inventory chưa được load từ Firebase, skip save để tránh xóa data");
+                Debug.Log("DayAndNightManager không tồn tại (LoginScene) → skip auto save");
             }
         }
     }
