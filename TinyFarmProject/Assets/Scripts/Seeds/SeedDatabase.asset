@@ -14,35 +14,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SeedDatabase
   seeds:
   - seedName: TomatoSeed
-    plantName: Tomato
+    plantName: TomatoSeed
     price: 10
     growTime: 5
     seedIcon: {fileID: 3041457214386405346, guid: cf9e2d10f85348446b6c16a88889b744, type: 3}
     priceToSell: 50
     numsSeed: 10
   - seedName: ChiliSeed
-    plantName: Chili
+    plantName: ChiliSeed
     price: 10
     growTime: 10
     seedIcon: {fileID: -3967237929857205426, guid: cf9e2d10f85348446b6c16a88889b744, type: 3}
     priceToSell: 50
     numsSeed: 10
   - seedName: CornSeed
-    plantName: Corn
+    plantName: CornSeed
     price: 10
     growTime: 10
     seedIcon: {fileID: 2264594466298315286, guid: cf9e2d10f85348446b6c16a88889b744, type: 3}
     priceToSell: 30
     numsSeed: 10
   - seedName: EggplantSeed
-    plantName: Eggplant
+    plantName: EggplantSeed
     price: 10
     growTime: 10
     seedIcon: {fileID: 5195754874138314979, guid: cf9e2d10f85348446b6c16a88889b744, type: 3}
     priceToSell: 40
     numsSeed: 10
   - seedName: WatermelonSeed
-    plantName: Watermelon
+    plantName: WatermelonSeed
     price: 10
     growTime: 10
     seedIcon: {fileID: -9044214207299891722, guid: cf9e2d10f85348446b6c16a88889b744, type: 3}
